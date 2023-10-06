@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
 }
 
 android {
@@ -45,6 +46,18 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+    tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
+    ktlint {
+        this.android.set(true)
+        this.ignoreFailures.set(false)
+        this.reporters {
+            this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+            this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+            this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
         }
     }
 }
