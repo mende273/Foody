@@ -16,14 +16,16 @@ private val darkColorScheme = darkColorScheme(
     primary = DarkThemePrimary,
     secondary = AccentColor,
     background = DarkThemeBackground,
-    onBackground = DarkThemePrimary
+    onBackground = DarkThemePrimary,
+    surface = LightThemePrimary
 )
 
 private val lightColorScheme = lightColorScheme(
     primary = LightThemePrimary,
     secondary = AccentColor,
     background = LightThemeBackground,
-    onBackground = LightThemePrimary
+    onBackground = LightThemePrimary,
+    surface = DarkThemePrimary
 )
 
 @Composable

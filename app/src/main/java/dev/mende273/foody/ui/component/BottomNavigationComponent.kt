@@ -20,7 +20,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.mende273.foody.R
 import dev.mende273.foody.navigation.Screen
-import dev.mende273.foody.ui.theme.AccentColor
 import dev.mende273.foody.ui.theme.LightThemePrimary
 import dev.mende273.foody.ui.theme.MediumDarkGreyColor
 import dev.mende273.foody.ui.theme.NavigationBarSelectedColor
@@ -33,9 +32,9 @@ fun BottomNavigationComponent(
 
     NavigationBar(
         modifier = Modifier,
-        contentColor = AccentColor,
-        tonalElevation = 0.dp,
-        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.secondary,
+        tonalElevation = 1.dp,
+        containerColor = MaterialTheme.colorScheme.surface,
         content = {
             val navBackStackEntry by navHostController.currentBackStackEntryAsState()
             val hierarchy = navBackStackEntry?.destination?.hierarchy
@@ -68,7 +67,7 @@ fun BottomNavigationComponent(
                         unselectedIconColor = MediumDarkGreyColor,
                         selectedTextColor = NavigationBarSelectedColor,
                         unselectedTextColor = MediumDarkGreyColor,
-                        indicatorColor = AccentColor
+                        indicatorColor = MaterialTheme.colorScheme.secondary
                     )
                 )
             }
