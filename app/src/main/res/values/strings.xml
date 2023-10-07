@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Foody</string>
+
+    <string name="screen_title_meals">Meals</string>
+    <string name="screen_title_random">Random</string>
+    <string name="screen_title_search">Search</string>
+    <string name="screen_title_favourites">Favourites</string>
 </resources>
