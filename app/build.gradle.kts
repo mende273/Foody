@@ -1,7 +1,10 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
+    id("io.gitlab.arturbosch.detekt") version ("1.22.0")
 }
 
 android {
@@ -49,8 +52,6 @@ android {
         }
     }
 
-    tasks.getByPath("preBuild").dependsOn("ktlintFormat")
-
     ktlint {
         this.android.set(true)
         this.ignoreFailures.set(false)
@@ -60,6 +61,18 @@ android {
             this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
         }
     }
+
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        config.setFrom("$projectDir/config/detekt.yml")
+        baseline = file("$projectDir/config/baseline.xml")
+    }
+
+    tasks.preBuild {
+        dependsOn("ktlintFormat", "detekt")
+    }
+    tasks.detekt.dependsOn("ktlintFormat")
 }
 
 dependencies {
