@@ -79,7 +79,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.activity:activity-compose:1.8.0")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3-window-size-class")
@@ -94,8 +94,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("androidx.navigation:navigation-compose:2.7.3")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.7.3")
+    implementation("androidx.navigation:navigation-compose:2.7.4")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.4")
 
     implementation("io.insert-koin:koin-androidx-compose:3.4.6")
     implementation("io.insert-koin:koin-androidx-compose-navigation:3.4.6")
