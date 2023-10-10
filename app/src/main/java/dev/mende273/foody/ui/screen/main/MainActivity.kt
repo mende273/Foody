@@ -17,11 +17,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import dev.mende273.foody.navigation.AppNavigation
-import dev.mende273.foody.navigation.getRoute
 import dev.mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -39,8 +36,6 @@ class MainActivity : ComponentActivity() {
 
             val isPortrait = windowSize.widthSizeClass <= WindowWidthSizeClass.Medium
 
-            val navigationMenuItems = enumValues<NavigationMenuItem>()
-
             FoodyTheme {
                 Scaffold(
                     content = { innerPadding ->
@@ -54,12 +49,12 @@ class MainActivity : ComponentActivity() {
                     },
                     bottomBar = {
                         if (isPortrait) {
-                            PortraitNavigationBar(
-                                navigationMenuItems = navigationMenuItems,
-                                currentMenuItem = currentMenuItemIndex,
-                                onMenuItemClick = { index, menuItem ->
+                            NavigationBar(
+                                navController = navController,
+                                isPortrait = true,
+                                currentMenuItemIndex = currentMenuItemIndex,
+                                onUpdateCurrentMenuItemIndex = { index ->
                                     currentMenuItemIndex = index
-                                    navController.navigateFromNavigationBar(menuItem.getRoute())
                                 }
                             )
                         }
@@ -67,28 +62,16 @@ class MainActivity : ComponentActivity() {
                 )
 
                 if (!isPortrait) {
-                    LandscapeNavigationBar(
-                        navigationMenuItems = navigationMenuItems,
-                        currentMenuItem = currentMenuItemIndex,
-                        onMenuItemClick = { index, menuItem ->
+                    NavigationBar(
+                        navController = navController,
+                        isPortrait = false,
+                        currentMenuItemIndex = currentMenuItemIndex,
+                        onUpdateCurrentMenuItemIndex = { index ->
                             currentMenuItemIndex = index
-                            navController.navigateFromNavigationBar(menuItem.getRoute())
                         }
                     )
                 }
             }
         }
-    }
-}
-
-private fun NavHostController.navigateFromNavigationBar(
-    route: String
-) {
-    navigate(route) {
-        popUpTo(graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
     }
 }
