@@ -15,13 +15,13 @@ import dev.mende273.foody.ui.screen.search.SearchScreen
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
-    navHostController: NavHostController,
+    navController: NavHostController,
     innerPadding: PaddingValues
 ) {
     NavHost(
-        navHostController,
+        navController,
         startDestination = Screen.Meals.route,
-        Modifier.padding(innerPadding)
+        modifier = modifier.padding(innerPadding)
     ) {
         composable(Screen.Meals.route) {
             MealsScreen(modifier = modifier)

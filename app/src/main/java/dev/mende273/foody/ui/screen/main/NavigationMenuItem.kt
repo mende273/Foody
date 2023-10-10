@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import dev.mende273.foody.R
 
 enum class NavigationMenuItem(
-    @StringRes val resourceId: Int,
+    @StringRes val title: Int,
     @DrawableRes val icon: Int?
 ) {
     MEALS(R.string.screen_title_meals, R.drawable.food),

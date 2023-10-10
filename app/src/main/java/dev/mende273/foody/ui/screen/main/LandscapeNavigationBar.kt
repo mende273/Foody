@@ -8,6 +8,7 @@ import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import dev.mende273.foody.ui.theme.LightThemePrimary
@@ -27,15 +28,18 @@ fun LandscapeNavigationBar(
     ) {
         navigationMenuItems.forEachIndexed { index, menuItem ->
             NavigationRailItem(
+                modifier = Modifier.testTag(
+                    "test_tag_menu_item_${stringResource(id = menuItem.title)}"
+                ),
                 icon = {
                     menuItem.icon?.let { painterResource(id = menuItem.icon) }?.let {
                         Icon(
                             painter = it,
-                            contentDescription = stringResource(id = menuItem.resourceId)
+                            contentDescription = stringResource(id = menuItem.title)
                         )
                     }
                 },
-                label = { Text(text = stringResource(id = menuItem.resourceId)) },
+                label = { Text(text = stringResource(id = menuItem.title)) },
                 selected = currentMenuItem == index,
                 onClick = { onMenuItemClick(index, menuItem) },
                 alwaysShowLabel = true,

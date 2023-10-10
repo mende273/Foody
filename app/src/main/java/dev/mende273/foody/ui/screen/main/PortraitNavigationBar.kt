@@ -8,6 +8,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -29,17 +30,20 @@ fun PortraitNavigationBar(
         content = {
             navigationMenuItems.forEachIndexed { index, menuItem ->
                 NavigationBarItem(
+                    modifier = Modifier.testTag(
+                        "test_tag_menu_item_${stringResource(id = menuItem.title)}"
+                    ),
                     selected = currentMenuItem == index,
                     onClick = {
                         onMenuItemClick(index, menuItem)
                     },
-                    label = { Text(text = stringResource(id = menuItem.resourceId)) },
+                    label = { Text(text = stringResource(id = menuItem.title)) },
                     enabled = true,
                     icon = {
                         menuItem.icon?.let { painterResource(id = menuItem.icon) }?.let {
                             Icon(
                                 painter = it,
-                                contentDescription = stringResource(id = menuItem.resourceId)
+                                contentDescription = stringResource(id = menuItem.title)
                             )
                         }
                     },
@@ -56,3 +60,15 @@ fun PortraitNavigationBar(
         }
     )
 }
+
+/*
+private fun getTestTagForMenuItem(menuItem: NavigationMenuItem): String {
+    val itemName = when (menuItem) {
+        NavigationMenuItem.MEALS -> "meals"
+        NavigationMenuItem.RANDOM_MEAL -> "random_meal"
+        NavigationMenuItem.SEARCH -> "search"
+        NavigationMenuItem.FAVORITES -> "favourites"
+    }
+    return "test_tag_menu_item_$itemName"
+}
+*/

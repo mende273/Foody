@@ -21,7 +21,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import dev.mende273.foody.navigation.AppNavigation
-import dev.mende273.foody.navigation.Screen
+import dev.mende273.foody.navigation.getRoute
 import dev.mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .background(MaterialTheme.colorScheme.background),
-                            navHostController = navController,
+                            navController = navController,
                             innerPadding = innerPadding
                         )
                     },
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                                 currentMenuItem = currentMenuItemIndex,
                                 onMenuItemClick = { index, menuItem ->
                                     currentMenuItemIndex = index
-                                    navController.navigateFromMenuItem(menuItem)
+                                    navController.navigateFromNavigationBar(menuItem.getRoute())
                                 }
                             )
                         }
@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                         currentMenuItem = currentMenuItemIndex,
                         onMenuItemClick = { index, menuItem ->
                             currentMenuItemIndex = index
-                            navController.navigateFromMenuItem(menuItem)
+                            navController.navigateFromNavigationBar(menuItem.getRoute())
                         }
                     )
                 }
@@ -81,16 +81,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun NavHostController.navigateFromMenuItem(
-    menuItem: NavigationMenuItem
+private fun NavHostController.navigateFromNavigationBar(
+    route: String
 ) {
-    val route = when (menuItem) {
-        NavigationMenuItem.MEALS -> Screen.Meals.route
-        NavigationMenuItem.RANDOM_MEAL -> Screen.RandomMeal.route
-        NavigationMenuItem.SEARCH -> Screen.Search.route
-        NavigationMenuItem.FAVORITES -> Screen.Favourites.route
-    }
-
     navigate(route) {
         popUpTo(graph.findStartDestination().id) {
             saveState = true
