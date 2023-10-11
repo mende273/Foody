@@ -1,5 +1,7 @@
 package dev.mende273.foody.ui.screen.main
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
@@ -16,7 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import dev.mende273.foody.navigation.getRoute
+import dev.mende273.foody.R
+import dev.mende273.foody.navigation.Screen
 import dev.mende273.foody.ui.theme.LightThemePrimary
 import dev.mende273.foody.ui.theme.MediumDarkGreyColor
 import dev.mende273.foody.ui.theme.NavigationBarSelectedColor
@@ -136,6 +139,16 @@ private fun LandscapeNavigationBar(
     }
 }
 
+private enum class NavigationMenuItem(
+    @StringRes val title: Int,
+    @DrawableRes val icon: Int?
+) {
+    MEALS(R.string.screen_title_meals, R.drawable.food),
+    RANDOM_MEAL(R.string.screen_title_random, R.drawable.random),
+    SEARCH(R.string.screen_title_search, R.drawable.search),
+    FAVORITES(R.string.screen_title_favourites, R.drawable.favourite)
+}
+
 private fun NavHostController.navigateFromNavigationBar(route: String) {
     navigate(route) {
         popUpTo(graph.findStartDestination().id) {
@@ -145,3 +158,11 @@ private fun NavHostController.navigateFromNavigationBar(route: String) {
         restoreState = true
     }
 }
+
+private fun NavigationMenuItem.getRoute(): String =
+    when (this) {
+        NavigationMenuItem.MEALS -> Screen.Meals.route
+        NavigationMenuItem.RANDOM_MEAL -> Screen.RandomMeal.route
+        NavigationMenuItem.SEARCH -> Screen.Search.route
+        NavigationMenuItem.FAVORITES -> Screen.Favourites.route
+    }

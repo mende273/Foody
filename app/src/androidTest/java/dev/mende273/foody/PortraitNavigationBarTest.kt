@@ -13,7 +13,6 @@ import androidx.test.core.app.ApplicationProvider
 import dev.mende273.foody.navigation.AppNavigation
 import dev.mende273.foody.navigation.Screen
 import dev.mende273.foody.ui.screen.main.NavigationBar
-import dev.mende273.foody.ui.screen.main.NavigationMenuItem
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -53,7 +52,7 @@ class PortraitNavigationBarTest {
 
     @Test
     fun appNavHost_verifyGoToMealsScreen() {
-        val meals = context.resources.getString(NavigationMenuItem.MEALS.title)
+        val meals = context.resources.getString(R.string.screen_title_meals)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$meals").performClick()
         val route = navController.currentDestination?.route
         Assert.assertEquals(route, Screen.Meals.route)
@@ -61,7 +60,7 @@ class PortraitNavigationBarTest {
 
     @Test
     fun appNavHost_verifyGoToSearchScreen() {
-        val search = context.resources.getString(NavigationMenuItem.SEARCH.title)
+        val search = context.resources.getString(R.string.screen_title_search)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$search").performClick()
         val route = navController.currentDestination?.route
         Assert.assertEquals(route, Screen.Search.route)
@@ -69,7 +68,7 @@ class PortraitNavigationBarTest {
 
     @Test
     fun appNavHost_verifyGoToFavouritesScreen() {
-        val favourites = context.resources.getString(NavigationMenuItem.FAVORITES.title)
+        val favourites = context.resources.getString(R.string.screen_title_favourites)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$favourites").performClick()
         val route = navController.currentDestination?.route
         Assert.assertEquals(route, Screen.Favourites.route)
@@ -77,7 +76,7 @@ class PortraitNavigationBarTest {
 
     @Test
     fun appNavHost_verifyGoToRandomMealScreen() {
-        val random = context.resources.getString(NavigationMenuItem.RANDOM_MEAL.title)
+        val random = context.resources.getString(R.string.screen_title_random)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$random").performClick()
         val route = navController.currentDestination?.route
         Assert.assertEquals(route, Screen.RandomMeal.route)
