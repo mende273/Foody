@@ -11,6 +11,7 @@ import dev.mende273.foody.ui.screen.favourites.FavouritesScreen
 import dev.mende273.foody.ui.screen.meals.MealsScreen
 import dev.mende273.foody.ui.screen.random.RandomMealScreen
 import dev.mende273.foody.ui.screen.search.SearchScreen
+import org.koin.androidx.compose.navigation.koinNavViewModel
 
 @Composable
 fun AppNavigation(
@@ -24,19 +25,19 @@ fun AppNavigation(
         modifier = modifier.padding(innerPadding)
     ) {
         composable(Screen.Meals.route) {
-            MealsScreen(modifier = modifier)
+            MealsScreen(modifier = modifier, viewModel = koinNavViewModel())
         }
 
         composable(Screen.RandomMeal.route) {
-            RandomMealScreen(modifier = modifier)
+            RandomMealScreen(modifier = modifier, viewModel = koinNavViewModel())
         }
 
         composable(Screen.Search.route) {
-            SearchScreen(modifier = modifier)
+            SearchScreen(modifier = modifier, viewModel = koinNavViewModel())
         }
 
         composable(Screen.Favourites.route) {
-            FavouritesScreen(modifier = modifier)
+            FavouritesScreen(modifier = modifier, viewModel = koinNavViewModel())
         }
     }
 }
