@@ -3,6 +3,7 @@ package dev.mende273.foody.di
 import android.util.Log
 import dev.mende273.foody.data.api.ApiService
 import dev.mende273.foody.data.repository.RemoteRepositoryImpl
+import dev.mende273.foody.domain.usecase.GetRandomMealUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.features.DefaultRequest
@@ -25,6 +26,7 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single { ApiService(provideHttpClient()) }
     single { RemoteRepositoryImpl(get()) }
+    factory { GetRandomMealUseCase(get()) }
 }
 
 const val NETWORK_TIME_OUT = 6_000

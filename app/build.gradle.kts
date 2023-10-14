@@ -5,6 +5,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("io.gitlab.arturbosch.detekt") version ("1.22.0")
+    id("org.jetbrains.kotlinx.kover") version "0.7.4"
+    id("kotlinx-serialization")
 }
 
 android {
