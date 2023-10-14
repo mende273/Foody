@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 class MealsDto(
     @SerialName("meals")
-    val meals: List<MealDto>
+    val meals: List<MealDto?>?
 )
