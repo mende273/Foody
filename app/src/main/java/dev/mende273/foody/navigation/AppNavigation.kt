@@ -1,7 +1,6 @@
 package dev.mende273.foody.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -17,19 +16,22 @@ import org.koin.androidx.compose.navigation.koinNavViewModel
 fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    innerPadding: PaddingValues
+    windowSize: WindowSizeClass
 ) {
     NavHost(
         navController,
-        startDestination = Screen.Meals.route,
-        modifier = modifier.padding(innerPadding)
+        startDestination = Screen.Meals.route
     ) {
         composable(Screen.Meals.route) {
             MealsScreen(modifier = modifier, viewModel = koinNavViewModel())
         }
 
         composable(Screen.RandomMeal.route) {
-            RandomMealScreen(modifier = modifier, viewModel = koinNavViewModel())
+            RandomMealScreen(
+                modifier = modifier,
+                viewModel = koinNavViewModel(),
+                windowSize = windowSize
+            )
         }
 
         composable(Screen.Search.route) {

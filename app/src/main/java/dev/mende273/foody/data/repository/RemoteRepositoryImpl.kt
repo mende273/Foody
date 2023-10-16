@@ -6,7 +6,7 @@ import dev.mende273.foody.util.exception.RetrieveNetworkDataException
 
 class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepository {
 
-    override suspend fun getRandomMeal(): Result<MealsDto> {
+    override suspend fun getRandomMeal(): Result<MealsDto?> {
         return try {
             Result.success(apiService.getRandomMeal())
         } catch (e: RetrieveNetworkDataException) {
