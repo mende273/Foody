@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".FoodyApplication"
+        android:name="mende273.foody.FoodyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Foody"
         tools:targetApi="31">
         <activity
-            android:name=".ui.screen.main.MainActivity"
+            android:name="mende273.foody.ui.screen.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Foody">
             <intent-filter>
