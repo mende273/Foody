@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.mende273.foody"
+    namespace = "mende273.foody"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "dev.mende273.foody"
+        applicationId = "mende273.foody"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

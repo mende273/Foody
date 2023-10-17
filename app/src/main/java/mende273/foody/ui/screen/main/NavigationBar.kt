@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import dev.mende273.foody.R
+import mende273.foody.R
 import mende273.foody.navigation.Screen
 import mende273.foody.ui.theme.LightThemePrimary
 import mende273.foody.ui.theme.MediumDarkGreyColor

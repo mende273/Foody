@@ -9,7 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import dev.mende273.foody.R
+import mende273.foody.R
 
 @Composable
 fun RoundedBackButton(navigateBackEvent: () -> Unit) {
