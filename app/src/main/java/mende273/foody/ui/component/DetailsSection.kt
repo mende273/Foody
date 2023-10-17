@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
 import mende273.foody.R
 
 @Composable
@@ -20,7 +21,7 @@ fun ColumnScope.DetailsSection(
             if (isHeaderTitle) {
                 LargeText(text = title)
             } else {
-                MediumText(text = title)
+                MediumText(text = title, FontWeight.SemiBold)
             }
         }
 

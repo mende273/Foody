@@ -7,7 +7,7 @@ data class Meal(
     val area: String,
     val instructions: String,
     val thumb: String,
-    val tags: String,
+    val tags: List<String>,
     val youtube: String,
     val source: String,
     val ingredientsWithMeasures: List<IngredientWithMeasure>

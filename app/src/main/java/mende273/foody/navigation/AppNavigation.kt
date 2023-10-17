@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import mende273.foody.ui.screen.favourites.FavouritesScreen
+import mende273.foody.ui.screen.filter.category.FilterMealsByCategory
 import mende273.foody.ui.screen.meals.MealsScreen
 import mende273.foody.ui.screen.random.RandomMealScreen
 import mende273.foody.ui.screen.search.SearchScreen
@@ -30,7 +31,25 @@ fun AppNavigation(
             RandomMealScreen(
                 modifier = modifier,
                 viewModel = koinNavViewModel(),
-                windowSize = windowSize
+                windowSize = windowSize,
+                onHeaderImageClicked = {
+                    // TODO
+                },
+                onCategoryClicked = {
+                    navController.navigate(Screen.FilterMealsByCategory.getRoute(it))
+                },
+                onAreaClicked = {
+                    // TODO
+                },
+                onTagClicked = {
+                    // TODO
+                },
+                onVideoClicked = {
+                    // TODO
+                },
+                onSourceClicked = {
+                    // TODO
+                }
             )
         }
 
@@ -40,6 +59,15 @@ fun AppNavigation(
 
         composable(Screen.Favourites.route) {
             FavouritesScreen(modifier = modifier, viewModel = koinNavViewModel())
+        }
+
+        composable(Screen.FilterMealsByCategory.route) {
+            val categoryName = it.arguments?.getString(Screen.FilterMealsByCategory.NAME_ARGUMENT)
+            FilterMealsByCategory(
+                modifier = modifier,
+                viewModel = koinNavViewModel(),
+                categoryName = categoryName ?: ""
+            )
         }
     }
 }
