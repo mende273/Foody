@@ -17,11 +17,15 @@ fun MealDto.toDomain(): Meal = Meal(
     area = area ?: "",
     instructions = instructions ?: "",
     thumb = thumb ?: "",
-    tags = tags ?: "",
+    tags = makeListForTags(tags),
     youtube = youtube ?: "",
     source = source ?: "",
     ingredientsWithMeasures = makeListForIngredientsWithMeasures(this)
 )
+
+private fun makeListForTags(tags: String?): List<String> {
+    return tags?.split(",") ?: emptyList()
+}
 
 private fun makeListForIngredientsWithMeasures(mealDto: MealDto): List<IngredientWithMeasure> {
     val items = mutableListOf<IngredientWithMeasure>()

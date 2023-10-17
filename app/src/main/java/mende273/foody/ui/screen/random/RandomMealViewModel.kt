@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.usecase.GetRandomMealUseCase
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.exception.ERROR_LOADING_DATA
+import mende273.foody.util.ERROR_LOADING_DATA
 
 class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase) : ViewModel() {
 

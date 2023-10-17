@@ -8,14 +8,17 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,13 +30,15 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.mende273.foody.R
+import mende273.foody.R
 import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.DetailsComponent
-import mende273.foody.ui.component.LargeText
+import mende273.foody.ui.component.DetailsSection
+import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MediumText
 import mende273.foody.ui.component.ProgressBar
+import mende273.foody.ui.component.SmallButton
 import mende273.foody.ui.component.SmallText
 import mende273.foody.ui.state.UIState
 
@@ -41,7 +46,13 @@ import mende273.foody.ui.state.UIState
 fun RandomMealScreen(
     modifier: Modifier = Modifier,
     viewModel: RandomMealViewModel,
-    windowSize: WindowSizeClass
+    windowSize: WindowSizeClass,
+    onHeaderImageClicked: (String) -> Unit,
+    onCategoryClicked: (String) -> Unit,
+    onAreaClicked: (String) -> Unit,
+    onTagClicked: (String) -> Unit,
+    onVideoClicked: (String) -> Unit,
+    onSourceClicked: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -50,48 +61,121 @@ fun RandomMealScreen(
     })
 
     when (uiState) {
-        is UIState.Error -> Text(text = (uiState as UIState.Error).errorMessage)
-        UIState.Loading -> ProgressBar(modifier)
-        is UIState.Success -> Contents(
+        is UIState.Error -> ErrorComponent(
+            modifier = Modifier.fillMaxSize(),
+            text = (uiState as UIState.Error).errorMessage
+        )
+
+        is UIState.Loading -> ProgressBar(Modifier.fillMaxSize())
+        is UIState.Success -> MealDetails(
             modifier = modifier,
             meal = (uiState as UIState.Success<Meal>).data,
-            windowSize = windowSize
+            windowSize = windowSize,
+            onHeaderImageClicked = { onHeaderImageClicked(it) },
+            onCategoryClicked = { onCategoryClicked(it) },
+            onAreaClicked = { onAreaClicked(it) },
+            onTagClicked = { onTagClicked(it) },
+            onVideoClicked = { onVideoClicked(it) },
+            onSourceClicked = { onSourceClicked(it) }
         )
     }
 }
 
-const val WEIGHT = 0.3f
-
 @Composable
-private fun Contents(modifier: Modifier = Modifier, meal: Meal, windowSize: WindowSizeClass) {
+private fun MealDetails(
+    modifier: Modifier = Modifier,
+    meal: Meal,
+    windowSize: WindowSizeClass,
+    onHeaderImageClicked: (String) -> Unit,
+    onCategoryClicked: (String) -> Unit,
+    onAreaClicked: (String) -> Unit,
+    onTagClicked: (String) -> Unit,
+    onVideoClicked: (String) -> Unit,
+    onSourceClicked: (String) -> Unit
+) {
     DetailsComponent(
         modifier = modifier.verticalScroll(rememberScrollState()),
         windowSize = windowSize,
         headerImageUrl = meal.thumb,
-        onHeaderImageClicked = {
-            // todo
-        },
+        onHeaderImageClicked = { onHeaderImageClicked(it) },
         contents = {
             Column(modifier) {
-                LargeText(text = meal.name)
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(
-                        dimensionResource(id = R.dimen.small_padding)
-                    )
-                ) {
-                    SmallText(text = meal.category)
-                    SmallText(text = meal.area)
+                DetailsSection(title = meal.name, isHeaderTitle = true, addBottomSpace = false)
+
+                DetailsSection(content = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(
+                            dimensionResource(id = R.dimen.small_padding)
+                        )
+                    ) {
+                        if (meal.category.isNotEmpty()) {
+                            SmallButton(text = meal.category, onClicked = {
+                                onCategoryClicked(meal.category)
+                            })
+                        }
+
+                        if (meal.area.isNotEmpty()) {
+                            SmallButton(text = meal.area, onClicked = {
+                                onAreaClicked(meal.area)
+                            })
+                        }
+                    }
+                })
+
+                if (meal.instructions.isNotEmpty()) {
+                    DetailsSection(title = "Instructions", content = {
+                        MediumText(text = meal.instructions)
+                    })
                 }
-                Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.normal_padding)))
-                MediumText(text = "Instructions")
-                MediumText(text = meal.instructions)
 
-                Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.normal_padding)))
-                MediumText(text = "Ingredients")
-                IngredientsWithMeasuresGrid(items = meal.ingredientsWithMeasures)
+                if (meal.ingredientsWithMeasures.isNotEmpty()) {
+                    DetailsSection(title = "Ingredients", content = {
+                        IngredientsWithMeasuresGrid(items = meal.ingredientsWithMeasures)
+                    })
+                }
 
-                Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.normal_padding)))
-                SmallText(text = meal.tags)
+                if (meal.tags.isNotEmpty()) {
+                    DetailsSection(title = "Tags", content = {
+                        LazyRow(
+                            horizontalArrangement = Arrangement.spacedBy(
+                                dimensionResource(id = R.dimen.normal_padding)
+                            ),
+                            content = {
+                                items(meal.tags) { tag ->
+                                    SmallButton(text = tag, onClicked = {
+                                        onTagClicked(tag)
+                                    })
+                                }
+                            }
+                        )
+                    })
+                }
+
+                DetailsSection(title = "More Info", content = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(
+                            dimensionResource(id = R.dimen.normal_padding)
+                        )
+                    ) {
+                        if (meal.youtube.isNotEmpty()) {
+                            SmallButton(text = "Video", onClicked = {
+                                onVideoClicked(meal.youtube)
+                            })
+                        }
+
+                        if (meal.source.isNotEmpty()) {
+                            SmallButton(text = "Source", onClicked = {
+                                onSourceClicked(meal.source)
+                            })
+                        }
+                    }
+                })
+
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                )
             }
         }
     )
@@ -126,7 +210,7 @@ private fun IngredientWithMeasureItem(
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth(WEIGHT)
+            .fillMaxWidth(fraction = 0.3f)
             .padding(dimensionResource(id = R.dimen.small_padding)),
         contentAlignment = Alignment.Center
     ) {
