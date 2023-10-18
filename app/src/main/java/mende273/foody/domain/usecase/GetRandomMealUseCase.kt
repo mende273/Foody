@@ -9,10 +9,11 @@ class GetRandomMealUseCase(private val remoteRepository: RemoteRepositoryImpl) {
 
     suspend operator fun invoke(): Result<MealDetails> {
         return remoteRepository.getRandomMeal().fold(
-            onSuccess = { mealsDto ->
-                val mealDetails: MealDetails? = mealsDto?.takeIf { it.mealsWithDetails != null }
-                    ?.toDomain()
-                    ?.meals?.get(0)
+            onSuccess = { mealsWithDetails ->
+                val mealDetails: MealDetails? =
+                    mealsWithDetails?.takeIf { it.mealsWithDetails != null }
+                        ?.toDomain()
+                        ?.meals?.get(0)
 
                 mealDetails?.let {
                     Result.success(it)

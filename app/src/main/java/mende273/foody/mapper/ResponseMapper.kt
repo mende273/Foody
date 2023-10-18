@@ -1,9 +1,13 @@
 package mende273.foody.mapper
 
 import mende273.foody.data.dto.MealDetailsDto
+import mende273.foody.data.dto.MealDto
+import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.domain.model.IngredientWithMeasure
+import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
+import mende273.foody.domain.model.Meals
 import mende273.foody.domain.model.MealsWithDetails
 
 fun MealsWithDetailsDto.toDomain(): MealsWithDetails = MealsWithDetails(
@@ -21,6 +25,16 @@ fun MealDetailsDto.toDomain(): MealDetails = MealDetails(
     youtube = youtube ?: "",
     source = source ?: "",
     ingredientsWithMeasures = makeListForIngredientsWithMeasures(this)
+)
+
+fun MealsDto.toDomain(): Meals = Meals(
+    meals = meals?.filterNotNull()?.map { it.toDomain() } ?: emptyList()
+)
+
+fun MealDto.toDomain(): Meal = Meal(
+    id = id,
+    thumb = thumb ?: "",
+    name = name ?: ""
 )
 
 private fun makeListForTags(tags: String?): List<String> {

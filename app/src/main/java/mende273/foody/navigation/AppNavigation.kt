@@ -66,7 +66,14 @@ fun AppNavigation(
             FilterMealsByCategory(
                 modifier = modifier,
                 viewModel = koinNavViewModel(),
-                categoryName = categoryName ?: ""
+                category = categoryName ?: "",
+                windowSize = windowSize,
+                onMealClicked = {
+                    // TODO
+                },
+                onNavigateBackClicked = {
+                    navController.popBackStack()
+                }
             )
         }
     }
