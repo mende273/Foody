@@ -1,6 +1,6 @@
 package mende273.foody.domain.model
 
-data class Meal(
+data class MealDetails(
     val id: Long,
     val name: String,
     val category: String,

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.R
 import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.domain.model.Meal
+import mende273.foody.domain.model.MealDetails
 import mende273.foody.ui.component.DetailsComponent
 import mende273.foody.ui.component.DetailsSection
 import mende273.foody.ui.component.ErrorComponent
@@ -69,7 +69,7 @@ fun RandomMealScreen(
         is UIState.Loading -> ProgressBar(Modifier.fillMaxSize())
         is UIState.Success -> MealDetails(
             modifier = modifier,
-            meal = (uiState as UIState.Success<Meal>).data,
+            mealDetails = (uiState as UIState.Success<MealDetails>).data,
             windowSize = windowSize,
             onHeaderImageClicked = { onHeaderImageClicked(it) },
             onCategoryClicked = { onCategoryClicked(it) },
@@ -84,7 +84,7 @@ fun RandomMealScreen(
 @Composable
 private fun MealDetails(
     modifier: Modifier = Modifier,
-    meal: Meal,
+    mealDetails: MealDetails,
     windowSize: WindowSizeClass,
     onHeaderImageClicked: (String) -> Unit,
     onCategoryClicked: (String) -> Unit,
@@ -96,11 +96,15 @@ private fun MealDetails(
     DetailsComponent(
         modifier = modifier.verticalScroll(rememberScrollState()),
         windowSize = windowSize,
-        headerImageUrl = meal.thumb,
+        headerImageUrl = mealDetails.thumb,
         onHeaderImageClicked = { onHeaderImageClicked(it) },
         contents = {
             Column(modifier) {
-                DetailsSection(title = meal.name, isHeaderTitle = true, addBottomSpace = false)
+                DetailsSection(
+                    title = mealDetails.name,
+                    isHeaderTitle = true,
+                    addBottomSpace = false
+                )
 
                 DetailsSection(content = {
                     Row(
@@ -108,40 +112,40 @@ private fun MealDetails(
                             dimensionResource(id = R.dimen.small_padding)
                         )
                     ) {
-                        if (meal.category.isNotEmpty()) {
-                            SmallButton(text = meal.category, onClicked = {
-                                onCategoryClicked(meal.category)
+                        if (mealDetails.category.isNotEmpty()) {
+                            SmallButton(text = mealDetails.category, onClicked = {
+                                onCategoryClicked(mealDetails.category)
                             })
                         }
 
-                        if (meal.area.isNotEmpty()) {
-                            SmallButton(text = meal.area, onClicked = {
-                                onAreaClicked(meal.area)
+                        if (mealDetails.area.isNotEmpty()) {
+                            SmallButton(text = mealDetails.area, onClicked = {
+                                onAreaClicked(mealDetails.area)
                             })
                         }
                     }
                 })
 
-                if (meal.instructions.isNotEmpty()) {
+                if (mealDetails.instructions.isNotEmpty()) {
                     DetailsSection(title = "Instructions", content = {
-                        MediumText(text = meal.instructions)
+                        MediumText(text = mealDetails.instructions)
                     })
                 }
 
-                if (meal.ingredientsWithMeasures.isNotEmpty()) {
+                if (mealDetails.ingredientsWithMeasures.isNotEmpty()) {
                     DetailsSection(title = "Ingredients", content = {
-                        IngredientsWithMeasuresGrid(items = meal.ingredientsWithMeasures)
+                        IngredientsWithMeasuresGrid(items = mealDetails.ingredientsWithMeasures)
                     })
                 }
 
-                if (meal.tags.isNotEmpty()) {
+                if (mealDetails.tags.isNotEmpty()) {
                     DetailsSection(title = "Tags", content = {
                         LazyRow(
                             horizontalArrangement = Arrangement.spacedBy(
                                 dimensionResource(id = R.dimen.normal_padding)
                             ),
                             content = {
-                                items(meal.tags) { tag ->
+                                items(mealDetails.tags) { tag ->
                                     SmallButton(text = tag, onClicked = {
                                         onTagClicked(tag)
                                     })
@@ -157,15 +161,15 @@ private fun MealDetails(
                             dimensionResource(id = R.dimen.normal_padding)
                         )
                     ) {
-                        if (meal.youtube.isNotEmpty()) {
+                        if (mealDetails.youtube.isNotEmpty()) {
                             SmallButton(text = "Video", onClicked = {
-                                onVideoClicked(meal.youtube)
+                                onVideoClicked(mealDetails.youtube)
                             })
                         }
 
-                        if (meal.source.isNotEmpty()) {
+                        if (mealDetails.source.isNotEmpty()) {
                             SmallButton(text = "Source", onClicked = {
-                                onSourceClicked(meal.source)
+                                onSourceClicked(mealDetails.source)
                             })
                         }
                     }

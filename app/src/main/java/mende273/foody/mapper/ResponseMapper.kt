@@ -1,16 +1,16 @@
 package mende273.foody.mapper
 
-import mende273.foody.data.dto.MealDto
-import mende273.foody.data.dto.MealsDto
+import mende273.foody.data.dto.MealDetailsDto
+import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.MealDetails
+import mende273.foody.domain.model.MealsWithDetails
 
-fun MealsDto.toDomain(): Meals = Meals(
-    meals = meals?.filterNotNull()?.map { it.toDomain() } ?: emptyList()
+fun MealsWithDetailsDto.toDomain(): MealsWithDetails = MealsWithDetails(
+    meals = mealsWithDetails?.filterNotNull()?.map { it.toDomain() } ?: emptyList()
 )
 
-fun MealDto.toDomain(): Meal = Meal(
+fun MealDetailsDto.toDomain(): MealDetails = MealDetails(
     id = id ?: 0,
     name = name ?: "",
     category = category ?: "",
@@ -27,10 +27,10 @@ private fun makeListForTags(tags: String?): List<String> {
     return tags?.split(",") ?: emptyList()
 }
 
-private fun makeListForIngredientsWithMeasures(mealDto: MealDto): List<IngredientWithMeasure> {
+private fun makeListForIngredientsWithMeasures(item: MealDetailsDto): List<IngredientWithMeasure> {
     val items = mutableListOf<IngredientWithMeasure>()
 
-    with(mealDto) {
+    with(item) {
         items.addIngredientWithMeasure(ingredient1, measure1)
         items.addIngredientWithMeasure(ingredient2, measure2)
         items.addIngredientWithMeasure(ingredient3, measure3)

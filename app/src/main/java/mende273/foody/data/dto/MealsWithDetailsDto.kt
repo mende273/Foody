@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class MealsDto(
+class MealsWithDetailsDto(
     @SerialName("meals")
-    val meals: List<MealDto?>?
+    val mealsWithDetails: List<MealDetailsDto?>?
 )

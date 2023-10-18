@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class MealDto(
+class MealDetailsDto(
     @SerialName("idMeal")
     val id: Long?,
     @SerialName("strMeal")
