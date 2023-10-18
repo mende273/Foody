@@ -1,6 +1,7 @@
 package mende273.foody.data.repository
 
 import mende273.foody.data.api.ApiService
+import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.util.exception.RetrieveNetworkDataException
 
@@ -9,6 +10,14 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
     override suspend fun getRandomMeal(): Result<MealsWithDetailsDto?> {
         return try {
             Result.success(apiService.getRandomMeal())
+        } catch (e: RetrieveNetworkDataException) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun getMealsForCategory(category: String): Result<MealsDto?> {
+        return try {
+            Result.success(apiService.getMealsForCategory(category))
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }

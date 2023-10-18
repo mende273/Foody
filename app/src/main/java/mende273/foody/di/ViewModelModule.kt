@@ -13,5 +13,5 @@ val viewModelModule = module {
     viewModel { RandomMealViewModel(get()) }
     viewModel { SearchViewModel() }
     viewModel { FavouritesViewModel() }
-    viewModel { FilterMealByCategoryViewModel() }
+    viewModel { FilterMealByCategoryViewModel(get()) }
 }
