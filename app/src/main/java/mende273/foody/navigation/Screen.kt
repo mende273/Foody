@@ -22,6 +22,17 @@ sealed class Screen(val route: String) {
         }
     }
 
+    data object FilterMealsByArea : Screen("area/{name}") {
+
+        const val NAME_ARGUMENT = "name"
+
+        override fun getNavArguments(): List<NamedNavArgument> {
+            return listOf(
+                navArgument(NAME_ARGUMENT) { type = NavType.StringType }
+            )
+        }
+    }
+
     open fun getNavArguments(): List<NamedNavArgument> = emptyList()
 
     fun getRoute(vararg id: String): String {

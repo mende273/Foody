@@ -22,4 +22,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
             Result.failure(e)
         }
     }
+
+    override suspend fun getMealsForArea(area: String): Result<MealsDto?> {
+        return try {
+            Result.success(apiService.getMealsForArea(area))
+        } catch (e: RetrieveNetworkDataException) {
+            Result.failure(e)
+        }
+    }
 }

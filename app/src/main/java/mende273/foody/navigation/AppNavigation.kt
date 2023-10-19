@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import mende273.foody.ui.screen.favourites.FavouritesScreen
+import mende273.foody.ui.screen.filter.area.FilterMealsByAreaScreen
 import mende273.foody.ui.screen.filter.category.FilterMealsByCategory
 import mende273.foody.ui.screen.meals.MealsScreen
 import mende273.foody.ui.screen.random.RandomMealScreen
@@ -39,7 +40,7 @@ fun AppNavigation(
                     navController.navigate(Screen.FilterMealsByCategory.getRoute(it))
                 },
                 onAreaClicked = {
-                    // TODO
+                    navController.navigate(Screen.FilterMealsByArea.getRoute(it))
                 },
                 onTagClicked = {
                     // TODO
@@ -67,6 +68,22 @@ fun AppNavigation(
                 modifier = modifier,
                 viewModel = koinNavViewModel(),
                 category = categoryName ?: "",
+                windowSize = windowSize,
+                onMealClicked = {
+                    // TODO
+                },
+                onNavigateBackClicked = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Screen.FilterMealsByArea.route) {
+            val areaName = it.arguments?.getString(Screen.FilterMealsByArea.NAME_ARGUMENT)
+            FilterMealsByAreaScreen(
+                modifier = modifier,
+                viewModel = koinNavViewModel(),
+                area = areaName ?: "",
                 windowSize = windowSize,
                 onMealClicked = {
                     // TODO
