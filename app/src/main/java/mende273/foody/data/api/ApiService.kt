@@ -23,4 +23,10 @@ class ApiService(private val client: HttpClient) {
             url("${ENDPOINT}filter.php")
             parameter("c", category)
         }
+
+    suspend fun getMealsForArea(area: String): MealsDto? =
+        client.get {
+            url("${ENDPOINT}filter.php")
+            parameter("a", area)
+        }
 }
