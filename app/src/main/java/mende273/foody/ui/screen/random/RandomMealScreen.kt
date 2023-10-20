@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -50,7 +48,6 @@ fun RandomMealScreen(
     onHeaderImageClicked: (String) -> Unit,
     onCategoryClicked: (String) -> Unit,
     onAreaClicked: (String) -> Unit,
-    onTagClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit
 ) {
@@ -74,7 +71,6 @@ fun RandomMealScreen(
             onHeaderImageClicked = { onHeaderImageClicked(it) },
             onCategoryClicked = { onCategoryClicked(it) },
             onAreaClicked = { onAreaClicked(it) },
-            onTagClicked = { onTagClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
             onSourceClicked = { onSourceClicked(it) }
         )
@@ -89,7 +85,6 @@ private fun MealDetails(
     onHeaderImageClicked: (String) -> Unit,
     onCategoryClicked: (String) -> Unit,
     onAreaClicked: (String) -> Unit,
-    onTagClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit
 ) {
@@ -140,40 +135,31 @@ private fun MealDetails(
 
                 if (mealDetails.tags.isNotEmpty()) {
                     DetailsSection(title = "Tags", content = {
-                        LazyRow(
-                            horizontalArrangement = Arrangement.spacedBy(
-                                dimensionResource(id = R.dimen.normal_padding)
-                            ),
-                            content = {
-                                items(mealDetails.tags) { tag ->
-                                    SmallButton(text = tag, onClicked = {
-                                        onTagClicked(tag)
-                                    })
-                                }
-                            }
-                        )
+                        MediumText(text = mealDetails.tags)
                     })
                 }
 
-                DetailsSection(title = "More Info", content = {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(
-                            dimensionResource(id = R.dimen.normal_padding)
-                        )
-                    ) {
-                        if (mealDetails.youtube.isNotEmpty()) {
-                            SmallButton(text = "Video", onClicked = {
-                                onVideoClicked(mealDetails.youtube)
-                            })
-                        }
+                if (mealDetails.youtube.isNotEmpty() || mealDetails.source.isNotEmpty()) {
+                    DetailsSection(title = "More Info", content = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(
+                                dimensionResource(id = R.dimen.normal_padding)
+                            )
+                        ) {
+                            if (mealDetails.youtube.isNotEmpty()) {
+                                SmallButton(text = "Video", onClicked = {
+                                    onVideoClicked(mealDetails.youtube)
+                                })
+                            }
 
-                        if (mealDetails.source.isNotEmpty()) {
-                            SmallButton(text = "Source", onClicked = {
-                                onSourceClicked(mealDetails.source)
-                            })
+                            if (mealDetails.source.isNotEmpty()) {
+                                SmallButton(text = "Source", onClicked = {
+                                    onSourceClicked(mealDetails.source)
+                                })
+                            }
                         }
-                    }
-                })
+                    })
+                }
 
                 Spacer(
                     modifier = Modifier

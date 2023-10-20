@@ -52,9 +52,6 @@ fun AppNavigation(
                 onAreaClicked = {
                     navController.navigate(Screen.FilterMealsByArea.getRoute(it))
                 },
-                onTagClicked = {
-                    // TODO
-                },
                 onVideoClicked = { startImplicitIntent(context, it) },
                 onSourceClicked = { startImplicitIntent(context, it) }
             )
