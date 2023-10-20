@@ -45,13 +45,13 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val windowSize = calculateWindowSizeClass(this)
 
-            var navigationBarVisible by remember { mutableStateOf(false) }
+            var isNavigationBarVisible by remember { mutableStateOf(false) }
 
             var currentMenuItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
             val isPortrait = windowSize.widthSizeClass <= WindowWidthSizeClass.Medium
 
-            navigationBarVisible = isRouteFromBottomBarMenu(
+            isNavigationBarVisible = isRouteFromBottomBarMenu(
                 navController.currentBackStackEntryAsState()
             )
 
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         if (isPortrait) {
                             AnimatedVisibility(
-                                visible = navigationBarVisible,
+                                visible = isNavigationBarVisible,
                                 enter = slideInVertically(initialOffsetY = { it }),
                                 exit = slideOutVertically(targetOffsetY = { it })
                             ) {
@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
 
                 if (!isPortrait) {
                     AnimatedVisibility(
-                        visible = navigationBarVisible,
+                        visible = isNavigationBarVisible,
                         enter = slideInVertically(initialOffsetY = { it }),
                         exit = slideOutVertically(targetOffsetY = { it })
                     ) {

@@ -1,14 +1,21 @@
 package mende273.foody.navigation
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import mende273.foody.ui.screen.favourites.FavouritesScreen
 import mende273.foody.ui.screen.filter.area.FilterMealsByAreaScreen
 import mende273.foody.ui.screen.filter.category.FilterMealsByCategory
+import mende273.foody.ui.screen.image.FullScreenImage
 import mende273.foody.ui.screen.meals.MealsScreen
 import mende273.foody.ui.screen.random.RandomMealScreen
 import mende273.foody.ui.screen.search.SearchScreen
@@ -20,6 +27,8 @@ fun AppNavigation(
     navController: NavHostController,
     windowSize: WindowSizeClass
 ) {
+    val context = LocalContext.current
+
     NavHost(
         navController,
         startDestination = Screen.Meals.route
@@ -34,7 +43,8 @@ fun AppNavigation(
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
                 onHeaderImageClicked = {
-                    // TODO
+                    val encodedUrl = URLEncoder.encode(it, StandardCharsets.UTF_8.toString())
+                    navController.navigate(Screen.FullScreenImage.getRoute(encodedUrl))
                 },
                 onCategoryClicked = {
                     navController.navigate(Screen.FilterMealsByCategory.getRoute(it))
@@ -45,12 +55,8 @@ fun AppNavigation(
                 onTagClicked = {
                     // TODO
                 },
-                onVideoClicked = {
-                    // TODO
-                },
-                onSourceClicked = {
-                    // TODO
-                }
+                onVideoClicked = { startImplicitIntent(context, it) },
+                onSourceClicked = { startImplicitIntent(context, it) }
             )
         }
 
@@ -88,10 +94,26 @@ fun AppNavigation(
                 onMealClicked = {
                     // TODO
                 },
-                onNavigateBackClicked = {
-                    navController.popBackStack()
-                }
+                onNavigateBackClicked = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.FullScreenImage.route) {
+            val imageUrl = it.arguments?.getString(Screen.FullScreenImage.URL_ARGUMENT)
+            FullScreenImage(
+                modifier = modifier,
+                imageUrl = imageUrl ?: "",
+                onNavigateBackClicked = { navController.popBackStack() }
             )
         }
     }
+}
+
+private fun startImplicitIntent(context: Context, url: String) {
+    context.startActivity(
+        Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(url)
+        )
+    )
 }

@@ -33,6 +33,16 @@ sealed class Screen(val route: String) {
         }
     }
 
+    data object FullScreenImage : Screen("image/{url}") {
+        const val URL_ARGUMENT = "url"
+
+        override fun getNavArguments(): List<NamedNavArgument> {
+            return listOf(
+                navArgument(URL_ARGUMENT) { type = NavType.StringType }
+            )
+        }
+    }
+
     open fun getNavArguments(): List<NamedNavArgument> = emptyList()
 
     fun getRoute(vararg id: String): String {

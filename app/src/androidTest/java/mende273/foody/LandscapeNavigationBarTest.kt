@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
-import dev.mende273.foody.R
 import mende273.foody.navigation.AppNavigation
 import mende273.foody.navigation.Screen
 import mende273.foody.ui.screen.main.NavigationBar
