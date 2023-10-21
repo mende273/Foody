@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
+import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
 
@@ -34,5 +35,11 @@ class ApiService(private val client: HttpClient) {
         client.get {
             url("${ENDPOINT}lookup.php")
             parameter("i", id)
+        }
+
+    suspend fun getMealCategories(): MealCategoriesDto? =
+        client.get {
+            url("${ENDPOINT}list.php")
+            parameter("c", "list")
         }
 }
