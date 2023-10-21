@@ -1,5 +1,6 @@
 package mende273.foody.mapper
 
+import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealDetailsDto
 import mende273.foody.data.dto.MealDto
 import mende273.foody.data.dto.MealsDto
@@ -36,6 +37,17 @@ fun MealDto.toDomain(): Meal = Meal(
     thumb = thumb ?: "",
     name = name ?: ""
 )
+
+fun MealCategoriesDto.toDomain(): List<String> =
+    this.categories
+        ?.filterNotNull()
+        .takeIf { !it.isNullOrEmpty() }
+        ?.map {
+            it.category ?: ""
+        }?.filter {
+            it.isNotEmpty()
+        }
+        ?: emptyList()
 
 private fun makeListForIngredientsWithMeasures(item: MealDetailsDto): List<IngredientWithMeasure> {
     val items = mutableListOf<IngredientWithMeasure>()
