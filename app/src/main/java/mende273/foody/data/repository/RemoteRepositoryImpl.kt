@@ -30,4 +30,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
             Result.failure(e)
         }
     }
+
+    override suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?> {
+        return try {
+            Result.success(apiService.getMealDetails(id))
+        } catch (e: RetrieveNetworkDataException) {
+            Result.failure(e)
+        }
+    }
 }

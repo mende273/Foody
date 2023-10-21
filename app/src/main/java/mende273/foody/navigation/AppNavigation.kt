@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import mende273.foody.ui.screen.details.MealDetailsScreen
 import mende273.foody.ui.screen.favourites.FavouritesScreen
 import mende273.foody.ui.screen.filter.area.FilterMealsByAreaScreen
 import mende273.foody.ui.screen.filter.category.FilterMealsByCategory
@@ -57,6 +58,29 @@ fun AppNavigation(
             )
         }
 
+        composable(Screen.MealDetails.route) {
+            val mealId = it.arguments?.getString(Screen.MealDetails.MEAL_ID_ARGUMENT)
+            MealDetailsScreen(
+                modifier = modifier,
+                viewModel = koinNavViewModel(),
+                mealId = mealId ?: "",
+                windowSize = windowSize,
+                onHeaderImageClicked = {
+                    val encodedUrl = URLEncoder.encode(it, StandardCharsets.UTF_8.toString())
+                    navController.navigate(Screen.FullScreenImage.getRoute(encodedUrl))
+                },
+                onCategoryClicked = { category ->
+                    navController.navigate(Screen.FilterMealsByCategory.getRoute(category))
+                },
+                onAreaClicked = { area ->
+                    navController.navigate(Screen.FilterMealsByArea.getRoute(area))
+                },
+                onVideoClicked = { url -> startImplicitIntent(context, url) },
+                onSourceClicked = { url -> startImplicitIntent(context, url) },
+                onNavigateBackClicked = { navController.popBackStack() }
+            )
+        }
+
         composable(Screen.Search.route) {
             SearchScreen(modifier = modifier, viewModel = koinNavViewModel())
         }
@@ -72,8 +96,8 @@ fun AppNavigation(
                 viewModel = koinNavViewModel(),
                 category = categoryName ?: "",
                 windowSize = windowSize,
-                onMealClicked = {
-                    // TODO
+                onMealClicked = { mealId ->
+                    navController.navigate(Screen.MealDetails.getRoute(mealId))
                 },
                 onNavigateBackClicked = {
                     navController.popBackStack()
@@ -88,8 +112,8 @@ fun AppNavigation(
                 viewModel = koinNavViewModel(),
                 area = areaName ?: "",
                 windowSize = windowSize,
-                onMealClicked = {
-                    // TODO
+                onMealClicked = { mealId ->
+                    navController.navigate(Screen.MealDetails.getRoute(mealId))
                 },
                 onNavigateBackClicked = { navController.popBackStack() }
             )
