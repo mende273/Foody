@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.random
+package mende273.foody.ui.screen.details
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
@@ -14,20 +14,22 @@ import mende273.foody.ui.component.ProgressBar
 import mende273.foody.ui.state.UIState
 
 @Composable
-fun RandomMealScreen(
+fun MealDetailsScreen(
     modifier: Modifier = Modifier,
-    viewModel: RandomMealViewModel,
+    viewModel: MealDetailsViewModel,
+    mealId: String,
     windowSize: WindowSizeClass,
     onHeaderImageClicked: (String) -> Unit,
     onCategoryClicked: (String) -> Unit,
     onAreaClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
-    onSourceClicked: (String) -> Unit
+    onSourceClicked: (String) -> Unit,
+    onNavigateBackClicked: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(key1 = "random meal", block = {
-        viewModel.requestData()
+    LaunchedEffect(key1 = mealId, block = {
+        viewModel.requestData(mealId)
     })
 
     when (uiState) {
@@ -41,12 +43,13 @@ fun RandomMealScreen(
             modifier = modifier,
             mealDetails = (uiState as UIState.Success<MealDetails>).data,
             windowSize = windowSize,
-            isBackButtonEnabled = false,
+            isBackButtonEnabled = true,
             onHeaderImageClicked = { onHeaderImageClicked(it) },
             onCategoryClicked = { onCategoryClicked(it) },
             onAreaClicked = { onAreaClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
-            onSourceClicked = { onSourceClicked(it) }
+            onSourceClicked = { onSourceClicked(it) },
+            onNavigateBackClicked = { onNavigateBackClicked() }
         )
     }
 }

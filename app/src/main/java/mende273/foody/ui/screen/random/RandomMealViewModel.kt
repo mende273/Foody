@@ -12,20 +12,27 @@ import mende273.foody.util.ERROR_LOADING_DATA
 
 class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase) : ViewModel() {
 
+    companion object {
+        private var isDataLoaded = false
+    }
+
     private var _uiState: MutableStateFlow<UIState<MealDetails>> =
         MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<MealDetails>> = _uiState
 
     fun requestData() {
-        viewModelScope.launch {
-            _uiState.value = getRandomMealUseCase().fold(
-                onSuccess = {
-                    UIState.Success(it)
-                },
-                onFailure = {
-                    UIState.Error(it.message ?: ERROR_LOADING_DATA)
-                }
-            )
+        if (!isDataLoaded) {
+            viewModelScope.launch {
+                _uiState.value = getRandomMealUseCase().fold(
+                    onSuccess = {
+                        isDataLoaded = true
+                        UIState.Success(it)
+                    },
+                    onFailure = {
+                        UIState.Error(it.message ?: ERROR_LOADING_DATA)
+                    }
+                )
+            }
         }
     }
 }

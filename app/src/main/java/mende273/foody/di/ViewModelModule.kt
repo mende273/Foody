@@ -1,5 +1,6 @@
 package mende273.foody.di
 
+import mende273.foody.ui.screen.details.MealDetailsViewModel
 import mende273.foody.ui.screen.favourites.FavouritesViewModel
 import mende273.foody.ui.screen.filter.area.FilterMealsByAreaViewModel
 import mende273.foody.ui.screen.filter.category.FilterMealsByCategoryViewModel
@@ -16,4 +17,5 @@ val viewModelModule = module {
     viewModel { FavouritesViewModel() }
     viewModel { FilterMealsByCategoryViewModel(get()) }
     viewModel { FilterMealsByAreaViewModel(get()) }
+    viewModel { MealDetailsViewModel(get()) }
 }

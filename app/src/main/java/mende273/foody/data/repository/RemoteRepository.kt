@@ -7,4 +7,5 @@ interface RemoteRepository {
     suspend fun getRandomMeal(): Result<MealsWithDetailsDto?>
     suspend fun getMealsForCategory(category: String): Result<MealsDto?>
     suspend fun getMealsForArea(area: String): Result<MealsDto?>
+    suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?>
 }
