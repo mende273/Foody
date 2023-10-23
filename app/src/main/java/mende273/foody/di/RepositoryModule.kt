@@ -20,6 +20,7 @@ import io.ktor.http.contentType
 import kotlinx.serialization.json.Json
 import mende273.foody.data.api.ApiService
 import mende273.foody.data.repository.RemoteRepositoryImpl
+import mende273.foody.domain.usecase.GetMealCategoriesUseCase
 import mende273.foody.domain.usecase.GetMealDetailsUseCase
 import mende273.foody.domain.usecase.GetMealsForAreaUseCase
 import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
@@ -33,6 +34,7 @@ val repositoryModule = module {
     factory { GetMealsForCategoryUseCase(get()) }
     factory { GetMealsForAreaUseCase(get()) }
     factory { GetMealDetailsUseCase(get()) }
+    single { GetMealCategoriesUseCase(get()) }
 }
 
 const val NETWORK_TIME_OUT = 6_000

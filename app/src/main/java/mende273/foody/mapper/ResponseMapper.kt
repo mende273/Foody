@@ -42,8 +42,8 @@ fun MealCategoriesDto.toDomain(): List<String> =
     this.categories
         ?.filterNotNull()
         .takeIf { !it.isNullOrEmpty() }
-        ?.map {
-            it.category ?: ""
+        ?.mapNotNull {
+            it.category
         }?.filter {
             it.isNotEmpty()
         }
