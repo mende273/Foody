@@ -1,6 +1,5 @@
 package mende273.foody.ui.component
 
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,9 +10,13 @@ import mende273.foody.R
 import mende273.foody.ui.theme.mediumTextStyle
 
 @Composable
-fun MediumText(text: String, fontWeight: FontWeight = FontWeight.Normal) {
+fun MediumText(
+    modifier: Modifier = Modifier,
+    text: String,
+    fontWeight: FontWeight = FontWeight.Normal
+) {
     Text(
-        modifier = Modifier.wrapContentWidth(),
+        modifier = modifier,
         text = text,
         fontWeight = fontWeight,
         style = mediumTextStyle()

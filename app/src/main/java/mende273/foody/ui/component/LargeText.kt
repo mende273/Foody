@@ -1,6 +1,5 @@
 package mende273.foody.ui.component
 
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,9 +9,9 @@ import mende273.foody.R
 import mende273.foody.ui.theme.largeTextStyle
 
 @Composable
-fun LargeText(text: String) {
+fun LargeText(modifier: Modifier = Modifier, text: String) {
     Text(
-        modifier = Modifier.wrapContentWidth(),
+        modifier = modifier,
         text = text,
         style = largeTextStyle()
     )

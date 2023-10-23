@@ -6,6 +6,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -13,8 +14,9 @@ import mende273.foody.R
 import mende273.foody.ui.theme.FoodyTheme
 
 @Composable
-fun SmallButton(text: String, onClicked: () -> Unit) {
+fun SmallButton(modifier: Modifier = Modifier, text: String, onClicked: () -> Unit) {
     Button(
+        modifier = modifier,
         onClick = { onClicked() },
         shape = MaterialTheme.shapes.small,
         contentPadding = PaddingValues(
