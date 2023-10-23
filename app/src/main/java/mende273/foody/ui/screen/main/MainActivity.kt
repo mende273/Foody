@@ -1,6 +1,5 @@
 package mende273.foody.ui.screen.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,8 +7,14 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -35,7 +40,6 @@ import mende273.foody.ui.theme.FoodyTheme
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : ComponentActivity() {
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
             var currentMenuItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
-            val isPortrait = windowSize.widthSizeClass <= WindowWidthSizeClass.Medium
+            val isPortrait = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
 
             isNavigationBarVisible = isRouteFromBottomBarMenu(
                 navController.currentBackStackEntryAsState()
@@ -57,15 +61,37 @@ class MainActivity : ComponentActivity() {
 
             FoodyTheme {
                 Scaffold(
-                    content = {
-                        AppNavigation(
-                            modifier = Modifier
+                    content = { innerPadding ->
+                        Row(
+                            Modifier
                                 .fillMaxSize()
-                                .navigationBarsPadding()
-                                .background(MaterialTheme.colorScheme.background),
-                            navController = navController,
-                            windowSize = windowSize
-                        )
+                                .windowInsetsPadding(
+                                    WindowInsets.safeDrawing.only(
+                                        WindowInsetsSides.Horizontal
+                                    )
+                                )
+                        ) {
+                            if (!isPortrait) {
+                                NavigationBar(
+                                    navController = navController,
+                                    isPortrait = false,
+                                    currentMenuItemIndex = currentMenuItemIndex,
+                                    onUpdateCurrentMenuItemIndex = { index ->
+                                        currentMenuItemIndex = index
+                                    }
+                                )
+                            }
+
+                            AppNavigation(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .navigationBarsPadding()
+                                    .background(MaterialTheme.colorScheme.background),
+                                navController = navController,
+                                windowSize = windowSize,
+                                innerPadding = innerPadding
+                            )
+                        }
                     },
                     bottomBar = {
                         if (isPortrait) {
@@ -86,23 +112,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 )
-
-                if (!isPortrait) {
-                    AnimatedVisibility(
-                        visible = isNavigationBarVisible,
-                        enter = slideInVertically(initialOffsetY = { it }),
-                        exit = slideOutVertically(targetOffsetY = { it })
-                    ) {
-                        NavigationBar(
-                            navController = navController,
-                            isPortrait = false,
-                            currentMenuItemIndex = currentMenuItemIndex,
-                            onUpdateCurrentMenuItemIndex = { index ->
-                                currentMenuItemIndex = index
-                            }
-                        )
-                    }
-                }
             }
         }
     }
