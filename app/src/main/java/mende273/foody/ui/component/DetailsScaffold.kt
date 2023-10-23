@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import mende273.foody.R
 
 @Composable
-fun DetailsComponent(
+fun DetailsScaffold(
     modifier: Modifier = Modifier,
     windowSize: WindowSizeClass,
     headerImageUrl: String,
