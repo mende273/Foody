@@ -29,7 +29,7 @@ fun MealDetailsComponent(
     onSourceClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit = {}
 ) {
-    DetailsComponent(
+    DetailsScaffold(
         modifier = modifier.verticalScroll(rememberScrollState()),
         windowSize = windowSize,
         isBackButtonEnabled = isBackButtonEnabled,
@@ -38,13 +38,13 @@ fun MealDetailsComponent(
         onHeaderImageClicked = { onHeaderImageClicked(it) },
         contents = {
             Column(modifier) {
-                DetailsSection(
+                DetailsScaffoldSection(
                     title = mealDetails.name,
                     isHeaderTitle = true,
                     addBottomSpace = false
                 )
 
-                DetailsSection(content = {
+                DetailsScaffoldSection(content = {
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(
                             dimensionResource(id = R.dimen.small_padding)
@@ -65,13 +65,13 @@ fun MealDetailsComponent(
                 })
 
                 if (mealDetails.instructions.isNotEmpty()) {
-                    DetailsSection(title = "Instructions", content = {
+                    DetailsScaffoldSection(title = "Instructions", content = {
                         MediumText(text = mealDetails.instructions)
                     })
                 }
 
                 if (mealDetails.ingredientsWithMeasures.isNotEmpty()) {
-                    DetailsSection(title = "Ingredients", content = {
+                    DetailsScaffoldSection(title = "Ingredients", content = {
                         IngredientsWithMeasuresGridComponent(
                             items = mealDetails.ingredientsWithMeasures
                         )
@@ -79,13 +79,13 @@ fun MealDetailsComponent(
                 }
 
                 if (mealDetails.tags.isNotEmpty()) {
-                    DetailsSection(title = "Tags", content = {
+                    DetailsScaffoldSection(title = "Tags", content = {
                         MediumText(text = mealDetails.tags)
                     })
                 }
 
                 if (mealDetails.youtube.isNotEmpty() || mealDetails.source.isNotEmpty()) {
-                    DetailsSection(title = "More Info", content = {
+                    DetailsScaffoldSection(title = "More Info", content = {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(
                                 dimensionResource(id = R.dimen.normal_padding)
