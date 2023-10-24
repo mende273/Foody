@@ -3,10 +3,15 @@ package mende273.foody.navigation
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,7 +31,8 @@ import org.koin.androidx.compose.navigation.koinNavViewModel
 fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    windowSize: WindowSizeClass
+    windowSize: WindowSizeClass,
+    innerPadding: PaddingValues = PaddingValues()
 ) {
     val context = LocalContext.current
 
@@ -35,7 +41,20 @@ fun AppNavigation(
         startDestination = Screen.Meals.route
     ) {
         composable(Screen.Meals.route) {
-            MealsScreen(modifier = modifier, viewModel = koinNavViewModel())
+            MealsScreen(
+                modifier = modifier.padding(
+                    start = innerPadding.calculateStartPadding(
+                        layoutDirection = LayoutDirection.Ltr
+                    ),
+                    top = innerPadding.calculateTopPadding(),
+                    end = innerPadding.calculateEndPadding(layoutDirection = LayoutDirection.Ltr)
+                ),
+                viewModel = koinNavViewModel(),
+                windowSize = windowSize,
+                onMealClicked = {
+                    navController.navigate(Screen.MealDetails.getRoute(it))
+                }
+            )
         }
 
         composable(Screen.RandomMeal.route) {
@@ -65,8 +84,8 @@ fun AppNavigation(
                 viewModel = koinNavViewModel(),
                 mealId = mealId ?: "",
                 windowSize = windowSize,
-                onHeaderImageClicked = {
-                    val encodedUrl = URLEncoder.encode(it, StandardCharsets.UTF_8.toString())
+                onHeaderImageClicked = { imageUrl ->
+                    val encodedUrl = URLEncoder.encode(imageUrl, StandardCharsets.UTF_8.toString())
                     navController.navigate(Screen.FullScreenImage.getRoute(encodedUrl))
                 },
                 onCategoryClicked = { category ->
