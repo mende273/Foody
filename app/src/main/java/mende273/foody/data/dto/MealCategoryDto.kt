@@ -1,10 +1,12 @@
 package mende273.foody.data.dto
 
-import kotlinx.serialization.SerialName
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 
+@OptIn(ExperimentalSerializationApi::class)
 @Serializable
 class MealCategoryDto(
-    @SerialName("strCategory")
+    @JsonNames("strCategory", "strArea")
     val category: String?
 )

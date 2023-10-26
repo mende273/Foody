@@ -32,6 +32,14 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
         }
     }
 
+    override suspend fun getMealsForFirstLetter(letter: String): Result<MealsDto?> {
+        return try {
+            Result.success(apiService.getMealsForFirstLetter(letter))
+        } catch (e: RetrieveNetworkDataException) {
+            Result.failure(e)
+        }
+    }
+
     override suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?> {
         return try {
             Result.success(apiService.getMealDetails(id))
@@ -43,6 +51,14 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
     override suspend fun getMealCategories(): Result<MealCategoriesDto?> {
         return try {
             Result.success(apiService.getMealCategories())
+        } catch (e: RetrieveNetworkDataException) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun getMealAreas(): Result<MealCategoriesDto?> {
+        return try {
+            Result.success(apiService.getMealAreas())
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }

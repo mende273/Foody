@@ -40,7 +40,9 @@ fun ScrollableTabRowComponent(
         selectedTabIndex = pagerState.currentPage,
         edgePadding = 0.dp,
         divider = { Divider(color = MaterialTheme.colorScheme.background) },
-        indicator = { TabIndicator(Modifier.tabIndicatorOffset(it[pagerState.currentPage])) }
+        indicator = {
+            TabIndicator(Modifier.tabIndicatorOffset(it[pagerState.currentPage]))
+        }
     ) {
         items.forEachIndexed { index, item ->
             Tab(

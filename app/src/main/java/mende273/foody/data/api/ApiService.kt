@@ -31,6 +31,12 @@ class ApiService(private val client: HttpClient) {
             parameter("a", area)
         }
 
+    suspend fun getMealsForFirstLetter(letter: String): MealsDto? =
+        client.get {
+            url("${ENDPOINT}search.php")
+            parameter("f", letter)
+        }
+
     suspend fun getMealDetails(id: String): MealsWithDetailsDto? =
         client.get {
             url("${ENDPOINT}lookup.php")
@@ -41,5 +47,11 @@ class ApiService(private val client: HttpClient) {
         client.get {
             url("${ENDPOINT}list.php")
             parameter("c", "list")
+        }
+
+    suspend fun getMealAreas(): MealCategoriesDto? =
+        client.get {
+            url("${ENDPOINT}list.php")
+            parameter("a", "list")
         }
 }
