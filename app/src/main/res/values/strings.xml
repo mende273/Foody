@@ -5,4 +5,8 @@
     <string name="screen_title_random">Random</string>
     <string name="screen_title_search">Search</string>
     <string name="screen_title_favourites">Favourites</string>
+
+    <string name="filter_category">Category</string>
+    <string name="filter_area">Area</string>
+    <string name="first_letter">First Letter</string>
 </resources>
