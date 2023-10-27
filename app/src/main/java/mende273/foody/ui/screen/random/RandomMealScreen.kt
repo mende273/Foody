@@ -3,7 +3,6 @@ package mende273.foody.ui.screen.random
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -25,10 +24,6 @@ fun RandomMealScreen(
     onSourceClicked: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(key1 = "random meal", block = {
-        viewModel.requestData()
-    })
 
     when (uiState) {
         is UIState.Error -> ErrorComponent(

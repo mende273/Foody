@@ -4,34 +4,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.MealDetails
 import mende273.foody.domain.usecase.GetRandomMealUseCase
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.ERROR_LOADING_DATA
+import mende273.foody.util.toUIState
 
 class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase) : ViewModel() {
 
-    companion object {
-        private var isDataLoaded = false
-    }
-
-    private var _uiState: MutableStateFlow<UIState<MealDetails>> =
+    private val _uiState: MutableStateFlow<UIState<MealDetails>> =
         MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<MealDetails>> = _uiState
 
-    fun requestData() {
-        if (!isDataLoaded) {
-            viewModelScope.launch {
-                _uiState.value = getRandomMealUseCase().fold(
-                    onSuccess = {
-                        isDataLoaded = true
-                        UIState.Success(it)
-                    },
-                    onFailure = {
-                        UIState.Error(it.message ?: ERROR_LOADING_DATA)
-                    }
-                )
+    init {
+        requestData()
+    }
+
+    private fun requestData() {
+        viewModelScope.launch {
+            _uiState.update {
+                getRandomMealUseCase().toUIState()
             }
         }
     }
