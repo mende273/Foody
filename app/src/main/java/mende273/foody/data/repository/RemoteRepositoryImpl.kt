@@ -1,5 +1,7 @@
 package mende273.foody.data.repository
 
+import io.ktor.client.call.body
+import io.ktor.http.isSuccess
 import mende273.foody.data.api.ApiService
 import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealsDto
@@ -10,7 +12,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getRandomMeal(): Result<MealsWithDetailsDto?> {
         return try {
-            Result.success(apiService.getRandomMeal())
+            val call = apiService.getRandomMeal()
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
@@ -18,7 +25,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealsForCategory(category: String): Result<MealsDto?> {
         return try {
-            Result.success(apiService.getMealsForCategory(category))
+            val call = apiService.getMealsForCategory(category)
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
@@ -26,7 +38,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealsForArea(area: String): Result<MealsDto?> {
         return try {
-            Result.success(apiService.getMealsForArea(area))
+            val call = apiService.getMealsForArea(area)
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
@@ -34,7 +51,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealsForFirstLetter(letter: String): Result<MealsDto?> {
         return try {
-            Result.success(apiService.getMealsForFirstLetter(letter))
+            val call = apiService.getMealsForFirstLetter(letter)
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
@@ -42,7 +64,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?> {
         return try {
-            Result.success(apiService.getMealDetails(id))
+            val call = apiService.getMealDetails(id)
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
@@ -50,7 +77,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealCategories(): Result<MealCategoriesDto?> {
         return try {
-            Result.success(apiService.getMealCategories())
+            val call = apiService.getMealCategories()
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
@@ -58,7 +90,12 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealAreas(): Result<MealCategoriesDto?> {
         return try {
-            Result.success(apiService.getMealAreas())
+            val call = apiService.getMealAreas()
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
         } catch (e: RetrieveNetworkDataException) {
             Result.failure(e)
         }
