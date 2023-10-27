@@ -7,7 +7,7 @@ import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.mapper.toDomain
 import mende273.foody.util.exception.RetrieveNetworkDataException
 
-class GetFilterOptionsDataUseCase(private val remoteRepository: RemoteRepositoryImpl) {
+class GetAllFiltersUseCase(private val remoteRepository: RemoteRepositoryImpl) {
 
     suspend operator fun invoke(): Flow<FiltersWrapper> {
         val categories: Result<List<String>> = remoteRepository.getMealCategories().fold(
