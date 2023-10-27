@@ -110,11 +110,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-    implementation("io.ktor:ktor-client-android:1.5.0")
-    implementation("io.ktor:ktor-client-serialization:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-    implementation("io.ktor:ktor-client-logging-jvm:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("io.ktor:ktor-client-android:2.2.4")
+    implementation("io.ktor:ktor-client-serialization:2.2.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("io.ktor:ktor-client-logging:2.2.4")
+    implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
 }

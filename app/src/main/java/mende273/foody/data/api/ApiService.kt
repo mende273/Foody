@@ -4,9 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
-import mende273.foody.data.dto.MealCategoriesDto
-import mende273.foody.data.dto.MealsDto
-import mende273.foody.data.dto.MealsWithDetailsDto
+import io.ktor.client.statement.HttpResponse
 
 class ApiService(private val client: HttpClient) {
 
@@ -14,42 +12,42 @@ class ApiService(private val client: HttpClient) {
         private const val ENDPOINT = "https://www.themealdb.com/api/json/v1/1/"
     }
 
-    suspend fun getRandomMeal(): MealsWithDetailsDto? =
+    suspend fun getRandomMeal(): HttpResponse =
         client.get {
             url("${ENDPOINT}random.php")
         }
 
-    suspend fun getMealsForCategory(category: String): MealsDto? =
+    suspend fun getMealsForCategory(category: String) =
         client.get {
             url("${ENDPOINT}filter.php")
             parameter("c", category)
         }
 
-    suspend fun getMealsForArea(area: String): MealsDto? =
+    suspend fun getMealsForArea(area: String) =
         client.get {
             url("${ENDPOINT}filter.php")
             parameter("a", area)
         }
 
-    suspend fun getMealsForFirstLetter(letter: String): MealsDto? =
+    suspend fun getMealsForFirstLetter(letter: String) =
         client.get {
             url("${ENDPOINT}search.php")
             parameter("f", letter)
         }
 
-    suspend fun getMealDetails(id: String): MealsWithDetailsDto? =
+    suspend fun getMealDetails(id: String) =
         client.get {
             url("${ENDPOINT}lookup.php")
             parameter("i", id)
         }
 
-    suspend fun getMealCategories(): MealCategoriesDto? =
+    suspend fun getMealCategories() =
         client.get {
             url("${ENDPOINT}list.php")
             parameter("c", "list")
         }
 
-    suspend fun getMealAreas(): MealCategoriesDto? =
+    suspend fun getMealAreas() =
         client.get {
             url("${ENDPOINT}list.php")
             parameter("a", "list")
