@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meals
 import mende273.foody.domain.usecase.FiltersWrapper
@@ -15,6 +16,7 @@ import mende273.foody.domain.usecase.GetAllFiltersUseCase
 import mende273.foody.domain.usecase.GetMealsForAreaUseCase
 import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
 import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
+import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.ERROR_LOADING_DATA
 import mende273.foody.util.toUIState
@@ -62,14 +64,14 @@ class MealsViewModel(
     private fun fetchAllFilters() {
         viewModelScope.launch {
             getAllFiltersUseCase().collectLatest { remote ->
-                _filters.value = UIState.Success(remote)
+                _filters.update { UIState.Success(remote) }
             }
         }
     }
 
     fun loadFilter(filter: Filter) {
         viewModelScope.launch {
-            _headerTitle.value = filter
+            _headerTitle.update { filter }
         }
     }
 
