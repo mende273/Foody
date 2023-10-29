@@ -1,23 +1,26 @@
 package mende273.foody.ui.screen.meals
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -41,6 +43,7 @@ import mende273.foody.domain.model.Meals
 import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.LargeText
 import mende273.foody.ui.component.MealsGrid
+import mende273.foody.ui.component.MediumText
 import mende273.foody.ui.component.ProgressBar
 import mende273.foody.ui.component.ScrollableTabRowComponent
 import mende273.foody.ui.component.SmallButton
@@ -76,13 +79,17 @@ fun MealsScreen(
     }
 
     if (shouldShowFilterDialog) {
-        FilterDialog(onDismissRequest = {
-            shouldShowFilterDialog = false
-        }, onFilterClicked = {
+        FilterDialog(
+            currentFilter = headerTitle,
+            onDismissRequest = {
+                shouldShowFilterDialog = false
+            },
+            onFilterClicked = {
                 shouldShowFilterDialog = false
                 viewModel.loadFilter(it)
                 shouldMoveToFirstPage = true
-            })
+            }
+        )
     }
 
     Column(modifier) {
@@ -240,6 +247,7 @@ private fun GridSection(
 
 @Composable
 private fun FilterDialog(
+    currentFilter: Filter,
     onDismissRequest: () -> Unit,
     onFilterClicked: (Filter) -> Unit
 ) {
@@ -247,25 +255,63 @@ private fun FilterDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp)
+                .heightIn(min = 200.dp, max = 250.dp),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.normal_padding)),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.background
+            )
         ) {
-            Column {
-                Filter.values().forEach {
-                    Text(
-                        text = stringResource(id = it.title),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentSize(Alignment.Center)
-                            .clickable {
-                                onFilterClicked(it)
-                            },
-                        textAlign = TextAlign.Center
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(dimensionResource(id = R.dimen.large_padding)),
+                verticalArrangement = Arrangement.spacedBy(
+                    dimensionResource(id = R.dimen.normal_padding)
+                )
+            ) {
+                Filter.values().forEach { filter ->
+                    FilterDialogItem(
+                        currentFilter = currentFilter,
+                        filter = filter,
+                        onFilterClicked = {
+                            onFilterClicked(filter)
+                        }
                     )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun FilterDialogItem(
+    currentFilter: Filter,
+    filter: Filter,
+    onFilterClicked: (Filter) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .selectable(
+                selected = currentFilter.title == filter.title,
+                onClick = {
+                    onFilterClicked(filter)
+                }
+            ),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(
+            colors = RadioButtonDefaults.colors(
+                selectedColor = MaterialTheme.colorScheme.primary,
+                unselectedColor = MaterialTheme.colorScheme.primary
+            ),
+            selected = currentFilter.title == filter.title,
+            onClick = { onFilterClicked(filter) }
+        )
+        MediumText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = filter.title)
+        )
     }
 }
