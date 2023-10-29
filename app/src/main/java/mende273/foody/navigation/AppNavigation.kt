@@ -4,14 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,7 +29,7 @@ fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     windowSize: WindowSizeClass,
-    innerPadding: PaddingValues = PaddingValues()
+    innerPadding: PaddingValues
 ) {
     val context = LocalContext.current
 
@@ -43,11 +40,7 @@ fun AppNavigation(
         composable(Screen.Meals.route) {
             MealsScreen(
                 modifier = modifier.padding(
-                    start = innerPadding.calculateStartPadding(
-                        layoutDirection = LayoutDirection.Ltr
-                    ),
-                    top = innerPadding.calculateTopPadding(),
-                    end = innerPadding.calculateEndPadding(layoutDirection = LayoutDirection.Ltr)
+                    top = innerPadding.calculateTopPadding()
                 ),
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,

@@ -11,13 +11,17 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import mende273.foody.R
 import mende273.foody.navigation.Screen
 import mende273.foody.ui.theme.LightThemePrimary
@@ -27,27 +31,26 @@ import mende273.foody.ui.theme.NavigationBarSelectedColor
 @Composable
 fun NavigationBar(
     navController: NavHostController,
-    isPortrait: Boolean,
-    currentMenuItemIndex: Int = 0,
-    onUpdateCurrentMenuItemIndex: (Int) -> Unit = {}
+    isPortrait: Boolean
 ) {
     val navigationMenuItems = enumValues<NavigationMenuItem>()
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val hierarchy = navBackStackEntry?.destination?.hierarchy
 
     if (isPortrait) {
         PortraitNavigationBar(
             navigationMenuItems = navigationMenuItems,
-            currentMenuItem = currentMenuItemIndex,
-            onMenuItemClick = { index, menuItem ->
-                onUpdateCurrentMenuItemIndex(index)
+            hierarchy = hierarchy,
+            onMenuItemClick = { menuItem ->
                 navController.navigateFromNavigationBar(menuItem.getRoute())
             }
         )
     } else {
         LandscapeNavigationBar(
             navigationMenuItems = navigationMenuItems,
-            currentMenuItem = currentMenuItemIndex,
-            onMenuItemClick = { index, menuItem ->
-                onUpdateCurrentMenuItemIndex(index)
+            hierarchy = hierarchy,
+            onMenuItemClick = { menuItem ->
                 navController.navigateFromNavigationBar(menuItem.getRoute())
             }
         )
@@ -57,8 +60,8 @@ fun NavigationBar(
 @Composable
 private fun PortraitNavigationBar(
     navigationMenuItems: Array<NavigationMenuItem>,
-    currentMenuItem: Int,
-    onMenuItemClick: (Int, NavigationMenuItem) -> Unit
+    hierarchy: Sequence<NavDestination>?,
+    onMenuItemClick: (NavigationMenuItem) -> Unit
 ) {
     androidx.compose.material3.NavigationBar(
         modifier = Modifier,
@@ -66,14 +69,14 @@ private fun PortraitNavigationBar(
         tonalElevation = 0.dp,
         containerColor = MaterialTheme.colorScheme.surface,
         content = {
-            navigationMenuItems.forEachIndexed { index, menuItem ->
+            navigationMenuItems.forEach { menuItem ->
                 NavigationBarItem(
                     modifier = Modifier.testTag(
                         "test_tag_menu_item_${stringResource(id = menuItem.title)}"
                     ),
-                    selected = currentMenuItem == index,
+                    selected = hierarchy?.any { it.route == menuItem.getRoute() } == true,
                     onClick = {
-                        onMenuItemClick(index, menuItem)
+                        onMenuItemClick(menuItem)
                     },
                     label = { Text(text = stringResource(id = menuItem.title)) },
                     enabled = true,
@@ -102,15 +105,15 @@ private fun PortraitNavigationBar(
 @Composable
 private fun LandscapeNavigationBar(
     navigationMenuItems: Array<NavigationMenuItem>,
-    currentMenuItem: Int,
-    onMenuItemClick: (Int, NavigationMenuItem) -> Unit
+    hierarchy: Sequence<NavDestination>?,
+    onMenuItemClick: (NavigationMenuItem) -> Unit
 ) {
     NavigationRail(
         modifier = Modifier,
         contentColor = MaterialTheme.colorScheme.secondary,
         containerColor = MaterialTheme.colorScheme.surface
     ) {
-        navigationMenuItems.forEachIndexed { index, menuItem ->
+        navigationMenuItems.forEach { menuItem ->
             NavigationRailItem(
                 modifier = Modifier.testTag(
                     "test_tag_menu_item_${stringResource(id = menuItem.title)}"
@@ -124,8 +127,8 @@ private fun LandscapeNavigationBar(
                     }
                 },
                 label = { Text(text = stringResource(id = menuItem.title)) },
-                selected = currentMenuItem == index,
-                onClick = { onMenuItemClick(index, menuItem) },
+                selected = hierarchy?.any { it.route == menuItem.getRoute() } == true,
+                onClick = { onMenuItemClick(menuItem) },
                 alwaysShowLabel = true,
                 colors = NavigationRailItemDefaults.colors(
                     selectedIconColor = LightThemePrimary,
