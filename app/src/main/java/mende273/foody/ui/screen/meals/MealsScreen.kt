@@ -213,7 +213,7 @@ private fun HeaderSection(
 
         SmallButton(
             modifier = Modifier.align(Alignment.CenterEnd),
-            text = "Filter",
+            text = stringResource(id = R.string.filter),
             onClicked = { onFilterClicked() }
         )
     }

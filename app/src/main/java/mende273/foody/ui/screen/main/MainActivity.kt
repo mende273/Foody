@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -23,10 +22,8 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
@@ -51,8 +48,6 @@ class MainActivity : ComponentActivity() {
 
             var isNavigationBarVisible by remember { mutableStateOf(false) }
 
-            var currentMenuItemIndex by rememberSaveable { mutableIntStateOf(0) }
-
             val isPortrait = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
 
             isNavigationBarVisible = isRouteFromBottomBarMenu(
@@ -74,18 +69,13 @@ class MainActivity : ComponentActivity() {
                             if (!isPortrait) {
                                 NavigationBar(
                                     navController = navController,
-                                    isPortrait = false,
-                                    currentMenuItemIndex = currentMenuItemIndex,
-                                    onUpdateCurrentMenuItemIndex = { index ->
-                                        currentMenuItemIndex = index
-                                    }
+                                    isPortrait = false
                                 )
                             }
 
                             AppNavigation(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .navigationBarsPadding()
                                     .background(MaterialTheme.colorScheme.background),
                                 navController = navController,
                                 windowSize = windowSize,
@@ -102,11 +92,7 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 NavigationBar(
                                     navController = navController,
-                                    isPortrait = true,
-                                    currentMenuItemIndex = currentMenuItemIndex,
-                                    onUpdateCurrentMenuItemIndex = { index ->
-                                        currentMenuItemIndex = index
-                                    }
+                                    isPortrait = true
                                 )
                             }
                         }
