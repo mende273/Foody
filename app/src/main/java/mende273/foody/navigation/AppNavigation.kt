@@ -40,7 +40,8 @@ fun AppNavigation(
         composable(Screen.Meals.route) {
             MealsScreen(
                 modifier = modifier.padding(
-                    top = innerPadding.calculateTopPadding()
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding()
                 ),
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
@@ -104,7 +105,7 @@ fun AppNavigation(
         composable(Screen.FilterMealsByCategory.route) {
             val categoryName = it.arguments?.getString(Screen.FilterMealsByCategory.NAME_ARGUMENT)
             FilterMealsByCategory(
-                modifier = modifier,
+                modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 viewModel = koinNavViewModel(),
                 category = categoryName ?: "",
                 windowSize = windowSize,
@@ -120,7 +121,7 @@ fun AppNavigation(
         composable(Screen.FilterMealsByArea.route) {
             val areaName = it.arguments?.getString(Screen.FilterMealsByArea.NAME_ARGUMENT)
             FilterMealsByAreaScreen(
-                modifier = modifier,
+                modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 viewModel = koinNavViewModel(),
                 area = areaName ?: "",
                 windowSize = windowSize,
