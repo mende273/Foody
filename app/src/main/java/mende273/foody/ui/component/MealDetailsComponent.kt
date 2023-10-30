@@ -27,6 +27,7 @@ fun MealDetailsComponent(
     onAreaClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit,
+    onIngredientClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit = {}
 ) {
     DetailsScaffold(
@@ -73,7 +74,10 @@ fun MealDetailsComponent(
                 if (mealDetails.ingredientsWithMeasures.isNotEmpty()) {
                     DetailsScaffoldSection(title = "Ingredients", content = {
                         IngredientsWithMeasuresGridComponent(
-                            items = mealDetails.ingredientsWithMeasures
+                            items = mealDetails.ingredientsWithMeasures,
+                            onIngredientClicked = {
+                                onIngredientClicked(it)
+                            }
                         )
                     })
                 }

@@ -1,6 +1,7 @@
 package mende273.foody.ui.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,10 @@ import mende273.foody.domain.model.IngredientWithMeasure
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun IngredientsWithMeasuresGridComponent(items: List<IngredientWithMeasure>) {
+fun IngredientsWithMeasuresGridComponent(
+    items: List<IngredientWithMeasure>,
+    onIngredientClicked: (String) -> Unit
+) {
     FlowRow(
         modifier = Modifier.padding(4.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -36,7 +40,8 @@ fun IngredientsWithMeasuresGridComponent(items: List<IngredientWithMeasure>) {
             .background(MaterialTheme.colorScheme.secondary)
         repeat(items.size) { index ->
             IngredientWithMeasureItem(
-                modifier = itemModifier,
+                modifier = itemModifier
+                    .clickable { onIngredientClicked(items[index].ingredient) },
                 ingredientWithMeasure = items[index]
             )
         }

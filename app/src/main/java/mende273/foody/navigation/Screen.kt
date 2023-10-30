@@ -33,6 +33,16 @@ sealed class Screen(val route: String) {
         }
     }
 
+    data object FilterMealsByIngredient : Screen("ingredient/{name}") {
+        const val NAME_ARGUMENT = "name"
+
+        override fun getNavArguments(): List<NamedNavArgument> {
+            return listOf(
+                navArgument(NAME_ARGUMENT) { type = NavType.StringType }
+            )
+        }
+    }
+
     data object FullScreenImage : Screen("image/{url}") {
         const val URL_ARGUMENT = "url"
 

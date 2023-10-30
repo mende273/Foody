@@ -27,6 +27,7 @@ import mende273.foody.domain.usecase.GetMealDetailsUseCase
 import mende273.foody.domain.usecase.GetMealsForAreaUseCase
 import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
 import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
+import mende273.foody.domain.usecase.GetMealsWithIngredientUseCase
 import mende273.foody.domain.usecase.GetRandomMealUseCase
 import org.koin.dsl.module
 
@@ -38,6 +39,7 @@ val repositoryModule = module {
     factory { GetMealsForAreaUseCase(get()) }
     factory { GetMealsForFirstLetterUseCase(get()) }
     factory { GetMealDetailsUseCase(get()) }
+    factory { GetMealsWithIngredientUseCase(get()) }
     single { GetMealCategoriesUseCase(get()) }
     single { GetMealAreasUseCase(get()) }
     single { GetAllFiltersUseCase(get()) }
