@@ -24,6 +24,7 @@ fun MealDetailsScreen(
     onAreaClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit,
+    onIngredientClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -49,6 +50,7 @@ fun MealDetailsScreen(
             onAreaClicked = { onAreaClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
             onSourceClicked = { onSourceClicked(it) },
+            onIngredientClicked = { onIngredientClicked(it) },
             onNavigateBackClicked = { onNavigateBackClicked() }
         )
     }

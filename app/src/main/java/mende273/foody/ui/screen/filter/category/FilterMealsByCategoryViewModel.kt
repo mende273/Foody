@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meals
 import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.ERROR_LOADING_DATA
+import mende273.foody.util.toUIState
 
 class FilterMealsByCategoryViewModel(
     private val getMealsForCategoryUseCase: GetMealsForCategoryUseCase
@@ -21,14 +21,7 @@ class FilterMealsByCategoryViewModel(
 
     fun requestData(category: String) {
         viewModelScope.launch {
-            _uiState.value = getMealsForCategoryUseCase(category).fold(
-                onSuccess = {
-                    UIState.Success(it)
-                },
-                onFailure = {
-                    UIState.Error(it.message ?: ERROR_LOADING_DATA)
-                }
-            )
+            _uiState.value = getMealsForCategoryUseCase(category).toUIState()
         }
     }
 }

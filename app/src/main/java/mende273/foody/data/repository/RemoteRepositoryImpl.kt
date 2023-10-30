@@ -49,6 +49,19 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
         }
     }
 
+    override suspend fun getMealsWithIngredient(ingredient: String): Result<MealsDto?> {
+        return try {
+            val call = apiService.getMealsWithIngredient((ingredient))
+            if (call.status.isSuccess()) {
+                Result.success(call.body())
+            } else {
+                Result.failure(RetrieveNetworkDataException())
+            }
+        } catch (e: RetrieveNetworkDataException) {
+            Result.failure(e)
+        }
+    }
+
     override suspend fun getMealsForFirstLetter(letter: String): Result<MealsDto?> {
         return try {
             val call = apiService.getMealsForFirstLetter(letter)

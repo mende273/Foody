@@ -4,6 +4,7 @@ import mende273.foody.ui.screen.details.MealDetailsViewModel
 import mende273.foody.ui.screen.favourites.FavouritesViewModel
 import mende273.foody.ui.screen.filter.area.FilterMealsByAreaViewModel
 import mende273.foody.ui.screen.filter.category.FilterMealsByCategoryViewModel
+import mende273.foody.ui.screen.filter.ingredient.FilterMealsByIngredientViewModel
 import mende273.foody.ui.screen.meals.MealsViewModel
 import mende273.foody.ui.screen.random.RandomMealViewModel
 import mende273.foody.ui.screen.search.SearchViewModel
@@ -17,5 +18,6 @@ val viewModelModule = module {
     viewModel { FavouritesViewModel() }
     viewModel { FilterMealsByCategoryViewModel(get()) }
     viewModel { FilterMealsByAreaViewModel(get()) }
+    viewModel { FilterMealsByIngredientViewModel(get()) }
     viewModel { MealDetailsViewModel(get()) }
 }

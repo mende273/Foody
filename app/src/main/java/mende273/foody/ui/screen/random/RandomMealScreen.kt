@@ -21,6 +21,7 @@ fun RandomMealScreen(
     onCategoryClicked: (String) -> Unit,
     onAreaClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
+    onIngredientClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -41,6 +42,7 @@ fun RandomMealScreen(
             onCategoryClicked = { onCategoryClicked(it) },
             onAreaClicked = { onAreaClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
+            onIngredientClicked = { onIngredientClicked(it) },
             onSourceClicked = { onSourceClicked(it) }
         )
     }

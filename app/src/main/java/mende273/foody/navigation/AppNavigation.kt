@@ -18,6 +18,7 @@ import mende273.foody.ui.screen.details.MealDetailsScreen
 import mende273.foody.ui.screen.favourites.FavouritesScreen
 import mende273.foody.ui.screen.filter.area.FilterMealsByAreaScreen
 import mende273.foody.ui.screen.filter.category.FilterMealsByCategory
+import mende273.foody.ui.screen.filter.ingredient.FilterMealsByIngredient
 import mende273.foody.ui.screen.image.FullScreenImage
 import mende273.foody.ui.screen.meals.MealsScreen
 import mende273.foody.ui.screen.random.RandomMealScreen
@@ -67,6 +68,9 @@ fun AppNavigation(
                     navController.navigate(Screen.FilterMealsByArea.getRoute(it))
                 },
                 onVideoClicked = { startImplicitIntent(context, it) },
+                onIngredientClicked = { ingredient ->
+                    navController.navigate(Screen.FilterMealsByIngredient.getRoute(ingredient))
+                },
                 onSourceClicked = { startImplicitIntent(context, it) }
             )
         }
@@ -90,6 +94,9 @@ fun AppNavigation(
                 },
                 onVideoClicked = { url -> startImplicitIntent(context, url) },
                 onSourceClicked = { url -> startImplicitIntent(context, url) },
+                onIngredientClicked = { ingredient ->
+                    navController.navigate(Screen.FilterMealsByIngredient.getRoute(ingredient))
+                },
                 onNavigateBackClicked = { navController.popBackStack() }
             )
         }
@@ -108,6 +115,22 @@ fun AppNavigation(
                 modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 viewModel = koinNavViewModel(),
                 category = categoryName ?: "",
+                windowSize = windowSize,
+                onMealClicked = { mealId ->
+                    navController.navigate(Screen.MealDetails.getRoute(mealId))
+                },
+                onNavigateBackClicked = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Screen.FilterMealsByIngredient.route) {
+            val ingredient = it.arguments?.getString(Screen.FilterMealsByIngredient.NAME_ARGUMENT)
+            FilterMealsByIngredient(
+                modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
+                viewModel = koinNavViewModel(),
+                ingredient = ingredient ?: "",
                 windowSize = windowSize,
                 onMealClicked = { mealId ->
                     navController.navigate(Screen.MealDetails.getRoute(mealId))
