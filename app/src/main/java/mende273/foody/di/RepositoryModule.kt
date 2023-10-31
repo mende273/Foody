@@ -21,8 +21,6 @@ import kotlinx.serialization.json.Json
 import mende273.foody.data.api.ApiService
 import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
-import mende273.foody.domain.usecase.GetMealAreasUseCase
-import mende273.foody.domain.usecase.GetMealCategoriesUseCase
 import mende273.foody.domain.usecase.GetMealDetailsUseCase
 import mende273.foody.domain.usecase.GetMealsForAreaUseCase
 import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
@@ -40,8 +38,6 @@ val repositoryModule = module {
     factory { GetMealsForFirstLetterUseCase(get()) }
     factory { GetMealDetailsUseCase(get()) }
     factory { GetMealsWithIngredientUseCase(get()) }
-    single { GetMealCategoriesUseCase(get()) }
-    single { GetMealAreasUseCase(get()) }
     single { GetAllFiltersUseCase(get()) }
 }
 
