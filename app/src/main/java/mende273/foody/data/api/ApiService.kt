@@ -58,4 +58,10 @@ class ApiService(private val client: HttpClient) {
             url("${ENDPOINT}list.php")
             parameter("a", "list")
         }
+
+    suspend fun searchMealsByName(name: String) =
+        client.get {
+            url("${ENDPOINT}search.php")
+            parameter("s", name)
+        }
 }

@@ -13,4 +13,5 @@ interface RemoteRepository {
     suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?>
     suspend fun getMealCategories(): Result<MealCategoriesDto?>
     suspend fun getMealAreas(): Result<MealCategoriesDto?>
+    suspend fun searchMealsByName(name: String): Result<MealsDto?>
 }

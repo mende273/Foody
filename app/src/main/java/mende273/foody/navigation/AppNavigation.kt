@@ -102,7 +102,14 @@ fun AppNavigation(
         }
 
         composable(Screen.Search.route) {
-            SearchScreen(modifier = modifier, viewModel = koinNavViewModel())
+            SearchScreen(
+                modifier = modifier,
+                viewModel = koinNavViewModel(),
+                windowSize = windowSize,
+                onMealClicked = { mealId ->
+                    navController.navigate(Screen.MealDetails.getRoute(mealId))
+                }
+            )
         }
 
         composable(Screen.Favourites.route) {
