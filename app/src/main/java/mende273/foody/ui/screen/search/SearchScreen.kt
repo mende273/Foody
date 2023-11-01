@@ -25,6 +25,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.R
@@ -50,6 +51,16 @@ fun SearchScreen(
 
     Column(modifier = modifier) {
         SearchComponent(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 150.dp)
+                .then(
+                    if (!isSearchBarActive) {
+                        Modifier.padding(dimensionResource(id = R.dimen.normal_padding))
+                    } else {
+                        Modifier.padding(0.dp)
+                    }
+                ),
             searchText = searchText,
             isSearchBarActive = isSearchBarActive,
             mealsSize = if (uiState is UIState.Success) {
@@ -103,6 +114,7 @@ fun SearchScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchComponent(
+    modifier: Modifier,
     searchText: String,
     isSearchBarActive: Boolean,
     mealsSize: Int,
@@ -111,32 +123,33 @@ private fun SearchComponent(
     onClearText: () -> Unit
 ) {
     SearchBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(max = 150.dp),
+        modifier = modifier,
         query = searchText,
         onQueryChange = { onQueryChanged(it) },
         onSearch = { onIsSearchBarActiveChanged(false) },
         active = isSearchBarActive,
         onActiveChange = { onIsSearchBarActiveChanged(it) },
         placeholder = {
-            Text(text = "Enter your meal name here")
+            Text(text = stringResource(id = R.string.search_bar_hint))
         },
         trailingIcon = {
             if (isSearchBarActive) {
                 Icon(
                     modifier = Modifier.clickable { onClearText() },
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Close icon"
+                    contentDescription = stringResource(id = R.string.cd_close_search_bar)
                 )
             }
         },
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = "Search icon")
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = stringResource(id = R.string.cd_search_icon)
+            )
         }
     ) {
         Box(modifier = Modifier.padding(16.dp)) {
-            Text(text = "found $mealsSize meals")
+            Text(text = stringResource(id = R.string.search_results, mealsSize))
         }
     }
 }
