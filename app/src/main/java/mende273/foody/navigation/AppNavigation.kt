@@ -103,7 +103,9 @@ fun AppNavigation(
 
         composable(Screen.Search.route) {
             SearchScreen(
-                modifier = modifier,
+                modifier = modifier.padding(
+                    bottom = innerPadding.calculateBottomPadding()
+                ),
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
                 onMealClicked = { mealId ->
