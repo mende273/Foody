@@ -113,4 +113,10 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
             Result.failure(e)
         }
     }
+
+    override suspend fun searchMealsByName(name: String): Result<MealsDto?> {
+        return runCatching {
+            return@runCatching apiService.searchMealsByName(name).body()
+        }
+    }
 }

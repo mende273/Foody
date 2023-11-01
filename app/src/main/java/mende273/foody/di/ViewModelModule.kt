@@ -14,7 +14,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { MealsViewModel(get(), get(), get(), get()) }
     viewModel { RandomMealViewModel(get()) }
-    viewModel { SearchViewModel() }
+    viewModel { SearchViewModel(get()) }
     viewModel { FavouritesViewModel() }
     viewModel { FilterMealsByCategoryViewModel(get()) }
     viewModel { FilterMealsByAreaViewModel(get()) }
