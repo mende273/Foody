@@ -7,6 +7,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version ("1.22.0")
     id("org.jetbrains.kotlinx.kover") version "0.7.4"
     id("kotlinx-serialization")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -46,12 +47,16 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    ksp {
+        arg("KOIN_CONFIG_CHECK", "true")
     }
 
     ktlint {
