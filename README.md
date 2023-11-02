@@ -3,7 +3,7 @@ Real world Android application demonstrating the use of JetPack Compose with Koi
 
 Foody supports all windows sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
 
-### Koin
+## Koin
 #### Verify Koin configuration
 ```
 @Test
@@ -22,6 +22,27 @@ fun checkKoinModule() {
 ksp {
     arg("KOIN_CONFIG_CHECK","true")
 }
+```
+
+## Coil - Image loader cache policy
+```
+ImageLoader(this).newBuilder()
+            .memoryCachePolicy(CachePolicy.ENABLED)
+            .memoryCache {
+                MemoryCache.Builder(this)
+                    .maxSizePercent(percent = 0.1)
+                    .strongReferencesEnabled(true)
+                    .build()
+            }
+            .diskCachePolicy(CachePolicy.ENABLED)
+            .diskCache {
+                DiskCache.Builder()
+                    .maxSizePercent(percent = 0.03)
+                    .directory(cacheDir)
+                    .build()
+            }
+            .logger(DebugLogger())
+            .build()
 ```
 
 ## Build With
