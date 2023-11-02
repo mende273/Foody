@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
 import mende273.foody.domain.model.IngredientWithMeasure
+import mende273.foody.ui.theme.blackNormalTextStyle
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -63,13 +65,15 @@ private fun IngredientWithMeasureItem(
             verticalArrangement = Arrangement.spacedBy(4.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SmallText(
+            Text(
                 textAlign = TextAlign.Center,
-                text = ingredientWithMeasure.ingredient
+                text = ingredientWithMeasure.ingredient,
+                style = blackNormalTextStyle()
             )
-            SmallText(
+            Text(
                 textAlign = TextAlign.Center,
-                text = ingredientWithMeasure.measure
+                text = ingredientWithMeasure.measure,
+                style = blackNormalTextStyle()
             )
         }
     }

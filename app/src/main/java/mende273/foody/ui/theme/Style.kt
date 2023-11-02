@@ -17,6 +17,14 @@ fun mediumTextStyle(): TextStyle {
 }
 
 @Composable
+fun blackNormalTextStyle(): TextStyle {
+    return normalTextStyle().copy(
+        fontSize = 16.sp,
+        color = LightThemePrimary
+    )
+}
+
+@Composable
 fun normalTextStyle(): TextStyle {
     return TextStyle(
         color = MaterialTheme.colorScheme.onBackground,
