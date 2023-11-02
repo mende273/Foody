@@ -18,7 +18,6 @@ import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
 import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.ERROR_LOADING_DATA
 import mende273.foody.util.toUIState
 
 class MealsViewModel(
@@ -32,25 +31,31 @@ class MealsViewModel(
         fetchAllFilters()
     }
 
+    private val allFiltersLoaded = MutableStateFlow(false)
+
     private val _headerTitle: MutableStateFlow<Filter> = MutableStateFlow(Filter.CATEGORY)
     val headerTitle: StateFlow<Filter> = _headerTitle
 
-    private var _filters: MutableStateFlow<UIState<FiltersWrapper>> =
-        MutableStateFlow(UIState.Loading)
-    val filters: StateFlow<UIState<FiltersWrapper>> = _filters
+    private var allFilters: MutableStateFlow<FiltersWrapper> =
+        MutableStateFlow(
+            FiltersWrapper(
+                categories = Result.success(emptyList()),
+                areas = Result.success(emptyList()),
+                firstLetters = emptyList()
+            )
+        )
 
     var currentFilter: StateFlow<UIState<List<String>>> =
-        _filters.combine(headerTitle) { filters, title ->
-            when (filters) {
-                is UIState.Error -> UIState.Error(ERROR_LOADING_DATA)
-                UIState.Loading -> UIState.Loading
-                is UIState.Success -> {
+        combine(allFilters, headerTitle, allFiltersLoaded) { filters, title, loaded ->
+            when (loaded) {
+                true ->
                     when (title) {
-                        Filter.CATEGORY -> filters.data.categories.toUIState()
-                        Filter.AREA -> filters.data.areas.toUIState()
-                        Filter.FIRST_LETTER -> UIState.Success(filters.data.firstLetters)
+                        Filter.CATEGORY -> filters.categories.toUIState()
+                        Filter.AREA -> filters.areas.toUIState()
+                        Filter.FIRST_LETTER -> UIState.Success(filters.firstLetters)
                     }
-                }
+
+                false -> UIState.Loading
             }
         }.stateIn(
             scope = viewModelScope,
@@ -64,7 +69,18 @@ class MealsViewModel(
     private fun fetchAllFilters() {
         viewModelScope.launch {
             getAllFiltersUseCase().collectLatest { remote ->
-                _filters.update { UIState.Success(remote) }
+                allFilters.update { remote }
+
+                _headerTitle.value = if (remote.categories.isSuccess) {
+                    Filter.CATEGORY
+                } else {
+                    if (remote.areas.isSuccess) {
+                        Filter.AREA
+                    } else {
+                        Filter.FIRST_LETTER
+                    }
+                }
+                allFiltersLoaded.update { true }
             }
         }
     }
@@ -83,5 +99,25 @@ class MealsViewModel(
                 Filter.FIRST_LETTER -> getMealsForFirstLetterUseCase(name).toUIState()
             }
         }
+    }
+
+    fun getAvailableFilters(): List<Filter> {
+        val availableFilters = arrayListOf<Filter>()
+
+        with(allFilters.value) {
+            if (categories.isSuccess) {
+                availableFilters.add(Filter.CATEGORY)
+            }
+
+            if (areas.isSuccess) {
+                availableFilters.add(Filter.AREA)
+            }
+
+            if (firstLetters.isNotEmpty()) {
+                availableFilters.add(Filter.FIRST_LETTER)
+            }
+        }
+
+        return availableFilters
     }
 }
