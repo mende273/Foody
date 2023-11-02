@@ -1,6 +1,8 @@
 # Foody
 Real world Android application demonstrating the use of JetPack Compose with Koin, Ktor, Navigation Component and MVVM architecture.
 
+Foody supports all windows sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
+
 ### Verify Koin configuration
 ```
 @Test
