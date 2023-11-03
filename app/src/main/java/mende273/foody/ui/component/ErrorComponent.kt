@@ -4,10 +4,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import mende273.foody.ui.theme.largeTextStyle
 
 @Composable
 fun ErrorComponent(modifier: Modifier = Modifier, text: String) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        LargeText(text = text)
+        NormalText(text = text, textStyle = largeTextStyle())
     }
 }

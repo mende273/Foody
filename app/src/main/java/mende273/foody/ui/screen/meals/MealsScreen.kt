@@ -42,14 +42,15 @@ import mende273.foody.R
 import mende273.foody.domain.Tab
 import mende273.foody.domain.model.Meals
 import mende273.foody.ui.component.ErrorComponent
-import mende273.foody.ui.component.LargeText
 import mende273.foody.ui.component.MealsGrid
-import mende273.foody.ui.component.MediumText
+import mende273.foody.ui.component.NormalText
 import mende273.foody.ui.component.ProgressBar
 import mende273.foody.ui.component.ScrollableTabRowComponent
 import mende273.foody.ui.component.SmallButton
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.largeTextStyle
+import mende273.foody.ui.theme.mediumTextStyle
 import mende273.foody.util.getGridCellsCount
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -195,9 +196,10 @@ private fun HeaderSection(
     Box(
         modifier = modifier
     ) {
-        LargeText(
+        NormalText(
             modifier = Modifier.align(Alignment.CenterStart),
-            text = title
+            text = title,
+            textStyle = largeTextStyle()
         )
 
         SmallButton(
@@ -299,9 +301,11 @@ private fun FilterDialogItem(
             selected = currentFilter.title == filter.title,
             onClick = { onFilterClicked(filter) }
         )
-        MediumText(
+
+        NormalText(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = filter.title)
+            text = stringResource(id = filter.title),
+            textStyle = mediumTextStyle()
         )
     }
 }

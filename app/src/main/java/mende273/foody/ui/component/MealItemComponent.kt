@@ -7,6 +7,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import mende273.foody.R
 import mende273.foody.domain.model.Meal
+import mende273.foody.ui.theme.mediumTextStyle
 
 @Composable
 fun MealItemComponent(
@@ -25,7 +26,7 @@ fun MealItemComponent(
             )
         }
         if (meal.name.isNotEmpty()) {
-            MediumText(text = meal.name)
+            NormalText(text = meal.name, textStyle = mediumTextStyle())
         }
     }
 }

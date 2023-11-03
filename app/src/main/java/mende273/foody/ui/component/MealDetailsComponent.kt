@@ -15,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
 import mende273.foody.domain.model.MealDetails
+import mende273.foody.ui.theme.mediumTextStyle
 
 @Composable
 fun MealDetailsComponent(
@@ -67,7 +68,10 @@ fun MealDetailsComponent(
 
                 if (mealDetails.instructions.isNotEmpty()) {
                     DetailsScaffoldSection(title = "Instructions", content = {
-                        MediumText(text = mealDetails.instructions)
+                        NormalText(
+                            text = mealDetails.instructions,
+                            textStyle = mediumTextStyle()
+                        )
                     })
                 }
 
@@ -84,7 +88,10 @@ fun MealDetailsComponent(
 
                 if (mealDetails.tags.isNotEmpty()) {
                     DetailsScaffoldSection(title = "Tags", content = {
-                        MediumText(text = mealDetails.tags)
+                        NormalText(
+                            text = mealDetails.tags,
+                            textStyle = mediumTextStyle()
+                        )
                     })
                 }
 
