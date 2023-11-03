@@ -105,8 +105,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("androidx.navigation:navigation-compose:2.7.4")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.7.4")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.5")
 
     implementation("io.insert-koin:koin-androidx-compose:3.4.6")
     implementation("io.insert-koin:koin-androidx-compose-navigation:3.4.6")
