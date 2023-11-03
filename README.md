@@ -3,6 +3,9 @@ Real world Android application demonstrating the use of JetPack Compose with Koi
 
 Foody supports all windows sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
 
+## PreBuild
+The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manually run the tasks with <code>./gradlew ktlintFormat</code> and <code>./gradlew detekt</code>
+
 ## Koin
 #### Verify Koin configuration
 ```
