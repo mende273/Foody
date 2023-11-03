@@ -1,4 +1,4 @@
-package mende273.foody.mapper
+package mende273.foody.domain.mapper
 
 import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealDetailsDto

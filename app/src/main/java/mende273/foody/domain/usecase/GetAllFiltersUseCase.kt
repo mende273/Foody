@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import mende273.foody.data.repository.RemoteRepositoryImpl
-import mende273.foody.mapper.toDomain
+import mende273.foody.domain.mapper.toDomain
 import mende273.foody.util.exception.RetrieveNetworkDataException
 
 class GetAllFiltersUseCase(private val remoteRepository: RemoteRepositoryImpl) {

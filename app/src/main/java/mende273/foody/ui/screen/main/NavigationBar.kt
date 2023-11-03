@@ -23,7 +23,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import mende273.foody.R
-import mende273.foody.navigation.Screen
+import mende273.foody.ui.navigation.Screen
 import mende273.foody.ui.theme.LightThemePrimary
 import mende273.foody.ui.theme.MediumDarkGreyColor
 import mende273.foody.ui.theme.NavigationBarSelectedColor

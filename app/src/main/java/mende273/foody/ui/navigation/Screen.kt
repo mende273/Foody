@@ -1,4 +1,4 @@
-package mende273.foody.navigation
+package mende273.foody.ui.navigation
 
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType

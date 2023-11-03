@@ -30,8 +30,8 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import mende273.foody.navigation.AppNavigation
-import mende273.foody.navigation.Screen
+import mende273.foody.ui.navigation.AppNavigation
+import mende273.foody.ui.navigation.Screen
 import mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
