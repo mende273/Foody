@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mende273.foody.R
+import mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,26 +42,6 @@ fun TopBar(
     )
 }
 
-/*
-@Composable
-private fun TopBarMenuItem(
-    menuItem: MenuItem,
-    menuItemEvent: (MenuItem) -> Unit = {}
-) {
-    IconButton(
-        modifier = Modifier.testTag(
-            "test_tag_menu_item_${stringResource(id = menuItem.titleTextId)}"
-        ),
-        onClick = { menuItemEvent(menuItem) }
-    ) {
-        Icon(
-            painter = painterResource(id = menuItem.icon),
-            contentDescription = stringResource(id = menuItem.titleTextId),
-            tint = MaterialTheme.colorScheme.onSurface
-        )
-    }
-}*/
-
 @Composable
 private fun BackNavigationButton(navigateBackEvent: () -> Unit) {
     IconButton(onClick = { navigateBackEvent() }) {
@@ -76,8 +57,24 @@ private fun TopBarPreview() {
 
 @Preview
 @Composable
+private fun TopBarDarkThemePreview() {
+    FoodyTheme(darkTheme = true) {
+        TopBar(title = stringResource(id = R.string.app_name))
+    }
+}
+
+@Preview
+@Composable
 private fun TopBarWithBackEnabledPreview() {
     TopBar(title = stringResource(id = R.string.app_name), isBackButtonEnabled = true)
+}
+
+@Preview
+@Composable
+private fun TopBarWithBackEnabledDarkThemePreview() {
+    FoodyTheme(darkTheme = true) {
+        TopBar(title = stringResource(id = R.string.app_name), isBackButtonEnabled = true)
+    }
 }
 
 @Preview
