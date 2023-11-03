@@ -1,6 +1,7 @@
 package mende273.foody
 
 import android.content.Context
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.ui.platform.LocalContext
@@ -37,7 +38,8 @@ class LandscapeNavigationBarTest {
 
             AppNavigation(
                 navController = navController,
-                windowSize = WindowSizeClass.calculateFromSize(DpSize(2280.dp, 1080.dp))
+                windowSize = WindowSizeClass.calculateFromSize(DpSize(2280.dp, 1080.dp)),
+                innerPadding = PaddingValues()
             )
 
             NavigationBar(

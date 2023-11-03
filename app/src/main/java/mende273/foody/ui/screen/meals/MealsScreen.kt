@@ -31,6 +31,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -90,7 +91,7 @@ fun MealsScreen(
         )
     }
 
-    Column(modifier) {
+    Column(modifier.testTag("test_tag_meals_screen")) {
         when (uiStateCurrentFilter) {
             is UIState.Success -> {
                 val pagerState = rememberPagerState(
