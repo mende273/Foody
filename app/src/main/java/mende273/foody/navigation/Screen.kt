@@ -11,34 +11,15 @@ sealed class Screen(val route: String) {
     data object RandomMeal : Screen("random")
     data object Favourites : Screen("favorites")
 
-    data object FilterMealsByCategory : Screen("category/{name}") {
+    data object FilterMeals : Screen("filter/{name}/{filterType}") {
 
         const val NAME_ARGUMENT = "name"
+        const val FILTER_TYPE_ARGUMENT = "filterType"
 
         override fun getNavArguments(): List<NamedNavArgument> {
             return listOf(
-                navArgument(NAME_ARGUMENT) { type = NavType.StringType }
-            )
-        }
-    }
-
-    data object FilterMealsByArea : Screen("area/{name}") {
-
-        const val NAME_ARGUMENT = "name"
-
-        override fun getNavArguments(): List<NamedNavArgument> {
-            return listOf(
-                navArgument(NAME_ARGUMENT) { type = NavType.StringType }
-            )
-        }
-    }
-
-    data object FilterMealsByIngredient : Screen("ingredient/{name}") {
-        const val NAME_ARGUMENT = "name"
-
-        override fun getNavArguments(): List<NamedNavArgument> {
-            return listOf(
-                navArgument(NAME_ARGUMENT) { type = NavType.StringType }
+                navArgument(NAME_ARGUMENT) { type = NavType.StringType },
+                navArgument(FILTER_TYPE_ARGUMENT) { type = NavType.StringType }
             )
         }
     }

@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.filter.area
+package mende273.foody.ui.screen.filter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.domain.model.Meals
 import mende273.foody.ui.component.ErrorComponent
@@ -19,24 +20,26 @@ import mende273.foody.util.GRID_CELLS_COUNT_IN_LANDSCAPE
 import mende273.foody.util.GRID_CELLS_COUNT_IN_PORTRAIT
 
 @Composable
-fun FilterMealsByAreaScreen(
+fun FilterMealsScreen(
     modifier: Modifier = Modifier,
-    viewModel: FilterMealsByAreaViewModel,
+    viewModel: FilterMealsViewModel,
     windowSize: WindowSizeClass,
-    area: String,
+    name: String,
+    filterType: FilterType,
     onMealClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit
 ) {
+    val headerTitle by viewModel.headerTitle.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(key1 = area, block = {
-        viewModel.requestData(area)
+    LaunchedEffect(key1 = name, block = {
+        viewModel.requestData(name, filterType)
     })
 
     Column(modifier = modifier) {
         TopBar(
             modifier = Modifier.fillMaxWidth(),
-            title = "Area: $area",
+            title = headerTitle?.let { stringResource(id = it, name) } ?: name,
             isBackButtonEnabled = true,
             onNavigateBackClicked = { onNavigateBackClicked() }
         )
