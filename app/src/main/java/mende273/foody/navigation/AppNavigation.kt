@@ -9,6 +9,7 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -81,11 +82,10 @@ fun AppNavigation(
         }
 
         composable(Screen.MealDetails.route) {
-            val mealId = it.arguments?.getString(Screen.MealDetails.MEAL_ID_ARGUMENT)
             MealDetailsScreen(
                 modifier = modifier,
                 viewModel = koinNavViewModel(),
-                mealId = mealId ?: "",
+                mealId = it.getArgument(Screen.MealDetails.MEAL_ID_ARGUMENT),
                 windowSize = windowSize,
                 onHeaderImageClicked = { imageUrl ->
                     val encodedUrl = URLEncoder.encode(imageUrl, StandardCharsets.UTF_8.toString())
@@ -130,15 +130,13 @@ fun AppNavigation(
         }
 
         composable(Screen.FilterMeals.route) {
-            val areaName = it.arguments?.getString(Screen.FilterMeals.NAME_ARGUMENT)
-            val filterType =
-                it.arguments?.getString(Screen.FilterMeals.FILTER_TYPE_ARGUMENT)
-                    ?: ""
             FilterMealsScreen(
                 modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 viewModel = koinNavViewModel(),
-                name = areaName ?: "",
-                filterType = FilterType.valueOf(filterType),
+                name = it.getArgument(Screen.FilterMeals.NAME_ARGUMENT),
+                filterType = FilterType.valueOf(
+                    it.getArgument(Screen.FilterMeals.FILTER_TYPE_ARGUMENT)
+                ),
                 windowSize = windowSize,
                 onMealClicked = { mealId ->
                     navController.navigate(Screen.MealDetails.getRoute(mealId))
@@ -148,15 +146,17 @@ fun AppNavigation(
         }
 
         composable(Screen.FullScreenImage.route) {
-            val imageUrl = it.arguments?.getString(Screen.FullScreenImage.URL_ARGUMENT)
             FullScreenImage(
                 modifier = modifier,
-                imageUrl = imageUrl ?: "",
+                imageUrl = it.getArgument(Screen.FullScreenImage.URL_ARGUMENT),
                 onNavigateBackClicked = { navController.popBackStack() }
             )
         }
     }
 }
+
+private fun NavBackStackEntry.getArgument(key: String): String =
+    this.arguments?.getString(key) ?: ""
 
 private fun startImplicitIntent(context: Context, url: String) {
     context.startActivity(
