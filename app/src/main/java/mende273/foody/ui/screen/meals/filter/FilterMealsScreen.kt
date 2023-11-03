@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.filter
+package mende273.foody.ui.screen.meals.filter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

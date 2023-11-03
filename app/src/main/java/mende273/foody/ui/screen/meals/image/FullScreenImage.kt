@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.image
+package mende273.foody.ui.screen.meals.image
 
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable

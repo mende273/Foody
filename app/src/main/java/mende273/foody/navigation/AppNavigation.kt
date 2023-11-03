@@ -14,12 +14,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
-import mende273.foody.ui.screen.details.MealDetailsScreen
 import mende273.foody.ui.screen.favourites.FavouritesScreen
-import mende273.foody.ui.screen.filter.FilterMealsScreen
-import mende273.foody.ui.screen.filter.FilterType
-import mende273.foody.ui.screen.image.FullScreenImage
 import mende273.foody.ui.screen.meals.MealsScreen
+import mende273.foody.ui.screen.meals.details.MealDetailsScreen
+import mende273.foody.ui.screen.meals.filter.FilterMealsScreen
+import mende273.foody.ui.screen.meals.filter.FilterType
+import mende273.foody.ui.screen.meals.image.FullScreenImage
 import mende273.foody.ui.screen.random.RandomMealScreen
 import mende273.foody.ui.screen.search.SearchScreen
 import org.koin.androidx.compose.navigation.koinNavViewModel

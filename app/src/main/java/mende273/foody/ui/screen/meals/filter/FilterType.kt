@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.filter
+package mende273.foody.ui.screen.meals.filter
 
 import androidx.annotation.StringRes
 import mende273.foody.R

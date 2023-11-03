@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.details
+package mende273.foody.ui.screen.meals.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
