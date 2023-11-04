@@ -13,6 +13,9 @@ import mende273.foody.util.toUIState
 
 class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase) : ViewModel() {
 
+    private val _isFavourite: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isFavourite: StateFlow<Boolean> = _isFavourite
+
     private val _uiState: MutableStateFlow<UIState<MealDetails>> =
         MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<MealDetails>> = _uiState
@@ -27,5 +30,9 @@ class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase
                 getRandomMealUseCase().toUIState()
             }
         }
+    }
+
+    fun toggleFavourite() {
+        // TODO
     }
 }

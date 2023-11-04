@@ -12,7 +12,7 @@ import androidx.compose.ui.res.dimensionResource
 import mende273.foody.R
 
 @Composable
-fun RoundedBackButton(navigateBackEvent: () -> Unit) {
+fun RoundedBackButton(onNavigateBackClicked: () -> Unit) {
     Box(
         Modifier.padding(
             start = dimensionResource(id = R.dimen.normal_padding),
@@ -20,7 +20,7 @@ fun RoundedBackButton(navigateBackEvent: () -> Unit) {
         )
     ) {
         RoundedComponent {
-            IconButton(onClick = { navigateBackEvent() }) {
+            IconButton(onClick = { onNavigateBackClicked() }) {
                 Icon(Icons.Filled.ArrowBack, "back button")
             }
         }

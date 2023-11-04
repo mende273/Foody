@@ -25,6 +25,8 @@ fun MealDetailsComponent(
     onHeaderImageClicked: (String) -> Unit,
     onCategoryClicked: (String) -> Unit,
     isBackButtonEnabled: Boolean,
+    isFavourite: Boolean,
+    onFavouriteClicked: () -> Unit,
     onAreaClicked: (String) -> Unit,
     onVideoClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit,
@@ -35,9 +37,11 @@ fun MealDetailsComponent(
         modifier = modifier.verticalScroll(rememberScrollState()),
         windowSize = windowSize,
         isBackButtonEnabled = isBackButtonEnabled,
+        isFavourite = isFavourite,
         headerImageUrl = mealDetails.thumb,
         onNavigateBackClicked = { onNavigateBackClicked() },
         onHeaderImageClicked = { onHeaderImageClicked(it) },
+        onFavouriteClicked = { onFavouriteClicked() },
         contents = {
             Column(modifier) {
                 DetailsScaffoldSection(

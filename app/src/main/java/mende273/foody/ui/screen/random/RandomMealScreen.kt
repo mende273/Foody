@@ -24,6 +24,7 @@ fun RandomMealScreen(
     onIngredientClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit
 ) {
+    val isFavourite by viewModel.isFavourite.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     when (uiState) {
@@ -38,12 +39,14 @@ fun RandomMealScreen(
             mealDetails = (uiState as UIState.Success<MealDetails>).data,
             windowSize = windowSize,
             isBackButtonEnabled = false,
+            isFavourite = isFavourite,
             onHeaderImageClicked = { onHeaderImageClicked(it) },
             onCategoryClicked = { onCategoryClicked(it) },
             onAreaClicked = { onAreaClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
             onIngredientClicked = { onIngredientClicked(it) },
-            onSourceClicked = { onSourceClicked(it) }
+            onSourceClicked = { onSourceClicked(it) },
+            onFavouriteClicked = { viewModel.toggleFavourite() }
         )
     }
 }

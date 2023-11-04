@@ -60,6 +60,6 @@ fun FullScreenImage(
             contentDescription = "full screen meal image",
             contentScale = ContentScale.Fit
         )
-        RoundedBackButton(navigateBackEvent = { onNavigateBackClicked() })
+        RoundedBackButton(onNavigateBackClicked = { onNavigateBackClicked() })
     }
 }

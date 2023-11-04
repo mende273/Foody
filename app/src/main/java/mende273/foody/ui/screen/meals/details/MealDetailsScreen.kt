@@ -27,6 +27,7 @@ fun MealDetailsScreen(
     onIngredientClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit
 ) {
+    val isFavourite by viewModel.isFavourite.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = mealId, block = {
@@ -45,13 +46,15 @@ fun MealDetailsScreen(
             mealDetails = (uiState as UIState.Success<MealDetails>).data,
             windowSize = windowSize,
             isBackButtonEnabled = true,
+            isFavourite = isFavourite,
             onHeaderImageClicked = { onHeaderImageClicked(it) },
             onCategoryClicked = { onCategoryClicked(it) },
             onAreaClicked = { onAreaClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
             onSourceClicked = { onSourceClicked(it) },
             onIngredientClicked = { onIngredientClicked(it) },
-            onNavigateBackClicked = { onNavigateBackClicked() }
+            onNavigateBackClicked = { onNavigateBackClicked() },
+            onFavouriteClicked = { viewModel.toggleFavourite() }
         )
     }
 }
