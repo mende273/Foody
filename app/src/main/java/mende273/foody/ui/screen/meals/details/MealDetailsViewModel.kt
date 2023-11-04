@@ -16,6 +16,9 @@ class MealDetailsViewModel(private val getMealDetailsUseCase: GetMealDetailsUseC
         MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<MealDetails>> = _uiState
 
+    private val _isFavourite: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isFavourite: StateFlow<Boolean> = _isFavourite
+
     fun requestData(id: String) {
         viewModelScope.launch {
             _uiState.value = getMealDetailsUseCase(id).fold(
@@ -27,5 +30,9 @@ class MealDetailsViewModel(private val getMealDetailsUseCase: GetMealDetailsUseC
                 }
             )
         }
+    }
+
+    fun toggleFavourite() {
+        // TODO
     }
 }
