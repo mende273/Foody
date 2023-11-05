@@ -1,0 +1,21 @@
+CREATE TABLE mealEntity (
+               id INTEGER PRIMARY KEY NOT NULL,
+               name TEXT NOT NULL,
+               thumb TEXT NOT NULL
+             );
+
+selectAll:
+SELECT *
+FROM mealEntity;
+
+selectById:
+SELECT *
+FROM mealEntity
+WHERE id = :id;
+
+insert:
+INSERT OR REPLACE INTO mealEntity(id, name,thumb)
+VALUES ?;
+
+delete:
+DELETE FROM mealEntity WHERE id == ?;
