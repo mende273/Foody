@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover") version "0.7.4"
     id("kotlinx-serialization")
     id("com.google.devtools.ksp")
+    id("app.cash.sqldelight")
 }
 
 android {
@@ -52,6 +53,14 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+    sqldelight {
+        databases {
+            create("Database") {
+                packageName.set("mende273.foody")
+            }
         }
     }
 
@@ -125,4 +134,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    implementation("app.cash.sqldelight:android-driver:2.0.0")
+    implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
 }
