@@ -1,7 +1,7 @@
 # Foody
 Real world Android application demonstrating the use of JetPack Compose with Koin, Ktor, Navigation Component and MVVM architecture.
 
-Foody supports all windows sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
+Foody supports almost all windows sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
 
 ## PreBuild
 The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manually run the tasks with <code>./gradlew ktlintFormat</code> and <code>./gradlew detekt</code>
@@ -58,6 +58,7 @@ ImageLoader(this).newBuilder()
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - The ViewModel is designed to store and manage UI-related data in a lifecycle conscious way.
 - [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) - StateFlow is a state-holder observable flow that emits the current and new state updates to its collectors.
 - [Koin](https://insert-koin.io/) - A pragmatic lightweight dependency injection framework.
+- [SqlDelight](https://cashapp.github.io/sqldelight/2.0.0/) - Generates typesafe Kotlin APIs from your SQL statements.
 - [Ktor](https://github.com/ktorio/ktor) - An asynchronous framework for creating microservices, web applications and more.
 - [Coil](https://github.com/coil-kt/coil) - An image loading library for Android backed by Kotlin Coroutines.
 - [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) - Provides an easy-to-use API and supports a wide range of formats for reflection-less serialization.
