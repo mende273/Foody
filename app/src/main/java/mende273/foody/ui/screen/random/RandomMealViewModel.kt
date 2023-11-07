@@ -2,19 +2,36 @@ package mende273.foody.ui.screen.random
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import mende273.foody.data.repository.LocalRepositoryImpl
+import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
 import mende273.foody.domain.usecase.GetRandomMealUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
-class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase) : ViewModel() {
+class RandomMealViewModel(
+    private val getRandomMealUseCase: GetRandomMealUseCase,
+    private val localRepository: LocalRepositoryImpl
+) : ViewModel() {
 
-    private val _isFavourite: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isFavourite: StateFlow<Boolean> = _isFavourite
+    private var mealDetailsResult: Result<MealDetails?> = Result.success(null)
+
+    private val _mealFromLocalDb = MutableStateFlow<Flow<Meal?>>(emptyFlow())
+    val mealFromLocalDb: StateFlow<Meal?> = _mealFromLocalDb.flatMapLatest {
+        it
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+        null
+    )
 
     private val _uiState: MutableStateFlow<UIState<MealDetails>> =
         MutableStateFlow(UIState.Loading)
@@ -26,13 +43,26 @@ class RandomMealViewModel(private val getRandomMealUseCase: GetRandomMealUseCase
 
     private fun requestData() {
         viewModelScope.launch {
-            _uiState.update {
-                getRandomMealUseCase().toUIState()
+            with(getRandomMealUseCase()) {
+                this.getOrNull()?.let {
+                    _mealFromLocalDb.value = localRepository.getFavouriteMealById(it.id)
+                }
+
+                mealDetailsResult = this
+                _uiState.value = this.toUIState()
             }
         }
     }
 
     fun toggleFavourite() {
-        // TODO
+        viewModelScope.launch {
+            mealFromLocalDb.value?.let {
+                localRepository.deleteFavouriteMeal(meal = it)
+            } ?: run {
+                mealDetailsResult.getOrNull()?.let {
+                    localRepository.addFavouriteMeal(Meal(it.id, it.name, it.thumb))
+                }
+            }
+        }
     }
 }
