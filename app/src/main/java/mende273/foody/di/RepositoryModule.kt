@@ -28,7 +28,6 @@ import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
 import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
 import mende273.foody.domain.usecase.GetMealsWithIngredientUseCase
 import mende273.foody.domain.usecase.GetRandomMealUseCase
-import mende273.foody.domain.usecase.SearchMealsByNameUseCase
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -41,7 +40,6 @@ val repositoryModule = module {
     factory { GetMealsForFirstLetterUseCase(get()) }
     factory { GetMealDetailsUseCase(get()) }
     factory { GetMealsWithIngredientUseCase(get()) }
-    factory { SearchMealsByNameUseCase(get()) }
     single { GetAllFiltersUseCase(get()) }
 }
 

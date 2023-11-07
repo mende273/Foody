@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.usecase.SearchMealsByNameUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 class SearchViewModel
-(private val searchMealsByNameUseCase: SearchMealsByNameUseCase) : ViewModel() {
+(private val remoteRepository: RemoteRepositoryImpl) : ViewModel() {
 
     private var _uiState: MutableStateFlow<UIState<List<Meal>>> =
         MutableStateFlow(UIState.Success(emptyList()))
@@ -21,7 +21,7 @@ class SearchViewModel
         if (name.isNotEmpty()) {
             viewModelScope.launch {
                 _uiState.value = UIState.Loading
-                _uiState.value = searchMealsByNameUseCase(name).toUIState()
+                _uiState.value = remoteRepository.searchMealsByName(name).toUIState()
             }
         }
     }
