@@ -20,6 +20,7 @@ import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -32,6 +33,8 @@ fun DetailsScaffold(
     windowSize: WindowSizeClass,
     headerImageUrl: String,
     isBackButtonEnabled: Boolean = false,
+    isFavourite: Boolean,
+    onFavouriteClicked: () -> Unit,
     onHeaderImageClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit = {},
     contents: @Composable () -> Unit
@@ -53,6 +56,8 @@ fun DetailsScaffold(
             headerImageModifier = headerImageModifier,
             headerImageUrl = headerImageUrl,
             isBackButtonEnabled = isBackButtonEnabled,
+            isFavourite = isFavourite,
+            onFavouriteClicked = { onFavouriteClicked() },
             onNavigateBackClicked = { onNavigateBackClicked() },
             contents = { contents() }
         )
@@ -62,6 +67,8 @@ fun DetailsScaffold(
             headerImageModifier = headerImageModifier,
             headerImageUrl = headerImageUrl,
             isBackButtonEnabled = isBackButtonEnabled,
+            isFavourite = isFavourite,
+            onFavouriteClicked = { onFavouriteClicked() },
             onNavigateBackClicked = { onNavigateBackClicked() },
             contents = { contents() }
         )
@@ -74,6 +81,8 @@ private fun PortraitDetailsComponent(
     headerImageModifier: Modifier,
     headerImageUrl: String,
     isBackButtonEnabled: Boolean,
+    isFavourite: Boolean,
+    onFavouriteClicked: () -> Unit,
     onNavigateBackClicked: () -> Unit,
     contents: @Composable () -> Unit
 ) {
@@ -92,8 +101,19 @@ private fun PortraitDetailsComponent(
             )
 
             if (isBackButtonEnabled) {
-                RoundedBackButton(navigateBackEvent = { onNavigateBackClicked() })
+                RoundedBackButton(onNavigateBackClicked = { onNavigateBackClicked() })
             }
+
+            RoundedFavouriteButton(
+                Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(
+                        end = dimensionResource(id = R.dimen.normal_padding),
+                        top = dimensionResource(id = R.dimen.large_padding)
+                    ),
+                isFavourite = isFavourite,
+                onFavouriteClicked = { onFavouriteClicked() }
+            )
         }
 
         Card(
@@ -118,7 +138,9 @@ private fun LandscapeDetailsComponent(
     headerImageModifier: Modifier,
     headerImageUrl: String,
     isBackButtonEnabled: Boolean,
+    isFavourite: Boolean,
     onNavigateBackClicked: () -> Unit,
+    onFavouriteClicked: () -> Unit,
     contents: @Composable () -> Unit
 ) {
     Row(
@@ -135,8 +157,19 @@ private fun LandscapeDetailsComponent(
             )
 
             if (isBackButtonEnabled) {
-                RoundedBackButton(navigateBackEvent = { onNavigateBackClicked() })
+                RoundedBackButton(onNavigateBackClicked = { onNavigateBackClicked() })
             }
+
+            RoundedFavouriteButton(
+                Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(
+                        end = dimensionResource(id = R.dimen.large_padding),
+                        top = dimensionResource(id = R.dimen.large_padding)
+                    ),
+                isFavourite = isFavourite,
+                onFavouriteClicked = { onFavouriteClicked() }
+            )
         }
 
         Card(

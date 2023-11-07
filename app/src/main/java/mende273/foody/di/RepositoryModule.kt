@@ -45,7 +45,7 @@ val repositoryModule = module {
     single { GetAllFiltersUseCase(get()) }
 }
 
-const val NETWORK_TIME_OUT = 6_000L
+private const val NETWORK_TIME_OUT = 6_000L
 
 fun provideHttpClient(): HttpClient = HttpClient(Android) {
     install(ContentNegotiation) {

@@ -41,20 +41,21 @@ fun MealDetailsScreen(
         )
 
         is UIState.Loading -> ProgressBar(Modifier.fillMaxSize())
-        is UIState.Success -> MealDetailsComponent(
-            modifier = modifier,
-            mealDetails = (uiState as UIState.Success<MealDetails>).data,
-            windowSize = windowSize,
-            isBackButtonEnabled = true,
-            isFavourite = isFavourite,
-            onHeaderImageClicked = { onHeaderImageClicked(it) },
-            onCategoryClicked = { onCategoryClicked(it) },
-            onAreaClicked = { onAreaClicked(it) },
-            onVideoClicked = { onVideoClicked(it) },
-            onSourceClicked = { onSourceClicked(it) },
-            onIngredientClicked = { onIngredientClicked(it) },
-            onNavigateBackClicked = { onNavigateBackClicked() },
-            onFavouriteClicked = { viewModel.toggleFavourite() }
-        )
+        is UIState.Success ->
+            MealDetailsComponent(
+                modifier = modifier,
+                mealDetails = (uiState as UIState.Success<MealDetails>).data,
+                windowSize = windowSize,
+                isBackButtonEnabled = true,
+                isFavourite = isFavourite != null,
+                onHeaderImageClicked = { onHeaderImageClicked(it) },
+                onCategoryClicked = { onCategoryClicked(it) },
+                onAreaClicked = { onAreaClicked(it) },
+                onVideoClicked = { onVideoClicked(it) },
+                onSourceClicked = { onSourceClicked(it) },
+                onIngredientClicked = { onIngredientClicked(it) },
+                onNavigateBackClicked = { onNavigateBackClicked() },
+                onFavouriteClicked = { viewModel.toggleFavourite() }
+            )
     }
 }
