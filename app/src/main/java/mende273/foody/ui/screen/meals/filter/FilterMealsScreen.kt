@@ -10,7 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.ProgressBar
@@ -60,7 +60,7 @@ fun FilterMealsScreen(
 
                 MealsGrid(
                     gridCellsCount = gridCells,
-                    meals = (uiState as UIState.Success<Meals>).data.meals,
+                    meals = (uiState as UIState.Success<List<Meal>>).data,
                     onMealClicked = {
                         onMealClicked(it)
                     }

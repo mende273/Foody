@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.Meal
 import mende273.foody.domain.usecase.GetMealsForAreaUseCase
 import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
 import mende273.foody.domain.usecase.GetMealsWithIngredientUseCase
@@ -21,9 +21,9 @@ class FilterMealsViewModel(
     private val _headerTitle: MutableStateFlow<Int?> = MutableStateFlow(null)
     val headerTitle: StateFlow<Int?> = _headerTitle
 
-    private val _uiState: MutableStateFlow<UIState<Meals>> =
+    private val _uiState: MutableStateFlow<UIState<List<Meal>>> =
         MutableStateFlow(UIState.Loading)
-    val uiState: StateFlow<UIState<Meals>> = _uiState
+    val uiState: StateFlow<UIState<List<Meal>>> = _uiState
 
     fun requestData(name: String, filterType: FilterType) {
         viewModelScope.launch {

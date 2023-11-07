@@ -29,7 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.R
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.ProgressBar
@@ -64,7 +64,7 @@ fun SearchScreen(
             searchText = searchText,
             isSearchBarActive = isSearchBarActive,
             mealsSize = if (uiState is UIState.Success) {
-                (uiState as UIState.Success<Meals>).data.meals.size
+                (uiState as UIState.Success<List<Meal>>).data.size
             } else {
                 0
             },
@@ -101,7 +101,7 @@ fun SearchScreen(
 
                 MealsGrid(
                     gridCellsCount = gridCells,
-                    meals = (uiState as UIState.Success<Meals>).data.meals,
+                    meals = (uiState as UIState.Success<List<Meal>>).data,
                     onMealClicked = {
                         onMealClicked(it)
                     }

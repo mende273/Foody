@@ -40,7 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import mende273.foody.R
 import mende273.foody.domain.Tab
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.NormalText
@@ -153,7 +153,7 @@ fun MealsScreen(
 @Composable
 private fun PagerSection(
     currentFilterData: Array<Tab>,
-    uiStateFilterOptionData: UIState<Meals>,
+    uiStateFilterOptionData: UIState<List<Meal>>,
     pagerState: PagerState,
     windowSize: WindowSizeClass,
     onMealClicked: (String) -> Unit,
@@ -213,7 +213,7 @@ private fun HeaderSection(
 @Composable
 private fun GridSection(
     modifier: Modifier = Modifier,
-    uiState: UIState<Meals>,
+    uiState: UIState<List<Meal>>,
     gridCellsCount: Int,
     onMealClicked: (String) -> Unit
 ) {
@@ -227,7 +227,7 @@ private fun GridSection(
         is UIState.Success -> {
             MealsGrid(
                 gridCellsCount = gridCellsCount,
-                meals = uiState.data.meals,
+                meals = uiState.data,
                 onMealClicked = {
                     onMealClicked(it)
                 }

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.Meal
 import mende273.foody.domain.usecase.FiltersWrapper
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
 import mende273.foody.domain.usecase.GetMealsForAreaUseCase
@@ -63,8 +63,8 @@ class MealsViewModel(
             initialValue = UIState.Loading
         )
 
-    private val _meals: MutableStateFlow<UIState<Meals>> = MutableStateFlow(UIState.Loading)
-    val meals: StateFlow<UIState<Meals>> = _meals
+    private val _meals: MutableStateFlow<UIState<List<Meal>>> = MutableStateFlow(UIState.Loading)
+    val meals: StateFlow<UIState<List<Meal>>> = _meals
 
     private fun fetchAllFilters() {
         viewModelScope.launch {

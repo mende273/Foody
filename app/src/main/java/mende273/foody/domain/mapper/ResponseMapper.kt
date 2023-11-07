@@ -8,7 +8,6 @@ import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.model.Meals
 import mende273.foody.domain.model.MealsWithDetails
 
 fun MealsWithDetailsDto.toDomain(): MealsWithDetails = MealsWithDetails(
@@ -28,9 +27,8 @@ fun MealDetailsDto.toDomain(): MealDetails = MealDetails(
     ingredientsWithMeasures = makeListForIngredientsWithMeasures(this)
 )
 
-fun MealsDto.toDomain(): Meals = Meals(
-    meals = meals?.filterNotNull()?.map { it.toDomain() } ?: emptyList()
-)
+fun MealsDto?.toDomain(): List<Meal> =
+    this?.meals?.filterNotNull()?.map { it.toDomain() } ?: emptyList()
 
 fun MealDto.toDomain(): Meal = Meal(
     id = id,
