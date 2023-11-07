@@ -24,8 +24,8 @@ class MealDetailsViewModel(
     private val localRepository: LocalRepositoryImpl
 ) : ViewModel() {
 
-    private val _isFavourite = MutableStateFlow<Flow<Meal?>>(emptyFlow())
-    val isFavourite: StateFlow<Meal?> = _isFavourite.flatMapLatest {
+    private val _mealFromLocalDb = MutableStateFlow<Flow<Meal?>>(emptyFlow())
+    val mealFromLocalDb: StateFlow<Meal?> = _mealFromLocalDb.flatMapLatest {
         it
     }.stateIn(
         viewModelScope,
@@ -41,7 +41,7 @@ class MealDetailsViewModel(
 
     fun requestData(id: String) {
         viewModelScope.launch {
-            _isFavourite.value = localRepository.getFavouriteMealById(id.toLong())
+            _mealFromLocalDb.value = localRepository.getFavouriteMealById(id.toLong())
 
             with(getMealDetailsUseCase(id)) {
                 mealDetailsResult = this
@@ -52,7 +52,7 @@ class MealDetailsViewModel(
 
     fun toggleFavourite() {
         viewModelScope.launch {
-            isFavourite.value?.let {
+            mealFromLocalDb.value?.let {
                 localRepository.deleteFavouriteMeal(meal = it)
             } ?: run {
                 mealDetailsResult.getOrNull()?.let {
