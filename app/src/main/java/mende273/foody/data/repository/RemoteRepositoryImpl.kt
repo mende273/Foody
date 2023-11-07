@@ -5,6 +5,8 @@ import mende273.foody.data.api.ApiService
 import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
+import mende273.foody.domain.mapper.toModel
+import mende273.foody.domain.model.Meal
 
 class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepository {
 
@@ -48,8 +50,6 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
             apiService.getMealAreas().body()
         }
 
-    override suspend fun searchMealsByName(name: String): Result<MealsDto?> =
-        runCatching {
-            apiService.searchMealsByName(name).body()
-        }
+    override suspend fun searchMealsByName(name: String): Result<List<Meal>> =
+        runCatching { apiService.searchMealsByName(name).body<MealsDto?>().toModel() }
 }
