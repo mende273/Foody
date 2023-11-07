@@ -13,7 +13,7 @@ val viewModelModule = module {
     viewModel { MealsViewModel(get(), get(), get(), get()) }
     viewModel { RandomMealViewModel(get()) }
     viewModel { SearchViewModel(get()) }
-    viewModel { FavouritesViewModel() }
+    viewModel { FavouritesViewModel(get()) }
     viewModel { FilterMealsViewModel(get(), get(), get()) }
-    viewModel { MealDetailsViewModel(get()) }
+    viewModel { MealDetailsViewModel(get(), get()) }
 }

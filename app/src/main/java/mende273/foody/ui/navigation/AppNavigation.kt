@@ -126,7 +126,17 @@ fun AppNavigation(
         }
 
         composable(Screen.Favourites.route) {
-            FavouritesScreen(modifier = modifier, viewModel = koinNavViewModel())
+            FavouritesScreen(
+                modifier = modifier.padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding()
+                ),
+                viewModel = koinNavViewModel(),
+                windowSize = windowSize,
+                onMealClicked = { mealId ->
+                    navController.navigate(Screen.MealDetails.getRoute(mealId))
+                }
+            )
         }
 
         composable(Screen.FilterMeals.route) {
