@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -12,13 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.R
-import mende273.foody.domain.model.Meals
+import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.ProgressBar
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.GRID_CELLS_COUNT_IN_LANDSCAPE
-import mende273.foody.util.GRID_CELLS_COUNT_IN_PORTRAIT
+import mende273.foody.util.getGridCellsCount
 
 @Composable
 fun FavouritesScreen(
@@ -45,15 +43,9 @@ fun FavouritesScreen(
             is UIState.Loading -> ProgressBar()
 
             is UIState.Success -> {
-                val gridCells = if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
-                    GRID_CELLS_COUNT_IN_PORTRAIT
-                } else {
-                    GRID_CELLS_COUNT_IN_LANDSCAPE
-                }
-
                 MealsGrid(
-                    gridCellsCount = gridCells,
-                    meals = (uiState as UIState.Success<Meals>).data.meals,
+                    gridCellsCount = windowSize.getGridCellsCount(),
+                    meals = (uiState as UIState.Success<List<Meal>>).data,
                     onMealClicked = {
                         onMealClicked(it)
                     }

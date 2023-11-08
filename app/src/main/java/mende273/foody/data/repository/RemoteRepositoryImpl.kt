@@ -37,17 +37,17 @@ class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepositor
 
     override suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?> =
         runCatching {
-            apiService.getMealDetails(id).body()
+            apiService.getMealDetails(id).body<MealsWithDetailsDto?>() // .toModel()
         }
 
-    override suspend fun getMealCategories(): Result<MealCategoriesDto?> =
+    override suspend fun getMealCategories(): Result<List<String>> =
         runCatching {
-            apiService.getMealCategories().body()
+            apiService.getMealCategories().body<MealCategoriesDto?>().toModel()
         }
 
-    override suspend fun getMealAreas(): Result<MealCategoriesDto?> =
+    override suspend fun getMealAreas(): Result<List<String>> =
         runCatching {
-            apiService.getMealAreas().body()
+            apiService.getMealAreas().body<MealCategoriesDto?>().toModel()
         }
 
     override suspend fun searchMealsByName(name: String): Result<List<Meal>> =
