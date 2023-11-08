@@ -36,8 +36,8 @@ fun MealDto.toModel(): Meal = Meal(
     name = name ?: ""
 )
 
-fun MealCategoriesDto.toModel(): List<String> =
-    this.categories
+fun MealCategoriesDto?.toModel(): List<String> =
+    this?.categories
         ?.filterNotNull()
         .takeIf { !it.isNullOrEmpty() }
         ?.mapNotNull {
