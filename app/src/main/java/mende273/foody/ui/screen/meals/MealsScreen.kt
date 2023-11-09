@@ -41,12 +41,11 @@ import kotlinx.coroutines.launch
 import mende273.foody.R
 import mende273.foody.domain.Tab
 import mende273.foody.domain.model.Meal
-import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.NormalText
-import mende273.foody.ui.component.ProgressBar
 import mende273.foody.ui.component.ScrollableTabRowComponent
 import mende273.foody.ui.component.SmallButton
+import mende273.foody.ui.component.UiStateWrapper
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.theme.largeTextStyle
@@ -93,58 +92,41 @@ fun MealsScreen(
     }
 
     Column(modifier.testTag("test_tag_meals_screen")) {
-        when (uiStateCurrentFilter) {
-            is UIState.Success -> {
-                val pagerState = rememberPagerState(
-                    pageCount = {
-                        (uiStateCurrentFilter as UIState.Success<List<String>>)
-                            .data.size
-                    }
-                )
-
-                if (shouldMoveToFirstPage) {
-                    LaunchedEffect(key1 = pagerState.currentPage, block = {
-                        pagerState.scrollToPage(0)
-                    })
-                    shouldMoveToFirstPage = false
-                }
-
-                LaunchedEffect(key1 = headerTitle.title + pagerState.currentPage, block = {
-                    val category =
-                        (uiStateCurrentFilter as UIState.Success<List<String>>)
-                            .data[pagerState.currentPage]
-                    viewModel.fetchMeals(category)
-                })
-
-                HeaderSection(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(dimensionResource(id = R.dimen.normal_padding)),
-                    title = stringResource(id = headerTitle.title),
-                    onFilterClicked = { shouldShowFilterDialog = true }
-                )
-
-                PagerSection(
-                    currentFilterData =
-                    (uiStateCurrentFilter as UIState.Success<List<String>>)
-                        .data
-                        .map { Tab(it) }.toTypedArray(),
-                    uiStateFilterOptionData = uiStateCurrentFilterOption,
-                    pagerState = pagerState,
-                    windowSize = windowSize,
-                    onMealClicked = { onMealClicked(it) },
-                    scrollToPage = { index ->
-                        coroutineScope.launch { pagerState.scrollToPage(index) }
-                    }
-                )
-            }
-
-            is UIState.Error -> ErrorComponent(
-                modifier = Modifier.fillMaxSize(),
-                text = (uiStateCurrentFilter as UIState.Error).errorMessage
+        UiStateWrapper(uiState = uiStateCurrentFilter) { filterItems ->
+            val pagerState = rememberPagerState(
+                pageCount = { filterItems.size }
             )
 
-            UIState.Loading -> ProgressBar(Modifier.fillMaxSize())
+            if (shouldMoveToFirstPage) {
+                LaunchedEffect(key1 = pagerState.currentPage, block = {
+                    pagerState.scrollToPage(0)
+                })
+                shouldMoveToFirstPage = false
+            }
+
+            LaunchedEffect(key1 = headerTitle.title + pagerState.currentPage, block = {
+                viewModel.fetchMeals(filterItems[pagerState.currentPage])
+            })
+
+            HeaderSection(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.normal_padding)),
+                title = stringResource(id = headerTitle.title),
+                onFilterClicked = { shouldShowFilterDialog = true }
+            )
+
+            PagerSection(
+                currentFilterData =
+                filterItems.map { Tab(it) }.toTypedArray(),
+                uiStateFilterOptionData = uiStateCurrentFilterOption,
+                pagerState = pagerState,
+                windowSize = windowSize,
+                onMealClicked = { onMealClicked(it) },
+                scrollToPage = { index ->
+                    coroutineScope.launch { pagerState.scrollToPage(index) }
+                }
+            )
         }
     }
 }
@@ -177,12 +159,13 @@ private fun PagerSection(
         userScrollEnabled = false,
         beyondBoundsPageCount = 0,
         pageContent = {
-            GridSection(
-                modifier = Modifier.fillMaxSize(),
-                uiState = uiStateFilterOptionData,
-                gridCellsCount = windowSize.getGridCellsCount(),
-                onMealClicked = { onMealClicked(it) }
-            )
+            UiStateWrapper(uiState = uiStateFilterOptionData) { meals ->
+                MealsGrid(
+                    gridCellsCount = windowSize.getGridCellsCount(),
+                    meals = meals,
+                    onMealClicked = { onMealClicked(it) }
+                )
+            }
         }
     )
 }
@@ -207,32 +190,6 @@ private fun HeaderSection(
             text = stringResource(id = R.string.filter),
             onClicked = { onFilterClicked() }
         )
-    }
-}
-
-@Composable
-private fun GridSection(
-    modifier: Modifier = Modifier,
-    uiState: UIState<List<Meal>>,
-    gridCellsCount: Int,
-    onMealClicked: (String) -> Unit
-) {
-    when (uiState) {
-        is UIState.Error -> ErrorComponent(
-            modifier = Modifier.fillMaxSize(),
-            text = uiState.errorMessage
-        )
-
-        is UIState.Loading -> ProgressBar(modifier)
-        is UIState.Success -> {
-            MealsGrid(
-                gridCellsCount = gridCellsCount,
-                meals = uiState.data,
-                onMealClicked = {
-                    onMealClicked(it)
-                }
-            )
-        }
     }
 }
 

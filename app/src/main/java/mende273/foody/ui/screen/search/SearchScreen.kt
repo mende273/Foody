@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -17,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,12 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.R
 import mende273.foody.domain.model.Meal
-import mende273.foody.ui.component.ErrorComponent
 import mende273.foody.ui.component.MealsGrid
-import mende273.foody.ui.component.ProgressBar
+import mende273.foody.ui.component.UiStateWrapper
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.GRID_CELLS_COUNT_IN_LANDSCAPE
-import mende273.foody.util.GRID_CELLS_COUNT_IN_PORTRAIT
+import mende273.foody.util.getGridCellsCount
 
 @Composable
 fun SearchScreen(
@@ -50,7 +46,7 @@ fun SearchScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(modifier = modifier) {
-        SearchComponent(
+        SearchBarComponent(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(max = 150.dp)
@@ -85,35 +81,19 @@ fun SearchScreen(
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.normal_padding)))
 
-        when (uiState) {
-            is UIState.Error -> ErrorComponent(
-                modifier = Modifier.fillMaxSize(),
-                text = (uiState as UIState.Error).errorMessage
+        UiStateWrapper(uiState = uiState) { meals ->
+            MealsGrid(
+                gridCellsCount = windowSize.getGridCellsCount(),
+                meals = meals,
+                onMealClicked = { onMealClicked(it) }
             )
-
-            is UIState.Loading -> ProgressBar(Modifier.fillMaxSize())
-            is UIState.Success -> {
-                val gridCells = if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
-                    GRID_CELLS_COUNT_IN_PORTRAIT
-                } else {
-                    GRID_CELLS_COUNT_IN_LANDSCAPE
-                }
-
-                MealsGrid(
-                    gridCellsCount = gridCells,
-                    meals = (uiState as UIState.Success<List<Meal>>).data,
-                    onMealClicked = {
-                        onMealClicked(it)
-                    }
-                )
-            }
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SearchComponent(
+private fun SearchBarComponent(
     modifier: Modifier,
     searchText: String,
     isSearchBarActive: Boolean,
