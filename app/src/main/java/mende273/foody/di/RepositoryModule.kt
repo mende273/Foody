@@ -22,24 +22,12 @@ import mende273.foody.data.api.ApiService
 import mende273.foody.data.repository.LocalRepositoryImpl
 import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
-import mende273.foody.domain.usecase.GetMealDetailsUseCase
-import mende273.foody.domain.usecase.GetMealsForAreaUseCase
-import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
-import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
-import mende273.foody.domain.usecase.GetMealsWithIngredientUseCase
-import mende273.foody.domain.usecase.GetRandomMealUseCase
 import org.koin.dsl.module
 
 val repositoryModule = module {
     single { ApiService(provideHttpClient()) }
     single { RemoteRepositoryImpl(get()) }
     single { LocalRepositoryImpl(get()) }
-    factory { GetRandomMealUseCase(get()) }
-    factory { GetMealsForCategoryUseCase(get()) }
-    factory { GetMealsForAreaUseCase(get()) }
-    factory { GetMealsForFirstLetterUseCase(get()) }
-    factory { GetMealDetailsUseCase(get()) }
-    factory { GetMealsWithIngredientUseCase(get()) }
     single { GetAllFiltersUseCase(get()) }
 }
 

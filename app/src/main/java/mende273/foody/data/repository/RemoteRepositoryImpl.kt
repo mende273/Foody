@@ -7,37 +7,38 @@ import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.domain.mapper.toModel
 import mende273.foody.domain.model.Meal
+import mende273.foody.domain.model.MealDetails
 
 class RemoteRepositoryImpl(private val apiService: ApiService) : RemoteRepository {
 
-    override suspend fun getRandomMeal(): Result<MealsWithDetailsDto?> =
+    override suspend fun getRandomMeal(): Result<MealDetails> =
         runCatching {
-            apiService.getRandomMeal().body()
+            apiService.getRandomMeal().body<MealsWithDetailsDto?>().toModel().first()
         }
 
-    override suspend fun getMealsForCategory(category: String): Result<MealsDto?> =
+    override suspend fun getMealsForCategory(category: String): Result<List<Meal>> =
         runCatching {
-            apiService.getMealsForCategory(category).body()
+            apiService.getMealsForCategory(category).body<MealsDto?>().toModel()
         }
 
-    override suspend fun getMealsForArea(area: String): Result<MealsDto?> =
+    override suspend fun getMealsForArea(area: String): Result<List<Meal>> =
         runCatching {
-            apiService.getMealsForArea(area).body()
+            apiService.getMealsForArea(area).body<MealsDto?>().toModel()
         }
 
-    override suspend fun getMealsWithIngredient(ingredient: String): Result<MealsDto?> =
+    override suspend fun getMealsWithIngredient(ingredient: String): Result<List<Meal>> =
         runCatching {
-            apiService.getMealsWithIngredient((ingredient)).body()
+            apiService.getMealsWithIngredient((ingredient)).body<MealsDto?>().toModel()
         }
 
-    override suspend fun getMealsForFirstLetter(letter: String): Result<MealsDto?> =
+    override suspend fun getMealsForFirstLetter(letter: String): Result<List<Meal>> =
         runCatching {
-            apiService.getMealsForFirstLetter(letter).body()
+            apiService.getMealsForFirstLetter(letter).body<MealsDto?>().toModel()
         }
 
-    override suspend fun getMealDetails(id: String): Result<MealsWithDetailsDto?> =
+    override suspend fun getMealDetails(id: String): Result<MealDetails> =
         runCatching {
-            apiService.getMealDetails(id).body<MealsWithDetailsDto?>() // .toModel()
+            apiService.getMealDetails(id).body<MealsWithDetailsDto?>().toModel().first()
         }
 
     override suspend fun getMealCategories(): Result<List<String>> =

@@ -10,7 +10,6 @@ class GetAllFiltersUseCase(private val remoteRepository: RemoteRepositoryImpl) {
     suspend operator fun invoke(): Flow<FiltersWrapper> {
         val categories: Result<List<String>> = remoteRepository.getMealCategories()
         val areas: Result<List<String>> = remoteRepository.getMealAreas()
-
         val firstLetters = getAlphabetLetters()
 
         return combine(

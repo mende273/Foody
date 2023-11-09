@@ -2,6 +2,7 @@ package mende273.foody.ui.screen.random
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -11,14 +12,15 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import mende273.foody.data.repository.LocalRepositoryImpl
+import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.usecase.GetRandomMealUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RandomMealViewModel(
-    private val getRandomMealUseCase: GetRandomMealUseCase,
+    private val remoteRepository: RemoteRepositoryImpl,
     private val localRepository: LocalRepositoryImpl
 ) : ViewModel() {
 
@@ -43,7 +45,7 @@ class RandomMealViewModel(
 
     private fun requestData() {
         viewModelScope.launch {
-            with(getRandomMealUseCase()) {
+            with(remoteRepository.getRandomMeal()) {
                 this.getOrNull()?.let {
                     _mealFromLocalDb.value = localRepository.getFavouriteMealById(it.id)
                 }
