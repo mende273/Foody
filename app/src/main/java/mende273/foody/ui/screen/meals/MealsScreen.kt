@@ -32,7 +32,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -48,6 +47,8 @@ import mende273.foody.ui.component.SmallButton
 import mende273.foody.ui.component.UiStateWrapper
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.LARGE_PADDING
+import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.largeTextStyle
 import mende273.foody.ui.theme.mediumTextStyle
 import mende273.foody.util.getGridCellsCount
@@ -111,7 +112,7 @@ fun MealsScreen(
             HeaderSection(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(dimensionResource(id = R.dimen.normal_padding)),
+                    .padding(NORMAL_PADDING),
                 title = stringResource(id = headerTitle.title),
                 onFilterClicked = { shouldShowFilterDialog = true }
             )
@@ -147,11 +148,7 @@ private fun PagerSection(
         tabEvent = { index -> scrollToPage(index) }
     )
 
-    Spacer(
-        modifier = Modifier.height(
-            dimensionResource(id = R.dimen.normal_padding)
-        )
-    )
+    Spacer(modifier = Modifier.height(NORMAL_PADDING))
 
     HorizontalPager(
         state = pagerState,
@@ -205,7 +202,7 @@ private fun FilterDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 200.dp, max = 250.dp),
-            shape = RoundedCornerShape(dimensionResource(id = R.dimen.normal_padding)),
+            shape = RoundedCornerShape(NORMAL_PADDING),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.background
             )
@@ -213,10 +210,8 @@ private fun FilterDialog(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(dimensionResource(id = R.dimen.large_padding)),
-                verticalArrangement = Arrangement.spacedBy(
-                    dimensionResource(id = R.dimen.normal_padding)
-                )
+                    .padding(LARGE_PADDING),
+                verticalArrangement = Arrangement.spacedBy(NORMAL_PADDING)
             ) {
                 availableFilters.forEach { filter ->
                     FilterDialogItem(

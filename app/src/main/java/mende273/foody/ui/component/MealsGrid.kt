@@ -8,10 +8,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
 import mende273.foody.domain.model.Meal
+import mende273.foody.ui.theme.NORMAL_PADDING
+import mende273.foody.ui.theme.SMALL_PADDING
 
 @Composable
 fun MealsGrid(
@@ -21,12 +21,12 @@ fun MealsGrid(
 ) {
     LazyVerticalGrid(
         modifier = Modifier.padding(
-            start = dimensionResource(id = R.dimen.normal_padding),
-            end = dimensionResource(id = R.dimen.normal_padding)
+            start = NORMAL_PADDING,
+            end = NORMAL_PADDING
         ),
         columns = GridCells.Fixed(count = gridCellsCount),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_padding)),
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_padding))
+        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING),
+        horizontalArrangement = Arrangement.spacedBy(SMALL_PADDING)
     ) {
         items(meals) { item ->
             MealItemComponent(

@@ -17,11 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
 import mende273.foody.domain.model.IngredientWithMeasure
+import mende273.foody.ui.theme.SMALL_PADDING
 import mende273.foody.ui.theme.blackNormalTextStyle
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -58,7 +57,7 @@ private fun IngredientWithMeasureItem(
     Box(
         modifier = modifier
             .fillMaxWidth(fraction = 0.3f)
-            .padding(dimensionResource(id = R.dimen.small_padding)),
+            .padding(SMALL_PADDING),
         contentAlignment = Alignment.Center
     ) {
         Column(

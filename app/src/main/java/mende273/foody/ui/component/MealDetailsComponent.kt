@@ -11,10 +11,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
 import mende273.foody.domain.model.MealDetails
+import mende273.foody.ui.theme.NORMAL_PADDING
+import mende273.foody.ui.theme.SMALL_PADDING
 import mende273.foody.ui.theme.mediumTextStyle
 
 @Composable
@@ -52,9 +52,7 @@ fun MealDetailsComponent(
 
                 DetailsScaffoldSection(content = {
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(
-                            dimensionResource(id = R.dimen.small_padding)
-                        )
+                        horizontalArrangement = Arrangement.spacedBy(SMALL_PADDING)
                     ) {
                         if (mealDetails.category.isNotEmpty()) {
                             SmallButton(text = mealDetails.category, onClicked = {
@@ -102,9 +100,7 @@ fun MealDetailsComponent(
                 if (mealDetails.youtube.isNotEmpty() || mealDetails.source.isNotEmpty()) {
                     DetailsScaffoldSection(title = "More Info", content = {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(
-                                dimensionResource(id = R.dimen.normal_padding)
-                            )
+                            horizontalArrangement = Arrangement.spacedBy(NORMAL_PADDING)
                         ) {
                             if (mealDetails.youtube.isNotEmpty()) {
                                 SmallButton(text = "Video", onClicked = {

@@ -8,10 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mende273.foody.R
+import mende273.foody.ui.theme.SMALL_PADDING
 
 @Composable
 fun RoundedComponent(
@@ -21,7 +21,7 @@ fun RoundedComponent(
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(
-            corner = CornerSize(dimensionResource(id = R.dimen.small_padding))
+            corner = CornerSize(SMALL_PADDING)
         ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background
