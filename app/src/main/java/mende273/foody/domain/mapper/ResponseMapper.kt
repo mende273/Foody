@@ -8,11 +8,10 @@ import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.model.MealsWithDetails
 
-fun MealsWithDetailsDto.toModel(): MealsWithDetails = MealsWithDetails(
-    meals = mealsWithDetails?.filterNotNull()?.map { it.toModel() } ?: emptyList()
-)
+fun MealsWithDetailsDto?.toModel(): List<MealDetails> {
+    return this?.mealsWithDetails?.filterNotNull()?.map { it.toModel() } ?: emptyList()
+}
 
 fun MealDetailsDto.toModel(): MealDetails = MealDetails(
     id = id ?: 0,

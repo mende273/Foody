@@ -10,20 +10,16 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.usecase.FiltersWrapper
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
-import mende273.foody.domain.usecase.GetMealsForAreaUseCase
-import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
-import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 class MealsViewModel(
-    private val getMealsForCategoryUseCase: GetMealsForCategoryUseCase,
-    private val getMealsForAreaUseCase: GetMealsForAreaUseCase,
-    private val getMealsForFirstLetterUseCase: GetMealsForFirstLetterUseCase,
+    private val remoteRepository: RemoteRepositoryImpl,
     private val getAllFiltersUseCase: GetAllFiltersUseCase
 ) : ViewModel() {
 
@@ -94,10 +90,10 @@ class MealsViewModel(
     fun fetchMeals(name: String) {
         viewModelScope.launch {
             _meals.value = when (_headerTitle.value) {
-                Filter.CATEGORY -> getMealsForCategoryUseCase(name).toUIState()
-                Filter.AREA -> getMealsForAreaUseCase(name).toUIState()
-                Filter.FIRST_LETTER -> getMealsForFirstLetterUseCase(name).toUIState()
-            }
+                Filter.CATEGORY -> remoteRepository.getMealsForCategory(name)
+                Filter.AREA -> remoteRepository.getMealsForArea(name)
+                Filter.FIRST_LETTER -> remoteRepository.getMealsForFirstLetter(name)
+            }.toUIState()
         }
     }
 

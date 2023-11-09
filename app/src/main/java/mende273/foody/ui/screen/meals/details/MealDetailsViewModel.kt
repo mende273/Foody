@@ -12,15 +12,15 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import mende273.foody.data.repository.LocalRepositoryImpl
+import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.usecase.GetMealDetailsUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MealDetailsViewModel(
-    private val getMealDetailsUseCase: GetMealDetailsUseCase,
+    private val remoteRepository: RemoteRepositoryImpl,
     private val localRepository: LocalRepositoryImpl
 ) : ViewModel() {
 
@@ -43,7 +43,7 @@ class MealDetailsViewModel(
         viewModelScope.launch {
             _mealFromLocalDb.value = localRepository.getFavouriteMealById(id.toLong())
 
-            with(getMealDetailsUseCase(id)) {
+            with(remoteRepository.getMealDetails(id)) {
                 mealDetailsResult = this
                 _uiState.value = this.toUIState()
             }
