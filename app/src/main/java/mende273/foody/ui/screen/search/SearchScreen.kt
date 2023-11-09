@@ -22,7 +22,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -31,6 +30,7 @@ import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.UiStateWrapper
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.util.getGridCellsCount
 
 @Composable
@@ -52,7 +52,7 @@ fun SearchScreen(
                 .heightIn(max = 150.dp)
                 .then(
                     if (!isSearchBarActive) {
-                        Modifier.padding(dimensionResource(id = R.dimen.normal_padding))
+                        Modifier.padding(NORMAL_PADDING)
                     } else {
                         Modifier.padding(0.dp)
                     }
@@ -79,7 +79,7 @@ fun SearchScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.normal_padding)))
+        Spacer(modifier = Modifier.height(NORMAL_PADDING))
 
         UiStateWrapper(uiState = uiState) { meals ->
             MealsGrid(

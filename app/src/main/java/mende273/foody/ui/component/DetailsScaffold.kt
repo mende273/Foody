@@ -23,9 +23,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
+import mende273.foody.ui.theme.LARGE_PADDING
+import mende273.foody.ui.theme.NORMAL_PADDING
+
+private val spaceBetween = 25.dp
+private val negativeSpaceBetween = -spaceBetween
 
 @Composable
 fun DetailsScaffold(
@@ -88,9 +91,7 @@ private fun PortraitDetailsComponent(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(
-            dimensionResource(id = R.dimen.negative_space_between)
-        )
+        verticalArrangement = Arrangement.spacedBy(negativeSpaceBetween)
     ) {
         Box {
             NetworkImage(
@@ -108,8 +109,8 @@ private fun PortraitDetailsComponent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        end = dimensionResource(id = R.dimen.normal_padding),
-                        top = dimensionResource(id = R.dimen.large_padding)
+                        end = NORMAL_PADDING,
+                        top = LARGE_PADDING
                     ),
                 isFavourite = isFavourite,
                 onFavouriteClicked = { onFavouriteClicked() }
@@ -119,13 +120,13 @@ private fun PortraitDetailsComponent(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(
-                corner = CornerSize(dimensionResource(id = R.dimen.space_between))
+                corner = CornerSize(spaceBetween)
             ),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.background
             )
         ) {
-            Box(modifier = Modifier.padding(dimensionResource(id = R.dimen.normal_padding))) {
+            Box(modifier = Modifier.padding(NORMAL_PADDING)) {
                 contents()
             }
         }
@@ -144,9 +145,7 @@ private fun LandscapeDetailsComponent(
     contents: @Composable () -> Unit
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(
-            dimensionResource(id = R.dimen.negative_space_between)
-        )
+        horizontalArrangement = Arrangement.spacedBy(negativeSpaceBetween)
     ) {
         Box {
             NetworkImage(
@@ -164,8 +163,8 @@ private fun LandscapeDetailsComponent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        end = dimensionResource(id = R.dimen.large_padding),
-                        top = dimensionResource(id = R.dimen.large_padding)
+                        end = LARGE_PADDING,
+                        top = LARGE_PADDING
                     ),
                 isFavourite = isFavourite,
                 onFavouriteClicked = { onFavouriteClicked() }
@@ -175,13 +174,13 @@ private fun LandscapeDetailsComponent(
         Card(
             modifier = Modifier.fillMaxSize(),
             shape = RoundedCornerShape(
-                corner = CornerSize(dimensionResource(id = R.dimen.space_between))
+                corner = CornerSize(spaceBetween)
             ),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.background
             )
         ) {
-            Box(modifier = modifier.padding(dimensionResource(id = R.dimen.normal_padding))) {
+            Box(modifier = modifier.padding(NORMAL_PADDING)) {
                 contents()
             }
         }

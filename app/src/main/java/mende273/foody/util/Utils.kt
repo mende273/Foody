@@ -3,10 +3,10 @@ package mende273.foody.util
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
-import mende273.foody.R
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.NORMAL_PADDING
+import mende273.foody.ui.theme.ZERO_PADDING
 
 fun WindowSizeClass.getGridCellsCount(): Int {
     return when (this.widthSizeClass == WindowWidthSizeClass.Compact) {
@@ -18,8 +18,8 @@ fun WindowSizeClass.getGridCellsCount(): Int {
 @Composable
 fun WindowSizeClass.getTopPadding(): Dp {
     return when (this.widthSizeClass == WindowWidthSizeClass.Compact) {
-        true -> dimensionResource(id = R.dimen.normal_padding)
-        false -> dimensionResource(id = R.dimen.zero_padding)
+        true -> NORMAL_PADDING
+        false -> ZERO_PADDING
     }
 }
 

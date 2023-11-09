@@ -8,15 +8,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
-import mende273.foody.R
+import mende273.foody.ui.theme.LARGE_PADDING
+import mende273.foody.ui.theme.NORMAL_PADDING
 
 @Composable
 fun RoundedBackButton(onNavigateBackClicked: () -> Unit) {
     Box(
         Modifier.padding(
-            start = dimensionResource(id = R.dimen.normal_padding),
-            top = dimensionResource(id = R.dimen.large_padding)
+            start = NORMAL_PADDING,
+            top = LARGE_PADDING
         )
     ) {
         RoundedComponent {
