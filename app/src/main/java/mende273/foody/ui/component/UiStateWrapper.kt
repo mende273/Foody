@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import mende273.foody.ui.annotations.ThemePreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.util.ERROR_LOADING_DATA
@@ -54,7 +54,7 @@ private fun UiStateWrapperSuccessPreview() {
     FoodyTheme {
         UiStateWrapper(
             uiState = UIState.Success("contents go here"),
-            onSuccess = {data ->
+            onSuccess = { data ->
                 Box(modifier = Modifier.fillMaxSize()) {
                     NormalText(text = data)
                 }

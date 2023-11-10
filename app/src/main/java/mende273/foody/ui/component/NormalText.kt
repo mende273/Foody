@@ -8,7 +8,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import mende273.foody.R
-import mende273.foody.ui.annotations.ThemePreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.largeTextStyle
 import mende273.foody.ui.theme.mediumTextStyle

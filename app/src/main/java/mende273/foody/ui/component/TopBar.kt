@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import mende273.foody.R
-import mende273.foody.ui.annotations.ThemePreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

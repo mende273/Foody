@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import mende273.foody.ui.annotations.FontScalePreviews
-import mende273.foody.ui.annotations.ThemePreviews
+import mende273.foody.ui.preview.annotations.FontScalePreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.largeTextStyle

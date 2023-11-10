@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,8 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.IngredientWithMeasure
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.parameter.IngredientWithMeasureParameterProvider
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.SMALL_PADDING
 import mende273.foody.ui.theme.blackNormalTextStyle
 
@@ -75,5 +80,23 @@ private fun IngredientWithMeasureItem(
                 style = blackNormalTextStyle()
             )
         }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun IngredientWithMeasureItemPreview(
+    @PreviewParameter(IngredientWithMeasureParameterProvider::class) item: IngredientWithMeasure
+) {
+    FoodyTheme {
+        IngredientWithMeasureItem(
+            Modifier
+                .padding(4.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .heightIn(min = 100.dp)
+                .widthIn(min = 100.dp)
+                .background(MaterialTheme.colorScheme.secondary),
+            ingredientWithMeasure = item
+        )
     }
 }

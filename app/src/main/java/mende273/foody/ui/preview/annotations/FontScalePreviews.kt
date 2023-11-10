@@ -1,4 +1,4 @@
-package mende273.foody.ui.annotations
+package mende273.foody.ui.preview.annotations
 
 import androidx.compose.ui.tooling.preview.Preview
 

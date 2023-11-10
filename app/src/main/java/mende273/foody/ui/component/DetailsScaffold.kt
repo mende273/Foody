@@ -23,7 +23,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import mende273.foody.R
+import mende273.foody.ui.preview.annotations.ScreenPreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.parameter.WindowSizeParameterProvider
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.LARGE_PADDING
 import mende273.foody.ui.theme.NORMAL_PADDING
 
@@ -93,7 +100,7 @@ private fun PortraitDetailsComponent(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(negativeSpaceBetween)
     ) {
-        Box {
+        Box(Modifier.heightIn(min = 300.dp)) {
             NetworkImage(
                 modifier = headerImageModifier,
                 url = headerImageUrl,
@@ -152,7 +159,8 @@ private fun LandscapeDetailsComponent(
                 modifier = headerImageModifier,
                 url = headerImageUrl,
                 contentDescription = "meal image",
-                contentScale = ContentScale.FillHeight
+                contentScale = ContentScale.FillHeight,
+                error = painterResource(id = R.drawable.image_placeholder)
             )
 
             if (isBackButtonEnabled) {
@@ -206,5 +214,24 @@ private fun Modifier.headerImage(windowSize: WindowSizeClass): Modifier {
         this
             .fillMaxHeight()
             .widthIn(max = 300.dp)
+    }
+}
+
+@ScreenPreviews
+@ThemePreviews
+@Composable
+private fun DetailsScaffoldPreview(
+    @PreviewParameter(WindowSizeParameterProvider::class) windowSize: WindowSizeClass
+) {
+    FoodyTheme {
+        DetailsScaffold(
+            windowSize = windowSize,
+            headerImageUrl = "",
+            isFavourite = false,
+            onFavouriteClicked = { },
+            onHeaderImageClicked = {}
+        ) {
+            NormalText(text = "this is the content section")
+        }
     }
 }
