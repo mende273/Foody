@@ -688,6 +688,7 @@ style:
     allowedNames: '(_|ignored|expected|serialVersionUID)'
     ignoreAnnotated:
       - 'Preview'
+      - 'Composable'
   UseAnyOrNoneInsteadOfFind:
     active: true
   UseArrayLiteralsInAnnotations:

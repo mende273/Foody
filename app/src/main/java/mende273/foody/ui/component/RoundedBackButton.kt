@@ -8,6 +8,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import mende273.foody.ui.annotations.ThemePreviews
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.LARGE_PADDING
 import mende273.foody.ui.theme.NORMAL_PADDING
 
@@ -24,5 +26,13 @@ fun RoundedBackButton(onNavigateBackClicked: () -> Unit) {
                 Icon(Icons.Filled.ArrowBack, "back button")
             }
         }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun RoundedBackButtonPreview() {
+    FoodyTheme {
+        RoundedBackButton(onNavigateBackClicked = {})
     }
 }

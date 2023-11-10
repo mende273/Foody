@@ -7,7 +7,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import mende273.foody.ui.annotations.ThemePreviews
+import mende273.foody.ui.theme.FoodyTheme
 
 @Composable
 fun RoundedFavouriteButton(
@@ -26,20 +27,24 @@ fun RoundedFavouriteButton(
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 private fun RoundedFavouriteButtonWhenNotFavouritePreview() {
-    RoundedFavouriteButton(
-        isFavourite = false,
-        onFavouriteClicked = {}
-    )
+    FoodyTheme {
+        RoundedFavouriteButton(
+            isFavourite = false,
+            onFavouriteClicked = {}
+        )
+    }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 private fun RoundedFavouriteButtonWhenFavouritePreview() {
-    RoundedFavouriteButton(
-        isFavourite = true,
-        onFavouriteClicked = {}
-    )
+    FoodyTheme {
+        RoundedFavouriteButton(
+            isFavourite = true,
+            onFavouriteClicked = {}
+        )
+    }
 }
