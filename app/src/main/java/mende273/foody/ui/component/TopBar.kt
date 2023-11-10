@@ -12,8 +12,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import mende273.foody.R
+import mende273.foody.ui.annotations.ThemePreviews
 import mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,40 +45,34 @@ fun TopBar(
 @Composable
 private fun BackNavigationButton(navigateBackEvent: () -> Unit) {
     IconButton(onClick = { navigateBackEvent() }) {
-        Icon(Icons.Filled.ArrowBack, "navigate back")
+        Icon(
+            imageVector = Icons.Filled.ArrowBack,
+            tint = MaterialTheme.colorScheme.primary,
+            contentDescription = "navigate back"
+        )
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 private fun TopBarPreview() {
-    TopBar(title = stringResource(id = R.string.app_name))
-}
-
-@Preview
-@Composable
-private fun TopBarDarkThemePreview() {
-    FoodyTheme(darkTheme = true) {
+    FoodyTheme {
         TopBar(title = stringResource(id = R.string.app_name))
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 private fun TopBarWithBackEnabledPreview() {
-    TopBar(title = stringResource(id = R.string.app_name), isBackButtonEnabled = true)
-}
-
-@Preview
-@Composable
-private fun TopBarWithBackEnabledDarkThemePreview() {
-    FoodyTheme(darkTheme = true) {
+    FoodyTheme {
         TopBar(title = stringResource(id = R.string.app_name), isBackButtonEnabled = true)
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 private fun BackNavigationButtonPreview() {
-    BackNavigationButton {}
+    FoodyTheme {
+        BackNavigationButton {}
+    }
 }

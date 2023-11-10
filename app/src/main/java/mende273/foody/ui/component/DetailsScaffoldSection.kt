@@ -1,6 +1,5 @@
 package mende273.foody.ui.component
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
@@ -8,7 +7,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import mende273.foody.ui.annotations.FontScalePreviews
+import mende273.foody.ui.annotations.ThemePreviews
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.largeTextStyle
@@ -41,8 +41,8 @@ fun ColumnScope.DetailsScaffoldSection(
     }
 }
 
-@Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@ThemePreviews
+@FontScalePreviews
 @Composable
 private fun DetailsScaffoldSectionPreview() {
     FoodyTheme {
@@ -52,7 +52,7 @@ private fun DetailsScaffoldSectionPreview() {
                 isHeaderTitle = true,
                 content = {
                     NormalText(
-                        text = "contents",
+                        text = "composable contents",
                         textStyle = mediumTextStyle(),
                         fontWeight = FontWeight.SemiBold
                     )

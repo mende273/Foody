@@ -7,11 +7,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import mende273.foody.ui.annotations.ThemePreviews
 import mende273.foody.ui.theme.AccentColor
+import mende273.foody.ui.theme.FoodyTheme
 
 @Composable
-@Preview
 fun ProgressBar(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
@@ -21,5 +21,13 @@ fun ProgressBar(modifier: Modifier = Modifier) {
             modifier = Modifier.background(MaterialTheme.colorScheme.background),
             color = AccentColor
         )
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun ProgressBarPreview() {
+    FoodyTheme {
+        ProgressBar()
     }
 }
