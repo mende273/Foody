@@ -1,12 +1,20 @@
 package mende273.foody.ui.screen.random
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mende273.foody.domain.model.MealDetails
 import mende273.foody.ui.component.MealDetailsComponent
 import mende273.foody.ui.component.UiStateWrapper
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.model.MealDetailsScreenPreviewModel
+import mende273.foody.ui.preview.parameter.MealDetailsScreenParameterProvider
+import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.FoodyTheme
 
 @Composable
 fun RandomMealScreen(
@@ -23,20 +31,72 @@ fun RandomMealScreen(
     val mealFromLocalDb by viewModel.mealFromLocalDb.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    RandomMealScreenContents(
+        modifier = modifier,
+        uiState = uiState,
+        windowSize = windowSize,
+        isFavourite = mealFromLocalDb != null,
+        onHeaderImageClicked = { onHeaderImageClicked(it) },
+        onCategoryClicked = { onCategoryClicked(it) },
+        onAreaClicked = { onAreaClicked(it) },
+        onVideoClicked = { onVideoClicked(it) },
+        onSourceClicked = { onSourceClicked(it) },
+        onIngredientClicked = { onIngredientClicked(it) },
+        onFavouriteClicked = { viewModel.toggleFavourite() }
+    )
+}
+
+@Composable
+private fun RandomMealScreenContents(
+    modifier: Modifier,
+    uiState: UIState<MealDetails>,
+    windowSize: WindowSizeClass,
+    isFavourite: Boolean,
+    onHeaderImageClicked: (String) -> Unit,
+    onCategoryClicked: (String) -> Unit,
+    onAreaClicked: (String) -> Unit,
+    onVideoClicked: (String) -> Unit,
+    onSourceClicked: (String) -> Unit,
+    onIngredientClicked: (String) -> Unit,
+    onFavouriteClicked: () -> Unit
+) {
     UiStateWrapper(uiState = uiState) { mealDetails ->
         MealDetailsComponent(
             modifier = modifier,
             mealDetails = mealDetails,
             windowSize = windowSize,
             isBackButtonEnabled = false,
-            isFavourite = mealFromLocalDb != null,
+            isFavourite = isFavourite,
             onHeaderImageClicked = { onHeaderImageClicked(it) },
             onCategoryClicked = { onCategoryClicked(it) },
             onAreaClicked = { onAreaClicked(it) },
             onVideoClicked = { onVideoClicked(it) },
             onIngredientClicked = { onIngredientClicked(it) },
             onSourceClicked = { onSourceClicked(it) },
-            onFavouriteClicked = { viewModel.toggleFavourite() }
+            onFavouriteClicked = { onFavouriteClicked() }
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun RandomMealScreenPreview(
+    @PreviewParameter(MealDetailsScreenParameterProvider::class)
+    previewModel: MealDetailsScreenPreviewModel
+) {
+    FoodyTheme {
+        RandomMealScreenContents(
+            modifier = Modifier.fillMaxSize(),
+            uiState = previewModel.uiState,
+            windowSize = previewModel.windowSizeClass,
+            isFavourite = previewModel.isFavourite,
+            onHeaderImageClicked = {},
+            onCategoryClicked = {},
+            onAreaClicked = {},
+            onVideoClicked = {},
+            onSourceClicked = {},
+            onIngredientClicked = {},
+            onFavouriteClicked = {}
         )
     }
 }
