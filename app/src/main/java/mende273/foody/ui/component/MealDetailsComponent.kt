@@ -13,10 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.MealDetails
 import mende273.foody.ui.preview.annotations.ScreenPreviews
-import mende273.foody.ui.preview.parameter.WindowSizeParameterProvider
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.model.MealDetailsComponentPreviewModel
+import mende273.foody.ui.preview.parameter.MealDetailsComponentParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.SMALL_PADDING
@@ -133,30 +134,20 @@ fun MealDetailsComponent(
 }
 
 @ScreenPreviews
+@ThemePreviews
 @Composable
 private fun MealDetailsComponentPreview(
-    @PreviewParameter(WindowSizeParameterProvider::class) windowSize: WindowSizeClass
+    @PreviewParameter(MealDetailsComponentParameterProvider::class)
+    previewModel: MealDetailsComponentPreviewModel
 ) {
-    val mealDetails = MealDetails(
-        id = 52874,
-        name = "Beef and Mustard Pie",
-        category = "Beef",
-        area = "British",
-        instructions = "Preheat the oven to 150C/300F/Gas 2.",
-        ingredientsWithMeasures = listOf(IngredientWithMeasure("Beef", "2kg")),
-        source = "source url",
-        youtube = "youtube url",
-        tags = "beef,lunch",
-        thumb = ""
-    )
     FoodyTheme {
         MealDetailsComponent(
-            mealDetails = mealDetails,
-            windowSize = windowSize,
+            mealDetails = previewModel.mealDetails,
+            windowSize = previewModel.windowSizeClass,
             onHeaderImageClicked = {},
             onCategoryClicked = {},
             isBackButtonEnabled = false,
-            isFavourite = false,
+            isFavourite = previewModel.isFavourite,
             onFavouriteClicked = { },
             onAreaClicked = {},
             onVideoClicked = {},

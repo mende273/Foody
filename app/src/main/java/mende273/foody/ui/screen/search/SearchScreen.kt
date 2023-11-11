@@ -1,20 +1,12 @@
 package mende273.foody.ui.screen.search
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,14 +14,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import mende273.foody.R
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.MealsGrid
+import mende273.foody.ui.component.SearchBarComponent
 import mende273.foody.ui.component.UiStateWrapper
+import mende273.foody.ui.preview.annotations.ScreenPreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.model.SearchScreenPreviewModel
+import mende273.foody.ui.preview.parameter.SearchScreenParameterPreview
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.util.getGridCellsCount
 
@@ -45,6 +42,41 @@ fun SearchScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    SearchScreenContents(
+        modifier = modifier,
+        isSearchBarActive = isSearchBarActive,
+        searchText = searchText,
+        uiState = uiState,
+        windowSize = windowSize,
+        onQueryChanged = {
+            searchText = it
+            viewModel.onSearchTextChange(searchText)
+        },
+        onIsSearchBarActiveChanged = { isSearchBarActive = it },
+        onClearText = {
+            if (searchText.isNotEmpty()) {
+                searchText = ""
+                viewModel.onClearSearch()
+            } else {
+                isSearchBarActive = false
+            }
+        },
+        onMealClicked = { onMealClicked(it) }
+    )
+}
+
+@Composable
+private fun SearchScreenContents(
+    modifier: Modifier,
+    isSearchBarActive: Boolean,
+    searchText: String,
+    uiState: UIState<List<Meal>>,
+    windowSize: WindowSizeClass,
+    onQueryChanged: (String) -> Unit,
+    onIsSearchBarActiveChanged: (Boolean) -> Unit,
+    onClearText: () -> Unit,
+    onMealClicked: (String) -> Unit
+) {
     Column(modifier = modifier) {
         SearchBarComponent(
             modifier = Modifier
@@ -60,22 +92,16 @@ fun SearchScreen(
             searchText = searchText,
             isSearchBarActive = isSearchBarActive,
             mealsSize = if (uiState is UIState.Success) {
-                (uiState as UIState.Success<List<Meal>>).data.size
+                uiState.data.size
             } else {
                 0
             },
             onQueryChanged = {
-                searchText = it
-                viewModel.onSearchTextChange(searchText)
+                onQueryChanged(it)
             },
-            onIsSearchBarActiveChanged = { isSearchBarActive = it },
+            onIsSearchBarActiveChanged = { onIsSearchBarActiveChanged(it) },
             onClearText = {
-                if (searchText.isNotEmpty()) {
-                    searchText = ""
-                    viewModel.onClearSearch()
-                } else {
-                    isSearchBarActive = false
-                }
+                onClearText()
             }
         )
 
@@ -91,45 +117,23 @@ fun SearchScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ThemePreviews
+@ScreenPreviews
 @Composable
-private fun SearchBarComponent(
-    modifier: Modifier,
-    searchText: String,
-    isSearchBarActive: Boolean,
-    mealsSize: Int,
-    onQueryChanged: (String) -> Unit,
-    onIsSearchBarActiveChanged: (Boolean) -> Unit,
-    onClearText: () -> Unit
+private fun SearchScreenContentsPreview(
+    @PreviewParameter(SearchScreenParameterPreview::class) previewModel: SearchScreenPreviewModel
 ) {
-    SearchBar(
-        modifier = modifier,
-        query = searchText,
-        onQueryChange = { onQueryChanged(it) },
-        onSearch = { onIsSearchBarActiveChanged(false) },
-        active = isSearchBarActive,
-        onActiveChange = { onIsSearchBarActiveChanged(it) },
-        placeholder = {
-            Text(text = stringResource(id = R.string.search_bar_hint))
-        },
-        trailingIcon = {
-            if (isSearchBarActive) {
-                Icon(
-                    modifier = Modifier.clickable { onClearText() },
-                    imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(id = R.string.cd_close_search_bar)
-                )
-            }
-        },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = stringResource(id = R.string.cd_search_icon)
-            )
-        }
-    ) {
-        Box(modifier = Modifier.padding(16.dp)) {
-            Text(text = stringResource(id = R.string.search_results, mealsSize))
-        }
+    FoodyTheme {
+        SearchScreenContents(
+            modifier = Modifier.fillMaxSize(),
+            isSearchBarActive = false,
+            searchText = "beef",
+            uiState = previewModel.uiState,
+            windowSize = previewModel.windowSize,
+            onQueryChanged = {},
+            onIsSearchBarActiveChanged = {},
+            onClearText = { },
+            onMealClicked = {}
+        )
     }
 }

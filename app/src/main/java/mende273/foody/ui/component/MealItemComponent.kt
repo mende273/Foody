@@ -7,6 +7,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import mende273.foody.R
 import mende273.foody.domain.model.Meal
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.mediumTextStyle
 
 @Composable
@@ -28,5 +30,16 @@ fun MealItemComponent(
         if (meal.name.isNotEmpty()) {
             NormalText(text = meal.name, textStyle = mediumTextStyle())
         }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun MealItemComponentPreview() {
+    FoodyTheme {
+        MealItemComponent(
+            meal = Meal(id = 1234L, name = "Beef with cheese", thumb = ""),
+            contentDescription = ""
+        )
     }
 }

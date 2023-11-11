@@ -1,15 +1,24 @@
 package mende273.foody.ui.screen.favourites
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.UiStateWrapper
+import mende273.foody.ui.preview.annotations.ScreenPreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.model.MealsUiStatePreviewModel
+import mende273.foody.ui.preview.parameter.MealsUiStateParameterPreview
+import mende273.foody.ui.state.UIState
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.util.getGridCellsCount
 import mende273.foody.util.getTopPadding
 
@@ -26,6 +35,21 @@ fun FavouritesScreen(
         viewModel.loadData()
     })
 
+    FavouritesScreenContents(
+        modifier = modifier,
+        windowSize = windowSize,
+        uiState = uiState,
+        onMealClicked = { onMealClicked(it) }
+    )
+}
+
+@Composable
+private fun FavouritesScreenContents(
+    modifier: Modifier,
+    windowSize: WindowSizeClass,
+    uiState: UIState<List<Meal>>,
+    onMealClicked: (String) -> Unit
+) {
     Box(modifier.padding(vertical = windowSize.getTopPadding())) {
         UiStateWrapper(uiState = uiState) { meals ->
             MealsGrid(
@@ -34,5 +58,21 @@ fun FavouritesScreen(
                 onMealClicked = { onMealClicked(it) }
             )
         }
+    }
+}
+
+@ThemePreviews
+@ScreenPreviews
+@Composable
+private fun FavouritesScreenPreview(
+    @PreviewParameter(MealsUiStateParameterPreview::class) previewModel: MealsUiStatePreviewModel
+) {
+    FoodyTheme {
+        FavouritesScreenContents(
+            modifier = Modifier.fillMaxSize(),
+            windowSize = previewModel.windowSize,
+            uiState = previewModel.uiState,
+            onMealClicked = {}
+        )
     }
 }
