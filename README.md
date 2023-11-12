@@ -3,8 +3,42 @@ Real world Android application demonstrating the use of JetPack Compose with Koi
 
 Foody supports almost all screen sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
 
+## Compose Previews
+<code>FontScalePreviews</code>, <code>ThemePreviews</code> and <code>ScreenPreviews</code> annotations are added for better previews.
+```
+@Preview(name = "Default Font Size", fontScale = 1f)
+@Preview(name = "Medium Font Size", fontScale = 1.5f)
+@Preview(name = "Large Font Size", fontScale = 2f)
+annotation class FontScalePreviews
+```
+
+```
+@Preview(name = "Light Theme")
+@Preview(name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, backgroundColor = 0xFF000000)
+annotation class ThemePreviews
+```
+
+```
+@Preview(showSystemUi = true, device = "spec:width=411dp,height=891dp")
+@Preview(showSystemUi = true, device = "spec:width=673.5dp,height=841dp,dpi=480,orientation=landscape")
+@Preview(showSystemUi = true, device = "spec:width=1280dp,height=800dp,dpi=480")
+@Preview(showSystemUi = true, device = "spec:width=1920dp,height=1080dp,dpi=480")
+annotation class ScreenPreviews
+```
+
 ## PreBuild
 The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manually run the tasks with <code>./gradlew ktlintFormat</code> and <code>./gradlew detekt</code>
+```
+@Test
+fun checkKoinModule() {
+  appModule.verify(
+    extraTypes = listOf(
+      io.ktor.client.engine.HttpClientEngine::class,
+      io.ktor.client.HttpClientConfig::class
+    )
+  )
+}
+```
 
 ## Koin
 #### Verify Koin configuration
