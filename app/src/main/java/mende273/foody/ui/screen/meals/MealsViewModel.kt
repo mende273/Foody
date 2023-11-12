@@ -29,8 +29,8 @@ class MealsViewModel(
 
     private val allFiltersLoaded = MutableStateFlow(false)
 
-    private val _headerTitle: MutableStateFlow<Filter> = MutableStateFlow(Filter.CATEGORY)
-    val headerTitle: StateFlow<Filter> = _headerTitle
+    private val _currentFilter: MutableStateFlow<Filter> = MutableStateFlow(Filter.CATEGORY)
+    val currentFilter: StateFlow<Filter> = _currentFilter
 
     private var allFilters: MutableStateFlow<FiltersWrapper> =
         MutableStateFlow(
@@ -41,8 +41,8 @@ class MealsViewModel(
             )
         )
 
-    var currentFilter: StateFlow<UIState<List<String>>> =
-        combine(allFilters, headerTitle, allFiltersLoaded) { filters, title, loaded ->
+    var uiStateCurrentFilterTabs: StateFlow<UIState<List<String>>> =
+        combine(allFilters, currentFilter, allFiltersLoaded) { filters, title, loaded ->
             when (loaded) {
                 true ->
                     when (title) {
@@ -59,15 +59,16 @@ class MealsViewModel(
             initialValue = UIState.Loading
         )
 
-    private val _meals: MutableStateFlow<UIState<List<Meal>>> = MutableStateFlow(UIState.Loading)
-    val meals: StateFlow<UIState<List<Meal>>> = _meals
+    private val _uiStateCurrentFilterTabItems: MutableStateFlow<UIState<List<Meal>>> =
+        MutableStateFlow(UIState.Loading)
+    val uiStateCurrentFilterTabItems: StateFlow<UIState<List<Meal>>> = _uiStateCurrentFilterTabItems
 
     private fun fetchAllFilters() {
         viewModelScope.launch {
             getAllFiltersUseCase().collectLatest { remote ->
                 allFilters.update { remote }
 
-                _headerTitle.value = if (remote.categories.isSuccess) {
+                _currentFilter.value = if (remote.categories.isSuccess) {
                     Filter.CATEGORY
                 } else {
                     if (remote.areas.isSuccess) {
@@ -83,13 +84,13 @@ class MealsViewModel(
 
     fun loadFilter(filter: Filter) {
         viewModelScope.launch {
-            _headerTitle.update { filter }
+            _currentFilter.update { filter }
         }
     }
 
     fun fetchMeals(name: String) {
         viewModelScope.launch {
-            _meals.value = when (_headerTitle.value) {
+            _uiStateCurrentFilterTabItems.value = when (_currentFilter.value) {
                 Filter.CATEGORY -> remoteRepository.getMealsForCategory(name)
                 Filter.AREA -> remoteRepository.getMealsForArea(name)
                 Filter.FIRST_LETTER -> remoteRepository.getMealsForFirstLetter(name)
