@@ -1,26 +1,16 @@
 package mende273.foody.ui.screen.meals
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,9 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mende273.foody.R
 import mende273.foody.domain.Tab
@@ -45,15 +36,18 @@ import mende273.foody.ui.component.NormalText
 import mende273.foody.ui.component.ScrollableTabRowComponent
 import mende273.foody.ui.component.SmallButton
 import mende273.foody.ui.component.UiStateWrapper
+import mende273.foody.ui.preview.annotations.ScreenPreviews
+import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.preview.model.MealsScreenPreviewModel
+import mende273.foody.ui.preview.parameter.MealsScreenParameterProvider
+import mende273.foody.ui.screen.meals.dialog.FilterDialog
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
-import mende273.foody.ui.theme.LARGE_PADDING
+import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.largeTextStyle
-import mende273.foody.ui.theme.mediumTextStyle
 import mende273.foody.util.getGridCellsCount
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MealsScreen(
     modifier: Modifier = Modifier,
@@ -61,11 +55,13 @@ fun MealsScreen(
     windowSize: WindowSizeClass,
     onMealClicked: (String) -> Unit
 ) {
-    val uiStateCurrentFilter by viewModel.currentFilter.collectAsStateWithLifecycle()
+    val uiStateCurrentFilterTabs by
+    viewModel.uiStateCurrentFilterTabs.collectAsStateWithLifecycle()
 
-    val uiStateCurrentFilterOption by viewModel.meals.collectAsStateWithLifecycle()
+    val uiStateCurrentFilterTabItems by
+    viewModel.uiStateCurrentFilterTabItems.collectAsStateWithLifecycle()
 
-    val headerTitle by viewModel.headerTitle.collectAsStateWithLifecycle()
+    val currentFilter by viewModel.currentFilter.collectAsStateWithLifecycle()
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -79,7 +75,7 @@ fun MealsScreen(
 
     if (shouldShowFilterDialog) {
         FilterDialog(
-            currentFilter = headerTitle,
+            currentFilter = currentFilter,
             availableFilters = viewModel.getAvailableFilters(),
             onDismissRequest = {
                 shouldShowFilterDialog = false
@@ -92,35 +88,65 @@ fun MealsScreen(
         )
     }
 
+    MealsScreenContents(
+        modifier = modifier,
+        uiStateCurrentFilterTabs = uiStateCurrentFilterTabs,
+        uiStateCurrentFilterTabItems = uiStateCurrentFilterTabItems,
+        currentFilter = currentFilter,
+        shouldMoveToFirstPage = shouldMoveToFirstPage,
+        windowSize = windowSize,
+        coroutineScope = coroutineScope,
+        onShouldMoveToFirstPage = { shouldMoveToFirstPage = it },
+        onFetchMeals = { viewModel.fetchMeals(it) },
+        onShouldShowFilterDialog = { shouldShowFilterDialog = it },
+        onMealClicked = { onMealClicked(it) }
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun MealsScreenContents(
+    modifier: Modifier,
+    uiStateCurrentFilterTabs: UIState<List<String>>,
+    uiStateCurrentFilterTabItems: UIState<List<Meal>>,
+    currentFilter: Filter,
+    shouldMoveToFirstPage: Boolean,
+    windowSize: WindowSizeClass,
+    coroutineScope: CoroutineScope,
+    onShouldMoveToFirstPage: (Boolean) -> Unit,
+    onFetchMeals: (String) -> Unit,
+    onShouldShowFilterDialog: (Boolean) -> Unit,
+    onMealClicked: (String) -> Unit
+) {
     Column(modifier.testTag("test_tag_meals_screen")) {
-        UiStateWrapper(uiState = uiStateCurrentFilter) { filterItems ->
+        UiStateWrapper(uiState = uiStateCurrentFilterTabs) { tabs ->
             val pagerState = rememberPagerState(
-                pageCount = { filterItems.size }
+                pageCount = { tabs.size }
             )
 
             if (shouldMoveToFirstPage) {
                 LaunchedEffect(key1 = pagerState.currentPage, block = {
                     pagerState.scrollToPage(0)
                 })
-                shouldMoveToFirstPage = false
+                onShouldMoveToFirstPage(false)
             }
 
-            LaunchedEffect(key1 = headerTitle.title + pagerState.currentPage, block = {
-                viewModel.fetchMeals(filterItems[pagerState.currentPage])
+            LaunchedEffect(key1 = currentFilter.title + pagerState.currentPage, block = {
+                onFetchMeals(tabs[pagerState.currentPage])
             })
 
             HeaderSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(NORMAL_PADDING),
-                title = stringResource(id = headerTitle.title),
-                onFilterClicked = { shouldShowFilterDialog = true }
+                title = stringResource(id = currentFilter.title),
+                onFilterClicked = { onShouldShowFilterDialog(true) }
             )
 
             PagerSection(
                 currentFilterData =
-                filterItems.map { Tab(it) }.toTypedArray(),
-                uiStateFilterOptionData = uiStateCurrentFilterOption,
+                tabs.map { Tab(it) }.toTypedArray(),
+                uiStateFilterOptionData = uiStateCurrentFilterTabItems,
                 pagerState = pagerState,
                 windowSize = windowSize,
                 onMealClicked = { onMealClicked(it) },
@@ -129,6 +155,29 @@ fun MealsScreen(
                 }
             )
         }
+    }
+}
+
+@ThemePreviews
+@ScreenPreviews
+@Composable
+private fun MealsScreenContentsPreview(
+    @PreviewParameter(MealsScreenParameterProvider::class) previewModel: MealsScreenPreviewModel
+) {
+    FoodyTheme {
+        MealsScreenContents(
+            modifier = Modifier.fillMaxSize(),
+            uiStateCurrentFilterTabs = previewModel.currentFilterTabsUiState,
+            uiStateCurrentFilterTabItems = previewModel.currentFilterTabItemsUiState,
+            currentFilter = previewModel.currentFilter,
+            shouldMoveToFirstPage = false,
+            windowSize = previewModel.windowSize,
+            coroutineScope = rememberCoroutineScope(),
+            onShouldMoveToFirstPage = {},
+            onFetchMeals = {},
+            onShouldShowFilterDialog = {},
+            onMealClicked = {}
+        )
     }
 }
 
@@ -190,74 +239,14 @@ private fun HeaderSection(
     }
 }
 
+@ThemePreviews
 @Composable
-private fun FilterDialog(
-    currentFilter: Filter,
-    availableFilters: List<Filter>,
-    onDismissRequest: () -> Unit,
-    onFilterClicked: (Filter) -> Unit
-) {
-    Dialog(onDismissRequest = { onDismissRequest() }) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 200.dp, max = 250.dp),
-            shape = RoundedCornerShape(NORMAL_PADDING),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.background
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(LARGE_PADDING),
-                verticalArrangement = Arrangement.spacedBy(NORMAL_PADDING)
-            ) {
-                availableFilters.forEach { filter ->
-                    FilterDialogItem(
-                        currentFilter = currentFilter,
-                        filter = filter,
-                        onFilterClicked = {
-                            onFilterClicked(filter)
-                        }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun FilterDialogItem(
-    currentFilter: Filter,
-    filter: Filter,
-    onFilterClicked: (Filter) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .selectable(
-                selected = currentFilter.title == filter.title,
-                onClick = {
-                    onFilterClicked(filter)
-                }
-            ),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        RadioButton(
-            colors = RadioButtonDefaults.colors(
-                selectedColor = MaterialTheme.colorScheme.primary,
-                unselectedColor = MaterialTheme.colorScheme.primary
-            ),
-            selected = currentFilter.title == filter.title,
-            onClick = { onFilterClicked(filter) }
-        )
-
-        NormalText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = filter.title),
-            textStyle = mediumTextStyle()
+private fun HeaderSectionPreview() {
+    FoodyTheme {
+        HeaderSection(
+            Modifier.fillMaxWidth(),
+            title = "Category",
+            onFilterClicked = {}
         )
     }
 }
