@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,9 +20,8 @@ import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.model.MealDetailsComponentPreviewModel
 import mende273.foody.ui.preview.parameter.MealDetailsComponentParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.NORMAL_PADDING
-import mende273.foody.ui.theme.SMALL_PADDING
 import mende273.foody.ui.theme.mediumTextStyle
+import mende273.foody.ui.theme.spacing
 
 @Composable
 fun MealDetailsComponent(
@@ -58,7 +58,9 @@ fun MealDetailsComponent(
 
                 DetailsScaffoldSection(content = {
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+                        horizontalArrangement = Arrangement.spacedBy(
+                            MaterialTheme.spacing.smallSpacing
+                        )
                     ) {
                         if (mealDetails.category.isNotEmpty()) {
                             SmallButton(text = mealDetails.category, onClicked = {
@@ -106,7 +108,9 @@ fun MealDetailsComponent(
                 if (mealDetails.youtube.isNotEmpty() || mealDetails.source.isNotEmpty()) {
                     DetailsScaffoldSection(title = "More Info", content = {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(NORMAL_PADDING)
+                            horizontalArrangement = Arrangement.spacedBy(
+                                MaterialTheme.spacing.normalSpacing
+                            )
                         ) {
                             if (mealDetails.youtube.isNotEmpty()) {
                                 SmallButton(text = "Video", onClicked = {

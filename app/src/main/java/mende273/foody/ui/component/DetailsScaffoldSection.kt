@@ -4,15 +4,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import mende273.foody.ui.preview.annotations.FontScalePreviews
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.largeTextStyle
 import mende273.foody.ui.theme.mediumTextStyle
+import mende273.foody.ui.theme.spacing
 
 @Composable
 fun ColumnScope.DetailsScaffoldSection(
@@ -36,7 +37,7 @@ fun ColumnScope.DetailsScaffoldSection(
 
         content()
         if (addBottomSpace) {
-            Spacer(modifier = Modifier.height(NORMAL_PADDING))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.normalSpacing))
         }
     }
 }

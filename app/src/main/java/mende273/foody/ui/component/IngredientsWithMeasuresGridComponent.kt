@@ -25,8 +25,8 @@ import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.parameter.IngredientWithMeasureParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.SMALL_PADDING
 import mende273.foody.ui.theme.blackNormalTextStyle
+import mende273.foody.ui.theme.spacing
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -62,7 +62,7 @@ private fun IngredientWithMeasureItem(
     Box(
         modifier = modifier
             .fillMaxWidth(fraction = 0.3f)
-            .padding(SMALL_PADDING),
+            .padding(MaterialTheme.spacing.smallSpacing),
         contentAlignment = Alignment.Center
     ) {
         Column(
