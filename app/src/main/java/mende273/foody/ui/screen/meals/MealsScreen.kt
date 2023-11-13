@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,8 +45,8 @@ import mende273.foody.ui.screen.meals.dialog.FilterDialog
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.NORMAL_PADDING
 import mende273.foody.ui.theme.largeTextStyle
+import mende273.foody.ui.theme.spacing
 import mende273.foody.util.getGridCellsCount
 
 @Composable
@@ -138,7 +139,7 @@ private fun MealsScreenContents(
             HeaderSection(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(NORMAL_PADDING),
+                    .padding(MaterialTheme.spacing.normalSpacing),
                 title = stringResource(id = currentFilter.title),
                 onFilterClicked = { onShouldShowFilterDialog(true) }
             )
@@ -197,7 +198,7 @@ private fun PagerSection(
         tabEvent = { index -> scrollToPage(index) }
     )
 
-    Spacer(modifier = Modifier.height(NORMAL_PADDING))
+    Spacer(modifier = Modifier.height(MaterialTheme.spacing.normalSpacing))
 
     HorizontalPager(
         state = pagerState,

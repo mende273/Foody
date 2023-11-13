@@ -31,8 +31,7 @@ import mende273.foody.ui.preview.annotations.ScreenPreviews
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.parameter.WindowSizeParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.LARGE_PADDING
-import mende273.foody.ui.theme.NORMAL_PADDING
+import mende273.foody.ui.theme.spacing
 
 private val spaceBetween = 25.dp
 private val negativeSpaceBetween = -spaceBetween
@@ -116,8 +115,8 @@ private fun PortraitDetailsComponent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        end = NORMAL_PADDING,
-                        top = LARGE_PADDING
+                        end = MaterialTheme.spacing.normalSpacing,
+                        top = MaterialTheme.spacing.largeSpacing
                     ),
                 isFavourite = isFavourite,
                 onFavouriteClicked = { onFavouriteClicked() }
@@ -133,7 +132,7 @@ private fun PortraitDetailsComponent(
                 containerColor = MaterialTheme.colorScheme.background
             )
         ) {
-            Box(modifier = Modifier.padding(NORMAL_PADDING)) {
+            Box(modifier = Modifier.padding(MaterialTheme.spacing.normalSpacing)) {
                 contents()
             }
         }
@@ -171,8 +170,8 @@ private fun LandscapeDetailsComponent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        end = LARGE_PADDING,
-                        top = LARGE_PADDING
+                        end = MaterialTheme.spacing.largeSpacing,
+                        top = MaterialTheme.spacing.largeSpacing
                     ),
                 isFavourite = isFavourite,
                 onFavouriteClicked = { onFavouriteClicked() }
@@ -188,7 +187,7 @@ private fun LandscapeDetailsComponent(
                 containerColor = MaterialTheme.colorScheme.background
             )
         ) {
-            Box(modifier = modifier.padding(NORMAL_PADDING)) {
+            Box(modifier = modifier.padding(MaterialTheme.spacing.normalSpacing)) {
                 contents()
             }
         }

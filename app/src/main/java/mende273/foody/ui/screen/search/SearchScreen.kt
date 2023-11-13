@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,7 +28,7 @@ import mende273.foody.ui.preview.model.SearchScreenPreviewModel
 import mende273.foody.ui.preview.parameter.SearchScreenParameterPreview
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.NORMAL_PADDING
+import mende273.foody.ui.theme.spacing
 import mende273.foody.util.getGridCellsCount
 
 @Composable
@@ -84,7 +85,7 @@ private fun SearchScreenContents(
                 .heightIn(max = 150.dp)
                 .then(
                     if (!isSearchBarActive) {
-                        Modifier.padding(NORMAL_PADDING)
+                        Modifier.padding(MaterialTheme.spacing.normalSpacing)
                     } else {
                         Modifier.padding(0.dp)
                     }
@@ -105,7 +106,7 @@ private fun SearchScreenContents(
             }
         )
 
-        Spacer(modifier = Modifier.height(NORMAL_PADDING))
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.normalSpacing))
 
         UiStateWrapper(uiState = uiState) { meals ->
             MealsGrid(

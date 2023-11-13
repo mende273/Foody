@@ -17,8 +17,7 @@ import androidx.compose.ui.window.Dialog
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.theme.FoodyTheme
-import mende273.foody.ui.theme.LARGE_PADDING
-import mende273.foody.ui.theme.NORMAL_PADDING
+import mende273.foody.ui.theme.spacing
 
 @Composable
 fun FilterDialog(
@@ -32,7 +31,7 @@ fun FilterDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 200.dp, max = 250.dp),
-            shape = RoundedCornerShape(NORMAL_PADDING),
+            shape = RoundedCornerShape(MaterialTheme.spacing.normalSpacing),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.background
             )
@@ -40,8 +39,8 @@ fun FilterDialog(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(LARGE_PADDING),
-                verticalArrangement = Arrangement.spacedBy(NORMAL_PADDING)
+                    .padding(MaterialTheme.spacing.largeSpacing),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.normalSpacing)
             ) {
                 availableFilters.forEach { filter ->
                     FilterDialogItem(
