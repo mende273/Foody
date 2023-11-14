@@ -8,6 +8,16 @@ Real world Android application demonstrating the use of JetPack Compose with Koi
 
 Foody supports almost all screen sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
 
+## Screenshots
+#### Portrait
+| Light Theme | Dark Theme |
+| --- | --- |
+| <img src="/screenshots/s1_light_portrait.jpg" width="250"> | <img src="/screenshots/s1_dark_portrait.jpg" width="250"> |
+|  |  |
+| <img src="/screenshots/s2_light_portrait.jpg" width="250"> | <img src="/screenshots/s2_dark_portrait.jpg" width="250"> |
+|  |  |
+| <img src="/screenshots/3_light.png" width="250"> | <img src="/screenshots/3_dark.png" width="250"> |
+
 ## Api
 This project is using the API provided by [themealdb.com](https://www.themealdb.com/api.php)
 
