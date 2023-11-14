@@ -10,13 +10,11 @@ Foody supports almost all screen sizes from phones in portrait and landscape to 
 
 ## Screenshots
 #### Portrait
-| Light Theme | Dark Theme |
-| --- | --- |
-| <img src="/screenshots/s1_light_portrait.jpg" width="250"> | <img src="/screenshots/s1_dark_portrait.jpg" width="250"> |
-|  |  |
-| <img src="/screenshots/s2_light_portrait.jpg" width="250"> | <img src="/screenshots/s2_dark_portrait.jpg" width="250"> |
-|  |  |
-| <img src="/screenshots/3_light.png" width="250"> | <img src="/screenshots/3_dark.png" width="250"> |
+##### Light Theme
+<img src="/screenshots/s1_light_portrait.jpg" width="250"> <img src="/screenshots/s2_light_portrait.jpg" width="250">
+
+##### Dark Theme
+<img src="/screenshots/s1_dark_portrait.jpg" width="250"> <img src="/screenshots/s2_dark_portrait.jpg" width="250">
 
 ## Api
 This project is using the API provided by [themealdb.com](https://www.themealdb.com/api.php)
