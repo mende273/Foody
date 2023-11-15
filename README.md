@@ -4,27 +4,29 @@
 ![Jetpack Compose](https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label=)
 ![Android](https://img.shields.io/badge/Api%2026+-3DDC84?logo=android&logoColor=white&style=for-the-badge)
 
-Real world Android application demonstrating the use of JetPack Compose with Koin, Ktor, Navigation Component and MVVM architecture.
+Real world Android application demonstrating the use of JetPack Compose with Koin, Ktor,SqlDelight, Navigation Component and MVVM architecture.
 
 Foody supports almost all screen sizes from phones in portrait and landscape to foldable phones and tablets. It also supports light and dark theme.
 
 ## Screenshots
 #### Portrait
-##### Light Theme
 <img src="/screenshots/s1_light_portrait.jpg" width="250"> <img src="/screenshots/s2_light_portrait.jpg" width="250"> <img src="/screenshots/s3_light_portrait.jpg" width="250">
 
-##### Dark Theme
 <img src="/screenshots/s1_dark_portrait.jpg" width="250"> <img src="/screenshots/s2_dark_portrait.jpg" width="250"> <img src="/screenshots/s3_dark_portrait.jpg" width="250">
 
 #### Landscape
-##### Light Theme
-<img src="/screenshots/s1_light_landscape.jpg" width="550"> <img src="/screenshots/s2_light_landscape_mobile.jpg" width="550"> 
+<img src="/screenshots/s1_light_landscape.jpg" width="550"> 
 
-##### Dark Theme
-<img src="/screenshots/s1_dark_landscape.jpg" width="550"> <img src="/screenshots/s2_dark_landscape.jpg" width="550">
+<img src="/screenshots/s2_light_landscape_mobile.jpg" width="550"> 
+
+<img src="/screenshots/s1_dark_landscape.jpg" width="550"> 
+
+<img src="/screenshots/s2_dark_landscape.jpg" width="550">
 
 #### Foldable / Tablet
-<img src="/screenshots/s1_light_fold.jpg" width="550"> <img src="/screenshots/s1_dark_fold.jpg" width="550">
+<img src="/screenshots/s1_light_fold.jpg" width="550"> 
+
+<img src="/screenshots/s1_dark_fold.jpg" width="550">
 
 ## Api
 This project is using the API provided by [themealdb.com](https://www.themealdb.com/api.php)
