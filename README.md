@@ -18,13 +18,13 @@ Foody supports almost all screen sizes from phones in portrait and landscape to 
 
 #### Landscape
 ##### Light Theme
-<img src="/screenshots/s1_light_landscape.jpg" width="450"> <img src="/screenshots/s2_light_landscape_mobile.jpg" width="450"> 
+<img src="/screenshots/s1_light_landscape.jpg" width="550"> <img src="/screenshots/s2_light_landscape_mobile.jpg" width="550"> 
 
 ##### Dark Theme
-<img src="/screenshots/s1_dark_landscape.jpg" width="450"> <img src="/screenshots/s2_dark_landscape.jpg" width="450">
+<img src="/screenshots/s1_dark_landscape.jpg" width="550"> <img src="/screenshots/s2_dark_landscape.jpg" width="550">
 
 #### Foldable / Tablet
-<img src="/screenshots/s1_light_fold.jpg" width="450"> <img src="/screenshots/s1_dark_fold.jpg" width="450">
+<img src="/screenshots/s1_light_fold.jpg" width="550"> <img src="/screenshots/s1_dark_fold.jpg" width="550">
 
 ## Api
 This project is using the API provided by [themealdb.com](https://www.themealdb.com/api.php)
