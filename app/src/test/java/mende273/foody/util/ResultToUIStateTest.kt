@@ -2,7 +2,6 @@ package mende273.foody.util
 
 import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 import mende273.foody.ui.state.UIState
 import org.junit.Test
 
@@ -10,7 +9,7 @@ import org.junit.Test
 class ResultToUIStateTest {
 
     @Test
-    fun `toUIState should convert success result to Success UIState`() = runTest {
+    fun `toUIState should convert success result to Success UIState`() {
         val successResult = Result.success("Success data")
         val uiState = successResult.toUIState()
 
@@ -18,7 +17,7 @@ class ResultToUIStateTest {
     }
 
     @Test
-    fun `toUIState should convert failure result to Error UIState with error message`() = runTest {
+    fun `toUIState should convert failure result to Error UIState with error message`() {
         val failureResult = Result.failure<Any>(Exception("Error loading data"))
         val uiState = failureResult.toUIState()
 
@@ -26,7 +25,7 @@ class ResultToUIStateTest {
     }
 
     @Test
-    fun `toUIState should convert failure result to Error UIState `() = runTest {
+    fun `toUIState should convert failure result to Error UIState `() {
         val failureResult = Result.failure<Any>(Exception())
         val uiState = failureResult.toUIState()
 
