@@ -20,7 +20,7 @@ fun MealDetailsDto.toModel(): MealDetails = MealDetails(
     area = area ?: "",
     instructions = instructions ?: "",
     thumb = thumb ?: "",
-    tags = tags?.replace(",", ", ") ?: "",
+    tags = tags ?: "",
     youtube = youtube ?: "",
     source = source ?: "",
     ingredientsWithMeasures = makeListForIngredientsWithMeasures(this)
@@ -42,7 +42,7 @@ fun MealCategoriesDto?.toModel(): List<String> =
         ?.mapNotNull {
             it.category
         }?.filter {
-            it.isNotEmpty()
+            it.trim().isNotEmpty()
         }
         ?: emptyList()
 
