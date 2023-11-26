@@ -57,17 +57,6 @@ annotation class ScreenPreviews
 
 ## PreBuild
 The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manually run the tasks with <code>./gradlew ktlintFormat</code> and <code>./gradlew detekt</code>
-```
-@Test
-fun checkKoinModule() {
-  appModule.verify(
-    extraTypes = listOf(
-      io.ktor.client.engine.HttpClientEngine::class,
-      io.ktor.client.HttpClientConfig::class
-    )
-  )
-}
-```
 
 ## Koin
 #### Verify Koin configuration
