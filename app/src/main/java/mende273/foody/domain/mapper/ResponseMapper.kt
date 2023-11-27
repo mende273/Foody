@@ -50,26 +50,26 @@ private fun makeListForIngredientsWithMeasures(item: MealDetailsDto): List<Ingre
     val items = mutableListOf<IngredientWithMeasure>()
 
     with(item) {
-        items.addIngredientWithMeasure(ingredient1, measure1)
-        items.addIngredientWithMeasure(ingredient2, measure2)
-        items.addIngredientWithMeasure(ingredient3, measure3)
-        items.addIngredientWithMeasure(ingredient4, measure4)
-        items.addIngredientWithMeasure(ingredient5, measure5)
-        items.addIngredientWithMeasure(ingredient6, measure6)
-        items.addIngredientWithMeasure(ingredient7, measure7)
-        items.addIngredientWithMeasure(ingredient8, measure8)
-        items.addIngredientWithMeasure(ingredient9, measure9)
-        items.addIngredientWithMeasure(ingredient10, measure10)
-        items.addIngredientWithMeasure(ingredient11, measure11)
-        items.addIngredientWithMeasure(ingredient12, measure12)
-        items.addIngredientWithMeasure(ingredient13, measure13)
-        items.addIngredientWithMeasure(ingredient14, measure14)
-        items.addIngredientWithMeasure(ingredient15, measure15)
-        items.addIngredientWithMeasure(ingredient16, measure16)
-        items.addIngredientWithMeasure(ingredient17, measure17)
-        items.addIngredientWithMeasure(ingredient18, measure18)
-        items.addIngredientWithMeasure(ingredient19, measure19)
-        items.addIngredientWithMeasure(ingredient20, measure20)
+        items.addIngredientWithMeasure(ingredient1?.trim(), measure1?.trim())
+        items.addIngredientWithMeasure(ingredient2?.trim(), measure2?.trim())
+        items.addIngredientWithMeasure(ingredient3?.trim(), measure3?.trim())
+        items.addIngredientWithMeasure(ingredient4?.trim(), measure4?.trim())
+        items.addIngredientWithMeasure(ingredient5?.trim(), measure5?.trim())
+        items.addIngredientWithMeasure(ingredient6?.trim(), measure6?.trim())
+        items.addIngredientWithMeasure(ingredient7?.trim(), measure7?.trim())
+        items.addIngredientWithMeasure(ingredient8?.trim(), measure8?.trim())
+        items.addIngredientWithMeasure(ingredient9?.trim(), measure9?.trim())
+        items.addIngredientWithMeasure(ingredient10?.trim(), measure10?.trim())
+        items.addIngredientWithMeasure(ingredient11?.trim(), measure11?.trim())
+        items.addIngredientWithMeasure(ingredient12?.trim(), measure12?.trim())
+        items.addIngredientWithMeasure(ingredient13?.trim(), measure13?.trim())
+        items.addIngredientWithMeasure(ingredient14?.trim(), measure14?.trim())
+        items.addIngredientWithMeasure(ingredient15?.trim(), measure15?.trim())
+        items.addIngredientWithMeasure(ingredient16?.trim(), measure16?.trim())
+        items.addIngredientWithMeasure(ingredient17?.trim(), measure17?.trim())
+        items.addIngredientWithMeasure(ingredient18?.trim(), measure18?.trim())
+        items.addIngredientWithMeasure(ingredient19?.trim(), measure19?.trim())
+        items.addIngredientWithMeasure(ingredient20?.trim(), measure20?.trim())
     }
 
     return items
@@ -79,7 +79,7 @@ private fun MutableList<IngredientWithMeasure>.addIngredientWithMeasure(
     ingredient: String?,
     measure: String?
 ) {
-    if (!ingredient.isNullOrEmpty() && !measure.isNullOrEmpty()) {
-        add(IngredientWithMeasure(ingredient, measure))
+    if (!ingredient.isNullOrEmpty()) {
+        add(IngredientWithMeasure(ingredient, measure ?: ""))
     }
 }

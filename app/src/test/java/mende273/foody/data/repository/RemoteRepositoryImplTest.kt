@@ -20,12 +20,10 @@ class RemoteRepositoryImplTest {
 
             assertTrue { response.isSuccess }
 
-            val actualResult = response.getOrNull()
+            val expectedMealDetails = provideMockMealDetailsObject()
+            val actualMealDetails = response.getOrNull()
 
-            assertEquals(52999, actualResult?.id)
-            assertEquals("Crispy Sausages and Greens", actualResult?.name)
-            assertEquals("Pork", actualResult?.category)
-            assertEquals("Irish", actualResult?.area)
+            assertEquals(expectedMealDetails, actualMealDetails)
         }
 
     @Test
@@ -49,17 +47,26 @@ class RemoteRepositoryImplTest {
 
             assertTrue { response.isSuccess }
 
-            val actualList = response.getOrNull()
+            val actualListSize = response.getOrNull()?.size ?: 0
 
             val expectedListSize = 8
 
-            assertEquals(expectedListSize, actualList?.size)
+            assertEquals(expectedListSize, actualListSize)
         }
     }
 
     @Test
     fun getMealsWithIngredient() {
-        // TODO
+        runTest(StandardTestDispatcher()) {
+            val response = remoteRepositoryImpl.getMealsWithIngredient("chicken_breast")
+
+            assertTrue { response.isSuccess }
+
+            val actualListSize = response.getOrNull()?.size ?: 0
+            val expectedListSize = 9
+
+            assertEquals(expectedListSize, actualListSize)
+        }
     }
 
     @Test
