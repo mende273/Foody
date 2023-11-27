@@ -41,7 +41,7 @@ class RemoteRepositoryImplTest {
         }
 
     @Test
-    fun getMealsForArea() {
+    fun getMealsForArea() =
         runTest(StandardTestDispatcher()) {
             val response = remoteRepositoryImpl.getMealsForArea("croatian")
 
@@ -53,10 +53,9 @@ class RemoteRepositoryImplTest {
 
             assertEquals(expectedListSize, actualListSize)
         }
-    }
 
     @Test
-    fun getMealsWithIngredient() {
+    fun getMealsWithIngredient() =
         runTest(StandardTestDispatcher()) {
             val response = remoteRepositoryImpl.getMealsWithIngredient("chicken_breast")
 
@@ -67,30 +66,64 @@ class RemoteRepositoryImplTest {
 
             assertEquals(expectedListSize, actualListSize)
         }
+
+    @Test
+    fun getMealsForFirstLetter() = runTest(StandardTestDispatcher()) {
+        val response = remoteRepositoryImpl.getMealsForFirstLetter("y")
+
+        assertTrue { response.isSuccess }
+
+        val actualListSize = response.getOrNull()?.size ?: 0
+        val expectedListSize = 1
+
+        assertEquals(expectedListSize, actualListSize)
     }
 
     @Test
-    fun getMealsForFirstLetter() {
-        // TODO
+    fun getMealDetails() = runTest(StandardTestDispatcher()) {
+        val response = remoteRepositoryImpl.getMealDetails("52999")
+
+        assertTrue { response.isSuccess }
+
+        val actualMealDetails = response.getOrNull()
+        val expectedMealDetails = provideMockMealDetailsObject()
+
+        assertEquals(expectedMealDetails, actualMealDetails)
     }
 
     @Test
-    fun getMealDetails() {
-        // TODO
+    fun getMealCategories() = runTest(StandardTestDispatcher()) {
+        val response = remoteRepositoryImpl.getMealCategories()
+
+        assertTrue { response.isSuccess }
+
+        val actualMealCategories = response.getOrNull()
+        val expectedMealCategories = provideMockCategories()
+
+        assertEquals(expectedMealCategories, actualMealCategories)
     }
 
     @Test
-    fun getMealCategories() {
-        // TODO
+    fun getMealAreas() = runTest(StandardTestDispatcher()) {
+        val response = remoteRepositoryImpl.getMealAreas()
+
+        assertTrue { response.isSuccess }
+
+        val actualCategories = response.getOrNull()
+        val expectedCategories = provideMockAreas()
+
+        assertEquals(expectedCategories, actualCategories)
     }
 
     @Test
-    fun getMealAreas() {
-        // TODO
-    }
+    fun searchMealsByName() = runTest(StandardTestDispatcher()) {
+        val response = remoteRepositoryImpl.searchMealsByName("Arrabiata")
 
-    @Test
-    fun searchMealsByName() {
-        // TODO
+        assertTrue { response.isSuccess }
+
+        val actualListSize = response.getOrNull()?.size ?: 0
+        val expectedListSize = 1
+
+        assertEquals(expectedListSize, actualListSize)
     }
 }
