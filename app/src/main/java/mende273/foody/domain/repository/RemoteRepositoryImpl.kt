@@ -1,4 +1,4 @@
-package mende273.foody.data.repository
+package mende273.foody.domain.repository
 
 import io.ktor.client.call.body
 import mende273.foody.data.api.ApiService

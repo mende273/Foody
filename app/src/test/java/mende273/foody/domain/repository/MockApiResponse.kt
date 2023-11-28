@@ -1,4 +1,4 @@
-package mende273.foody.data.repository
+package mende273.foody.domain.repository
 
 import io.ktor.client.request.HttpRequestData
 import mende273.foody.domain.model.IngredientWithMeasure

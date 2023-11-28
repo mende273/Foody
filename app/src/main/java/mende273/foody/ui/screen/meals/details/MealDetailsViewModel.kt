@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import mende273.foody.data.repository.LocalRepositoryImpl
-import mende273.foody.data.repository.RemoteRepositoryImpl
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
+import mende273.foody.domain.repository.LocalRepositoryImpl
+import mende273.foody.domain.repository.RemoteRepositoryImpl
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 

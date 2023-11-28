@@ -1,4 +1,4 @@
-package mende273.foody.data.repository
+package mende273.foody.domain.repository
 
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

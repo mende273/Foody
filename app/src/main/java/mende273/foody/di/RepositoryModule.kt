@@ -19,8 +19,8 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import mende273.foody.data.api.ApiService
-import mende273.foody.data.repository.LocalRepositoryImpl
-import mende273.foody.data.repository.RemoteRepositoryImpl
+import mende273.foody.domain.repository.LocalRepositoryImpl
+import mende273.foody.domain.repository.RemoteRepositoryImpl
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
 import org.koin.dsl.module
 

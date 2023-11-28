@@ -1,4 +1,4 @@
-package mende273.foody.data.repository
+package mende273.foody.domain.repository
 
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
