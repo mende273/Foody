@@ -121,3 +121,6 @@ ImageLoader(this).newBuilder()
 ## Static Code Analysis
 - [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle) - A library for formatting Kotlin code according to official guidelines.
 - [Detekt](https://github.com/detekt/detekt) - A static code analysis library for Kotlin.
+
+## Testing
+- [MockEngine](https://api.ktor.io/ktor-client/ktor-client-mock/io.ktor.client.engine.mock/-mock-engine/index.html) - HttpClientEngine for writing tests without network.
