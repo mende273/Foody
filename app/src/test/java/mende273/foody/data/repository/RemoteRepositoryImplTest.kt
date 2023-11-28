@@ -27,7 +27,7 @@ class RemoteRepositoryImplTest {
         }
 
     @Test
-    fun getMealsForCategory() =
+    fun `getMealsForCategory should return list of Meal objects`() =
         runTest(StandardTestDispatcher()) {
             val response = remoteRepositoryImpl.getMealsForCategory("breakfast")
 
@@ -41,7 +41,7 @@ class RemoteRepositoryImplTest {
         }
 
     @Test
-    fun getMealsForArea() =
+    fun `getMealsForArea should return list of Meal objects`() =
         runTest(StandardTestDispatcher()) {
             val response = remoteRepositoryImpl.getMealsForArea("croatian")
 
@@ -55,7 +55,7 @@ class RemoteRepositoryImplTest {
         }
 
     @Test
-    fun getMealsWithIngredient() =
+    fun `getMealsWithIngredient should return list of Meal objects`() =
         runTest(StandardTestDispatcher()) {
             val response = remoteRepositoryImpl.getMealsWithIngredient("chicken_breast")
 
@@ -68,19 +68,20 @@ class RemoteRepositoryImplTest {
         }
 
     @Test
-    fun getMealsForFirstLetter() = runTest(StandardTestDispatcher()) {
-        val response = remoteRepositoryImpl.getMealsForFirstLetter("y")
+    fun `getMealsForFirstLetter should return  list of Meal objects`() =
+        runTest(StandardTestDispatcher()) {
+            val response = remoteRepositoryImpl.getMealsForFirstLetter("y")
 
-        assertTrue { response.isSuccess }
+            assertTrue { response.isSuccess }
 
-        val actualListSize = response.getOrNull()?.size ?: 0
-        val expectedListSize = 1
+            val actualListSize = response.getOrNull()?.size ?: 0
+            val expectedListSize = 1
 
-        assertEquals(expectedListSize, actualListSize)
-    }
+            assertEquals(expectedListSize, actualListSize)
+        }
 
     @Test
-    fun getMealDetails() = runTest(StandardTestDispatcher()) {
+    fun `getMealDetails should return MealDetails object`() = runTest(StandardTestDispatcher()) {
         val response = remoteRepositoryImpl.getMealDetails("52999")
 
         assertTrue { response.isSuccess }
@@ -92,19 +93,20 @@ class RemoteRepositoryImplTest {
     }
 
     @Test
-    fun getMealCategories() = runTest(StandardTestDispatcher()) {
-        val response = remoteRepositoryImpl.getMealCategories()
+    fun `getMealCategories should return list of category items`() =
+        runTest(StandardTestDispatcher()) {
+            val response = remoteRepositoryImpl.getMealCategories()
 
-        assertTrue { response.isSuccess }
+            assertTrue { response.isSuccess }
 
-        val actualMealCategories = response.getOrNull()
-        val expectedMealCategories = provideMockCategories()
+            val actualMealCategories = response.getOrNull()
+            val expectedMealCategories = provideMockCategories()
 
-        assertEquals(expectedMealCategories, actualMealCategories)
-    }
+            assertEquals(expectedMealCategories, actualMealCategories)
+        }
 
     @Test
-    fun getMealAreas() = runTest(StandardTestDispatcher()) {
+    fun `getMealAreas should return list of area items`() = runTest(StandardTestDispatcher()) {
         val response = remoteRepositoryImpl.getMealAreas()
 
         assertTrue { response.isSuccess }
@@ -116,14 +118,15 @@ class RemoteRepositoryImplTest {
     }
 
     @Test
-    fun searchMealsByName() = runTest(StandardTestDispatcher()) {
-        val response = remoteRepositoryImpl.searchMealsByName("Arrabiata")
+    fun `searchMealsByName should return list of Meal objects`() =
+        runTest(StandardTestDispatcher()) {
+            val response = remoteRepositoryImpl.searchMealsByName("Arrabiata")
 
-        assertTrue { response.isSuccess }
+            assertTrue { response.isSuccess }
 
-        val actualListSize = response.getOrNull()?.size ?: 0
-        val expectedListSize = 1
+            val actualListSize = response.getOrNull()?.size ?: 0
+            val expectedListSize = 1
 
-        assertEquals(expectedListSize, actualListSize)
-    }
+            assertEquals(expectedListSize, actualListSize)
+        }
 }
