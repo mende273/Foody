@@ -38,27 +38,25 @@ class ResponseMapperKtTest {
     fun `should convert a MealDetailsDto to a MealDetails object`() {
         val actualMealDetails = mealDetailsDto.toModel()
 
-        assertEquals(12345L, actualMealDetails.id)
-        assertEquals("Spaghetti Carbonara", actualMealDetails.name)
-        assertEquals("Italian", actualMealDetails.category)
-        assertEquals("Italy", actualMealDetails.area)
-        assertEquals(
-            "A delicious pasta dish with bacon, eggs, and cheese.",
-            actualMealDetails.instructions
-        )
-        assertEquals("https://www.example.com/spaghetti.jpg", actualMealDetails.thumb)
-        assertEquals("spaghetti, italian", actualMealDetails.tags)
-        assertEquals("https://www.youtube.com/watch?v=12345", actualMealDetails.youtube)
-        assertEquals("https://www.example.com/recipe/spaghetti-carbonara", actualMealDetails.source)
-
-        val expectedIngredientsWithMeasures = listOf(
-            IngredientWithMeasure("bacon", "1 cup"),
-            IngredientWithMeasure("eggs", "3"),
-            IngredientWithMeasure("cheese", "1 cup"),
-            IngredientWithMeasure("pasta", "2 cups")
+        val expectedMealDetails = MealDetails(
+            id = 12345L,
+            name = "Spaghetti Carbonara",
+            category = "Italian",
+            area = "Italy",
+            instructions = "A delicious pasta dish with bacon, eggs, and cheese.",
+            thumb = "https://www.example.com/spaghetti.jpg",
+            tags = "spaghetti, italian",
+            youtube = "https://www.youtube.com/watch?v=12345",
+            source = "https://www.example.com/recipe/spaghetti-carbonara",
+            ingredientsWithMeasures = listOf(
+                IngredientWithMeasure("bacon", "1 cup"),
+                IngredientWithMeasure("eggs", "3"),
+                IngredientWithMeasure("cheese", "1 cup"),
+                IngredientWithMeasure("pasta", "2 cups")
+            )
         )
 
-        assertEquals(expectedIngredientsWithMeasures, actualMealDetails.ingredientsWithMeasures)
+        assertEquals(expectedMealDetails, actualMealDetails)
     }
 
     @Test
