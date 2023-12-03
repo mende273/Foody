@@ -59,7 +59,7 @@ fun MealDetailsComponent(
                 DetailsScaffoldSection(content = {
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(
-                            MaterialTheme.spacing.smallSpacing
+                            MaterialTheme.spacing.small
                         )
                     ) {
                         if (mealDetails.category.isNotEmpty()) {
@@ -109,7 +109,7 @@ fun MealDetailsComponent(
                     DetailsScaffoldSection(title = "More Info", content = {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(
-                                MaterialTheme.spacing.normalSpacing
+                                MaterialTheme.spacing.normal
                             )
                         ) {
                             if (mealDetails.youtube.isNotEmpty()) {

@@ -62,7 +62,7 @@ private fun IngredientWithMeasureItem(
     Box(
         modifier = modifier
             .fillMaxWidth(fraction = 0.3f)
-            .padding(MaterialTheme.spacing.smallSpacing),
+            .padding(MaterialTheme.spacing.small),
         contentAlignment = Alignment.Center
     ) {
         Column(

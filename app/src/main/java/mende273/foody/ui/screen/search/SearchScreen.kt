@@ -85,7 +85,7 @@ private fun ScreenContents(
                 .heightIn(max = 150.dp)
                 .then(
                     if (!isSearchBarActive) {
-                        Modifier.padding(MaterialTheme.spacing.normalSpacing)
+                        Modifier.padding(MaterialTheme.spacing.normal)
                     } else {
                         Modifier.padding(0.dp)
                     }
@@ -106,7 +106,7 @@ private fun ScreenContents(
             }
         )
 
-        Spacer(modifier = Modifier.height(MaterialTheme.spacing.normalSpacing))
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.normal))
 
         UiStateWrapper(uiState = uiState) { meals ->
             MealsGrid(

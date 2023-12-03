@@ -22,7 +22,7 @@ fun RoundedComponent(
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(
-            corner = CornerSize(MaterialTheme.spacing.smallSpacing)
+            corner = CornerSize(MaterialTheme.spacing.small)
         ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background

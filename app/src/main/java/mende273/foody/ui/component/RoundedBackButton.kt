@@ -17,8 +17,8 @@ import mende273.foody.ui.theme.spacing
 fun RoundedBackButton(onNavigateBackClicked: () -> Unit) {
     Box(
         Modifier.padding(
-            start = MaterialTheme.spacing.normalSpacing,
-            top = MaterialTheme.spacing.largeSpacing
+            start = MaterialTheme.spacing.normal,
+            top = MaterialTheme.spacing.large
         )
     ) {
         RoundedComponent {

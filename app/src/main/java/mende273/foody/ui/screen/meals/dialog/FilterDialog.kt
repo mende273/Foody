@@ -31,7 +31,7 @@ fun FilterDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 200.dp, max = 250.dp),
-            shape = RoundedCornerShape(MaterialTheme.spacing.normalSpacing),
+            shape = RoundedCornerShape(MaterialTheme.spacing.normal),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.background
             )
@@ -39,8 +39,8 @@ fun FilterDialog(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(MaterialTheme.spacing.largeSpacing),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.normalSpacing)
+                    .padding(MaterialTheme.spacing.large),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.normal)
             ) {
                 availableFilters.forEach { filter ->
                     FilterDialogItem(

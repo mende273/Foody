@@ -139,7 +139,7 @@ private fun ScreenContents(
             HeaderSection(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.normalSpacing),
+                    .padding(MaterialTheme.spacing.normal),
                 title = stringResource(id = currentFilter.title),
                 onFilterClicked = { onShouldShowFilterDialog(true) }
             )
@@ -198,7 +198,7 @@ private fun PagerSection(
         tabEvent = { index -> scrollToPage(index) }
     )
 
-    Spacer(modifier = Modifier.height(MaterialTheme.spacing.normalSpacing))
+    Spacer(modifier = Modifier.height(MaterialTheme.spacing.normal))
 
     HorizontalPager(
         state = pagerState,

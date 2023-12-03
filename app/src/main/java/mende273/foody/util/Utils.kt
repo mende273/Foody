@@ -18,8 +18,8 @@ fun WindowSizeClass.getGridCellsCount(): Int {
 @Composable
 fun WindowSizeClass.getTopPadding(): Dp {
     return when (this.widthSizeClass == WindowWidthSizeClass.Compact) {
-        true -> MaterialTheme.spacing.normalSpacing
-        false -> MaterialTheme.spacing.zeroSpacing
+        true -> MaterialTheme.spacing.normal
+        false -> MaterialTheme.spacing.zero
     }
 }
 

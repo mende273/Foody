@@ -37,7 +37,7 @@ fun ColumnScope.DetailsScaffoldSection(
 
         content()
         if (addBottomSpace) {
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.normalSpacing))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.normal))
         }
     }
 }

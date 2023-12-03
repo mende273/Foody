@@ -115,8 +115,8 @@ private fun PortraitDetailsComponent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        end = MaterialTheme.spacing.normalSpacing,
-                        top = MaterialTheme.spacing.largeSpacing
+                        end = MaterialTheme.spacing.normal,
+                        top = MaterialTheme.spacing.large
                     ),
                 isFavourite = isFavourite,
                 onFavouriteClicked = { onFavouriteClicked() }
@@ -132,7 +132,7 @@ private fun PortraitDetailsComponent(
                 containerColor = MaterialTheme.colorScheme.background
             )
         ) {
-            Box(modifier = Modifier.padding(MaterialTheme.spacing.normalSpacing)) {
+            Box(modifier = Modifier.padding(MaterialTheme.spacing.normal)) {
                 contents()
             }
         }
@@ -170,8 +170,8 @@ private fun LandscapeDetailsComponent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        end = MaterialTheme.spacing.largeSpacing,
-                        top = MaterialTheme.spacing.largeSpacing
+                        end = MaterialTheme.spacing.large,
+                        top = MaterialTheme.spacing.large
                     ),
                 isFavourite = isFavourite,
                 onFavouriteClicked = { onFavouriteClicked() }
@@ -187,7 +187,7 @@ private fun LandscapeDetailsComponent(
                 containerColor = MaterialTheme.colorScheme.background
             )
         ) {
-            Box(modifier = modifier.padding(MaterialTheme.spacing.normalSpacing)) {
+            Box(modifier = modifier.padding(MaterialTheme.spacing.normal)) {
                 contents()
             }
         }

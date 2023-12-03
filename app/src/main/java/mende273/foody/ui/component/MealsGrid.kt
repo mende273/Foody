@@ -21,12 +21,12 @@ fun MealsGrid(
 ) {
     LazyVerticalGrid(
         modifier = Modifier.padding(
-            start = MaterialTheme.spacing.normalSpacing,
-            end = MaterialTheme.spacing.normalSpacing
+            start = MaterialTheme.spacing.normal,
+            end = MaterialTheme.spacing.normal
         ),
         columns = GridCells.Fixed(count = gridCellsCount),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.smallSpacing),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.smallSpacing)
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
     ) {
         items(meals) { item ->
             MealItemComponent(

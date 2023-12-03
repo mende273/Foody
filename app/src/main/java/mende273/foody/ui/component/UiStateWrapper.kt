@@ -20,7 +20,7 @@ fun <T> UiStateWrapper(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(MaterialTheme.spacing.normalSpacing),
+                .padding(MaterialTheme.spacing.normal),
             contentAlignment = Alignment.Center
         ) {
             ErrorComponent(text = errorMessage)
@@ -30,7 +30,7 @@ fun <T> UiStateWrapper(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(MaterialTheme.spacing.normalSpacing),
+                .padding(MaterialTheme.spacing.normal),
             contentAlignment = Alignment.Center
         ) {
             ProgressBar()
