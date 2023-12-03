@@ -1,4 +1,4 @@
-package mende273.foody.ui.screen.main
+package mende273.foody.ui.main
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

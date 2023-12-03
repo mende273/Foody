@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
+import mende273.foody.ui.main.NavigationBar
 import mende273.foody.ui.navigation.AppNavigation
 import mende273.foody.ui.navigation.Screen
-import mende273.foody.ui.screen.main.NavigationBar
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
