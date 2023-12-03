@@ -40,7 +40,7 @@ fun FilterMealsScreen(
         viewModel.requestData(name, filterType)
     })
 
-    FilterMealsScreenContents(
+    ScreenContents(
         modifier = modifier,
         headerTitle = headerTitle?.let { stringResource(id = it, name) } ?: name,
         uiState = uiState,
@@ -51,7 +51,7 @@ fun FilterMealsScreen(
 }
 
 @Composable
-private fun FilterMealsScreenContents(
+private fun ScreenContents(
     modifier: Modifier,
     headerTitle: String,
     uiState: UIState<List<Meal>>,
@@ -80,11 +80,11 @@ private fun FilterMealsScreenContents(
 @ThemePreviews
 @ScreenPreviews
 @Composable
-private fun FilterMealsScreenPreview(
+private fun ScreenPreview(
     @PreviewParameter(MealsUiStateParameterPreview::class) previewModel: MealsUiStatePreviewModel
 ) {
     FoodyTheme {
-        FilterMealsScreenContents(
+        ScreenContents(
             modifier = Modifier.fillMaxSize(),
             headerTitle = "Filter meals",
             uiState = previewModel.uiState,

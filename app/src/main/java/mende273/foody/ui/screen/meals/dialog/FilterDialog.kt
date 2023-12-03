@@ -58,11 +58,11 @@ fun FilterDialog(
 
 @ThemePreviews
 @Composable
-private fun FilterDialogPreview() {
+private fun DialogPreview() {
     FoodyTheme {
         FilterDialog(
             currentFilter = Filter.CATEGORY,
-            availableFilters = Filter.values().asList(),
+            availableFilters = Filter.entries,
             onFilterClicked = {},
             onDismissRequest = {}
         )

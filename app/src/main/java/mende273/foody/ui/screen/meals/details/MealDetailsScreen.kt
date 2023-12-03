@@ -39,7 +39,7 @@ fun MealDetailsScreen(
         viewModel.requestData(mealId)
     })
 
-    MealDetailsScreenContents(
+    ScreenContents(
         modifier = modifier,
         uiState = uiState,
         windowSize = windowSize,
@@ -56,7 +56,7 @@ fun MealDetailsScreen(
 }
 
 @Composable
-private fun MealDetailsScreenContents(
+private fun ScreenContents(
     modifier: Modifier,
     uiState: UIState<MealDetails>,
     windowSize: WindowSizeClass,
@@ -92,12 +92,12 @@ private fun MealDetailsScreenContents(
 @ThemePreviews
 @ScreenPreviews
 @Composable
-private fun MealDetailsScreenPreview(
+private fun ScreenPreview(
     @PreviewParameter(MealDetailsScreenParameterProvider::class)
     previewModel: MealDetailsScreenPreviewModel
 ) {
     FoodyTheme {
-        MealDetailsScreenContents(
+        ScreenContents(
             modifier = Modifier.fillMaxSize(),
             uiState = previewModel.uiState,
             windowSize = previewModel.windowSizeClass,

@@ -89,7 +89,7 @@ fun MealsScreen(
         )
     }
 
-    MealsScreenContents(
+    ScreenContents(
         modifier = modifier,
         uiStateCurrentFilterTabs = uiStateCurrentFilterTabs,
         uiStateCurrentFilterTabItems = uiStateCurrentFilterTabItems,
@@ -106,7 +106,7 @@ fun MealsScreen(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun MealsScreenContents(
+private fun ScreenContents(
     modifier: Modifier,
     uiStateCurrentFilterTabs: UIState<List<String>>,
     uiStateCurrentFilterTabItems: UIState<List<Meal>>,
@@ -166,7 +166,7 @@ private fun MealsScreenContentsPreview(
     @PreviewParameter(MealsScreenParameterProvider::class) previewModel: MealsScreenPreviewModel
 ) {
     FoodyTheme {
-        MealsScreenContents(
+        ScreenContents(
             modifier = Modifier.fillMaxSize(),
             uiStateCurrentFilterTabs = previewModel.currentFilterTabsUiState,
             uiStateCurrentFilterTabItems = previewModel.currentFilterTabItemsUiState,

@@ -35,7 +35,7 @@ fun FavouritesScreen(
         viewModel.loadData()
     })
 
-    FavouritesScreenContents(
+    ScreenContents(
         modifier = modifier,
         windowSize = windowSize,
         uiState = uiState,
@@ -44,7 +44,7 @@ fun FavouritesScreen(
 }
 
 @Composable
-private fun FavouritesScreenContents(
+private fun ScreenContents(
     modifier: Modifier,
     windowSize: WindowSizeClass,
     uiState: UIState<List<Meal>>,
@@ -64,11 +64,11 @@ private fun FavouritesScreenContents(
 @ThemePreviews
 @ScreenPreviews
 @Composable
-private fun FavouritesScreenPreview(
+private fun ScreenPreview(
     @PreviewParameter(MealsUiStateParameterPreview::class) previewModel: MealsUiStatePreviewModel
 ) {
     FoodyTheme {
-        FavouritesScreenContents(
+        ScreenContents(
             modifier = Modifier.fillMaxSize(),
             windowSize = previewModel.windowSize,
             uiState = previewModel.uiState,

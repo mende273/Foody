@@ -2,24 +2,37 @@ package mende273.foody.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.theme.FoodyTheme
+import mende273.foody.ui.theme.spacing
 import mende273.foody.util.ERROR_LOADING_DATA
 
 @Composable
 fun <T> UiStateWrapper(
     uiState: UIState<T>,
     onError: @Composable (String) -> Unit = { errorMessage ->
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(MaterialTheme.spacing.normalSpacing),
+            contentAlignment = Alignment.Center
+        ) {
             ErrorComponent(text = errorMessage)
         }
     },
     onLoading: @Composable () -> Unit = {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(MaterialTheme.spacing.normalSpacing),
+            contentAlignment = Alignment.Center
+        ) {
             ProgressBar()
         }
     },

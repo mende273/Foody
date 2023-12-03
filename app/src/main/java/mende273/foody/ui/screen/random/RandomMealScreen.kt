@@ -31,7 +31,7 @@ fun RandomMealScreen(
     val mealFromLocalDb by viewModel.mealFromLocalDb.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    RandomMealScreenContents(
+    ScreenContents(
         modifier = modifier,
         uiState = uiState,
         windowSize = windowSize,
@@ -47,7 +47,7 @@ fun RandomMealScreen(
 }
 
 @Composable
-private fun RandomMealScreenContents(
+private fun ScreenContents(
     modifier: Modifier,
     uiState: UIState<MealDetails>,
     windowSize: WindowSizeClass,
@@ -80,12 +80,12 @@ private fun RandomMealScreenContents(
 
 @ThemePreviews
 @Composable
-private fun RandomMealScreenPreview(
+private fun ScreenPreview(
     @PreviewParameter(MealDetailsScreenParameterProvider::class)
     previewModel: MealDetailsScreenPreviewModel
 ) {
     FoodyTheme {
-        RandomMealScreenContents(
+        ScreenContents(
             modifier = Modifier.fillMaxSize(),
             uiState = previewModel.uiState,
             windowSize = previewModel.windowSizeClass,

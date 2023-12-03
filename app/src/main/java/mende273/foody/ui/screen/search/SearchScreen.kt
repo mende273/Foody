@@ -43,7 +43,7 @@ fun SearchScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    SearchScreenContents(
+    ScreenContents(
         modifier = modifier,
         isSearchBarActive = isSearchBarActive,
         searchText = searchText,
@@ -67,7 +67,7 @@ fun SearchScreen(
 }
 
 @Composable
-private fun SearchScreenContents(
+private fun ScreenContents(
     modifier: Modifier,
     isSearchBarActive: Boolean,
     searchText: String,
@@ -121,11 +121,11 @@ private fun SearchScreenContents(
 @ThemePreviews
 @ScreenPreviews
 @Composable
-private fun SearchScreenContentsPreview(
+private fun ScreenPreview(
     @PreviewParameter(SearchScreenParameterPreview::class) previewModel: SearchScreenPreviewModel
 ) {
     FoodyTheme {
-        SearchScreenContents(
+        ScreenContents(
             modifier = Modifier.fillMaxSize(),
             isSearchBarActive = false,
             searchText = "beef",
