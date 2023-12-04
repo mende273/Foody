@@ -117,6 +117,7 @@ ImageLoader(this).newBuilder()
 - [Material 3](https://m3.material.io/) - The latest version of Google’s open-source design system.
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+- [Gradle Version Catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog) - Maintain dependencies and plugins in a scalable way.
 
 ## Static Code Analysis
 - [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle) - A library for formatting Kotlin code according to official guidelines.
