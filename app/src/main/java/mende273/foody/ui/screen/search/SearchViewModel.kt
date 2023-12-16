@@ -13,8 +13,9 @@ import mende273.foody.util.toUIState
 class SearchViewModel
 (private val remoteRepository: RemoteRepositoryImpl) : ViewModel() {
 
-    private var _uiState: MutableStateFlow<UIState<List<Meal>>> =
-        MutableStateFlow(UIState.Success(emptyList()))
+    private val _uiState: MutableStateFlow<UIState<List<Meal>>> = MutableStateFlow(
+        UIState.Success(emptyList())
+    )
     val uiState: StateFlow<UIState<List<Meal>>> = _uiState
 
     fun onSearchTextChange(name: String) {
