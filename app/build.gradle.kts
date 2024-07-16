@@ -98,11 +98,19 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 
+    // compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.material3.window.size)
@@ -110,29 +118,22 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui.preview)
     implementation(libs.compose.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.kotlinx.coroutines.test)
-    implementation(libs.mockk)
-
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
-    implementation(libs.androidx.navigation.compose)
-    androidTestImplementation(libs.androidx.navigation.testing)
+    // mockk
+    implementation(libs.mockk)
 
+    // koin
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.compose.navigation)
     testImplementation(libs.koin.test)
     testImplementation(libs.koin.test.junit4)
 
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-
-    implementation(libs.kotlinx.coroutines.core)
+    // ktor
+    implementation(platform(libs.ktor.bom))
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.client.logging)
@@ -140,8 +141,10 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
     testImplementation(libs.ktor.client.mock)
 
+    // coil
     implementation(libs.coil.compose)
 
-    implementation(libs.android.driver)
-    implementation(libs.coroutines.extensions)
+    // sqldelight
+    implementation(libs.app.cash.sqldelight)
+    implementation(libs.app.cash.sqldelight.coroutines.extensions)
 }
