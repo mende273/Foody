@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -39,7 +39,7 @@ fun ScrollableTabRowComponent(
         contentColor = MaterialTheme.colorScheme.onBackground,
         selectedTabIndex = pagerState.currentPage,
         edgePadding = 0.dp,
-        divider = { Divider(color = MaterialTheme.colorScheme.background) },
+        divider = { HorizontalDivider(color = MaterialTheme.colorScheme.background) },
         indicator = {
             TabIndicator(Modifier.tabIndicatorOffset(it[pagerState.currentPage]))
         }

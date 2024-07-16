@@ -3,7 +3,7 @@ package mende273.foody.ui.component
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +23,7 @@ fun RoundedBackButton(onNavigateBackClicked: () -> Unit) {
     ) {
         RoundedComponent {
             IconButton(onClick = { onNavigateBackClicked() }) {
-                Icon(Icons.Filled.ArrowBack, "back button")
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, "back button")
             }
         }
     }
