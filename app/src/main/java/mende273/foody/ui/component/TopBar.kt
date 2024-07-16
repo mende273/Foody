@@ -1,7 +1,7 @@
 package mende273.foody.ui.component
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,7 +46,7 @@ fun TopBar(
 private fun BackNavigationButton(navigateBackEvent: () -> Unit) {
     IconButton(onClick = { navigateBackEvent() }) {
         Icon(
-            imageVector = Icons.Filled.ArrowBack,
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = "navigate back"
         )
