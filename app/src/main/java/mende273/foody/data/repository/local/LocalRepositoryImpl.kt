@@ -1,10 +1,11 @@
-package mende273.foody.domain.repository
+package mende273.foody.data.repository.local
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import mende273.foody.MealEntity
 import mende273.foody.data.dao.MealDao
 import mende273.foody.domain.model.Meal
+import mende273.foody.domain.repository.LocalRepository
 
 class LocalRepositoryImpl(private val mealDao: MealDao) : LocalRepository {
 

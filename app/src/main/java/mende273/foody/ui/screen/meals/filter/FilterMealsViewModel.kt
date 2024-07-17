@@ -6,12 +6,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.RemoteRepositoryImpl
+import mende273.foody.domain.repository.RemoteRepository
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 class FilterMealsViewModel(
-    private val remoteRepository: RemoteRepositoryImpl
+    private val remoteRepository: RemoteRepository
 ) : ViewModel() {
 
     private val _headerTitle: MutableStateFlow<Int?> = MutableStateFlow(null)

@@ -30,8 +30,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mende273.foody.R
-import mende273.foody.domain.Tab
 import mende273.foody.domain.model.Meal
+import mende273.foody.ui.common.Tab
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.NormalText
 import mende273.foody.ui.component.ScrollableTabRowComponent

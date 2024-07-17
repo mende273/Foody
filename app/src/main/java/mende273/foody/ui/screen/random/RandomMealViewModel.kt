@@ -13,15 +13,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.repository.LocalRepositoryImpl
-import mende273.foody.domain.repository.RemoteRepositoryImpl
+import mende273.foody.domain.repository.LocalRepository
+import mende273.foody.domain.repository.RemoteRepository
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class RandomMealViewModel(
-    private val remoteRepository: RemoteRepositoryImpl,
-    private val localRepository: LocalRepositoryImpl
+    private val remoteRepository: RemoteRepository,
+    private val localRepository: LocalRepository
 ) : ViewModel() {
 
     private var mealDetailsResult: Result<MealDetails?> = Result.success(null)

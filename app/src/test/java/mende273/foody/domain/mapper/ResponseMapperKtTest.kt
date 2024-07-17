@@ -7,6 +7,7 @@ import mende273.foody.data.dto.MealDetailsDto
 import mende273.foody.data.dto.MealDto
 import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
+import mende273.foody.data.mapper.toModel
 import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails

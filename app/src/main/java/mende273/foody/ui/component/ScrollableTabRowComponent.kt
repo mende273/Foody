@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import mende273.foody.domain.Tab
+import mende273.foody.ui.common.Tab
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.parameter.TabItemsParameterProvider
 import mende273.foody.ui.theme.AccentColor
