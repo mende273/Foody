@@ -3,9 +3,9 @@ package mende273.foody.domain.usecase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
-import mende273.foody.domain.repository.RemoteRepositoryImpl
+import mende273.foody.domain.repository.RemoteRepository
 
-class GetAllFiltersUseCase(private val remoteRepository: RemoteRepositoryImpl) {
+class GetAllFiltersUseCase(private val remoteRepository: RemoteRepository) {
 
     suspend operator fun invoke(): Flow<FiltersWrapper> {
         val categories: Result<List<String>> = remoteRepository.getMealCategories()

@@ -4,14 +4,15 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import mende273.foody.data.api.ApiService
+import mende273.foody.data.repository.remote.RemoteRepositoryImpl
+import mende273.foody.data.source.remote.RemoteDataSource
 import org.junit.Test
 
 class RemoteRepositoryImplTest {
 
     private val client = MockHttpClient()
-    private val apiService = ApiService(client.get())
-    private val remoteRepositoryImpl = RemoteRepositoryImpl(apiService)
+    private val remoteDataSource = RemoteDataSource(client.get())
+    private val remoteRepositoryImpl = RemoteRepositoryImpl(remoteDataSource)
 
     @Test
     fun `getRandomMeal() should return a MealDetails object`() =

@@ -1,4 +1,4 @@
-package mende273.foody.data.api
+package mende273.foody.data.source.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -6,7 +6,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 
-class ApiService(private val client: HttpClient) {
+class RemoteDataSource(private val client: HttpClient) {
 
     companion object {
         private const val ENDPOINT = "https://www.themealdb.com/api/json/v1/1/"

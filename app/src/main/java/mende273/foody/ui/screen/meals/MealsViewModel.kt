@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.RemoteRepositoryImpl
+import mende273.foody.domain.repository.RemoteRepository
 import mende273.foody.domain.usecase.FiltersWrapper
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
 import mende273.foody.ui.state.Filter
@@ -19,7 +19,7 @@ import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 class MealsViewModel(
-    private val remoteRepository: RemoteRepositoryImpl,
+    private val remoteRepository: RemoteRepository,
     private val getAllFiltersUseCase: GetAllFiltersUseCase
 ) : ViewModel() {
 
