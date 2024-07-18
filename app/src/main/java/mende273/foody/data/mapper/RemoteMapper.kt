@@ -9,11 +9,11 @@ import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
 
-fun MealsWithDetailsDto?.toModel(): List<MealDetails> {
-    return this?.mealsWithDetails?.filterNotNull()?.map { it.toModel() } ?: emptyList()
+fun MealsWithDetailsDto?.toDomainModel(): List<MealDetails> {
+    return this?.mealsWithDetails?.filterNotNull()?.map { it.toDomainModel() } ?: emptyList()
 }
 
-fun MealDetailsDto.toModel(): MealDetails = MealDetails(
+fun MealDetailsDto.toDomainModel(): MealDetails = MealDetails(
     id = id ?: 0,
     name = name ?: "",
     category = category ?: "",
@@ -26,16 +26,16 @@ fun MealDetailsDto.toModel(): MealDetails = MealDetails(
     ingredientsWithMeasures = makeListForIngredientsWithMeasures(this)
 )
 
-fun MealsDto?.toModel(): List<Meal> =
-    this?.meals?.filterNotNull()?.map { it.toModel() } ?: emptyList()
+fun MealsDto?.toDomainModel(): List<Meal> =
+    this?.meals?.filterNotNull()?.map { it.toDomainModel() } ?: emptyList()
 
-fun MealDto.toModel(): Meal = Meal(
+fun MealDto.toDomainModel(): Meal = Meal(
     id = id,
     thumb = thumb ?: "",
     name = name ?: ""
 )
 
-fun MealCategoriesDto?.toModel(): List<String> =
+fun MealCategoriesDto?.toDomainModel(): List<String> =
     this?.categories
         ?.filterNotNull()
         .takeIf { !it.isNullOrEmpty() }

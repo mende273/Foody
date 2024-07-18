@@ -4,14 +4,14 @@ import android.content.Context
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import mende273.foody.Database
-import mende273.foody.data.dao.MealDao
+import mende273.foody.data.source.local.LocalDataSource
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val databaseModule = module {
     factory { sqlDriverFactory(androidContext()) }
     single { createDatabase(driver = get()) }
-    single { MealDao(database = get()) }
+    single { LocalDataSource(database = get()) }
 }
 
 fun sqlDriverFactory(context: Context): SqlDriver {
