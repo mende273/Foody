@@ -41,7 +41,7 @@ class RemoteDataSource(private val client: HttpClient) {
             parameter("i", ingredient)
         }
 
-    suspend fun getMealDetails(id: String) =
+    suspend fun getMealDetails(id: Long) =
         client.get {
             url("${ENDPOINT}lookup.php")
             parameter("i", id)

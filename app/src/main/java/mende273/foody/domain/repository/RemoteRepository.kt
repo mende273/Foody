@@ -9,7 +9,7 @@ interface RemoteRepository {
     suspend fun getMealsForArea(area: String): Result<List<Meal>>
     suspend fun getMealsForFirstLetter(letter: String): Result<List<Meal>>
     suspend fun getMealsWithIngredient(ingredient: String): Result<List<Meal>>
-    suspend fun getMealDetails(id: String): Result<MealDetails>
+    suspend fun getMealDetails(id: Long): Result<MealDetails>
     suspend fun getMealCategories(): Result<List<String>>
     suspend fun getMealAreas(): Result<List<String>>
     suspend fun searchMealsByName(name: String): Result<List<Meal>>

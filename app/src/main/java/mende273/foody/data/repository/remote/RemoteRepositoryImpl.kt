@@ -60,7 +60,7 @@ class RemoteRepositoryImpl(
                 .toDomainModel()
         }
 
-    override suspend fun getMealDetails(id: String): Result<MealDetails> =
+    override suspend fun getMealDetails(id: Long): Result<MealDetails> =
         runCatching {
             remoteDataSource
                 .getMealDetails(id)
