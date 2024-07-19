@@ -20,4 +20,7 @@
     <string name="title_category">Category: %1s</string>
     <string name="title_area">Area: %1s</string>
     <string name="title_ingredient">Ingredient: %1s</string>
+
+    <string name="generic_error">Something went wrong</string>
+    <string name="error_no_items_here">There are no items here</string>
 </resources>

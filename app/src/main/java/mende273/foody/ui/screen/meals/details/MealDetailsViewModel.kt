@@ -2,61 +2,77 @@ package mende273.foody.ui.screen.meals.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import mende273.foody.data.mapper.toMeal
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.repository.LocalRepository
-import mende273.foody.domain.repository.RemoteRepository
+import mende273.foody.domain.usecase.AddFavoriteMealToDBUseCase
+import mende273.foody.domain.usecase.DeleteFavoriteMealFromDBUseCase
+import mende273.foody.domain.usecase.GetFavoriteMealByIdFromDBUseCase
+import mende273.foody.domain.usecase.GetMealDetailsUseCase
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.toUIState
+import mende273.foody.ui.state.UIStateError
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class MealDetailsViewModel(
-    private val remoteRepository: RemoteRepository,
-    private val localRepository: LocalRepository
+    private val getFavoriteMealByIdFromDB: GetFavoriteMealByIdFromDBUseCase,
+    private val deleteFavoriteMealFromDB: DeleteFavoriteMealFromDBUseCase,
+    private val addFavoriteMealToDB: AddFavoriteMealToDBUseCase,
+    private val getMealDetails: GetMealDetailsUseCase
 ) : ViewModel() {
 
-    private val _mealFromLocalDb = MutableStateFlow<Flow<Meal?>>(emptyFlow())
-    val mealFromLocalDb: StateFlow<Meal?> = _mealFromLocalDb.flatMapLatest {
-        it
-    }.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
-        null
-    )
+    private var meal: Meal? = null
 
-    private var mealDetailsResult: Result<MealDetails?> = Result.success(null)
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> get() = _isFavorite
 
-    private val _uiState: MutableStateFlow<UIState<MealDetails>> =
-        MutableStateFlow(UIState.Loading)
+    private val _uiState = MutableStateFlow<UIState<MealDetails>>(UIState.Loading)
     val uiState: StateFlow<UIState<MealDetails>> = _uiState
 
-    fun requestData(id: String) {
-        viewModelScope.launch {
-            _mealFromLocalDb.value = localRepository.getFavouriteMealById(id.toLong())
+    fun init(id: Long) {
+        checkIsFavorite(id)
+        fetchMealDetails(id)
+    }
 
-            with(remoteRepository.getMealDetails(id)) {
-                mealDetailsResult = this
-                _uiState.value = this.toUIState()
-            }
+    private fun fetchMealDetails(id: Long) {
+        viewModelScope.launch {
+            getMealDetails(id).fold(
+                onSuccess = { mealDetails ->
+                    meal = mealDetails.toMeal()
+                    updateUiState(UIState.Success(mealDetails))
+                },
+                onFailure = {
+                    updateUiState(UIState.Error(UIStateError.GENERIC_ERROR))
+                }
+            )
+        }
+    }
+
+    private fun updateUiState(uiState: UIState<MealDetails>) {
+        viewModelScope.launch {
+            _uiState.update { uiState }
+        }
+    }
+
+    private fun checkIsFavorite(id: Long) {
+        viewModelScope.launch {
+            getFavoriteMealByIdFromDB(id)
+                .collectLatest { meal ->
+                    _isFavorite.update { meal != null }
+                }
         }
     }
 
     fun toggleFavourite() {
         viewModelScope.launch {
-            mealFromLocalDb.value?.let {
-                localRepository.deleteFavouriteMeal(meal = it)
-            } ?: run {
-                mealDetailsResult.getOrNull()?.let {
-                    localRepository.addFavouriteMeal(Meal(it.id, it.name, it.thumb))
+            meal?.let {
+                when (isFavorite.value) {
+                    true -> deleteFavoriteMealFromDB(it)
+
+                    false -> addFavoriteMealToDB(it)
                 }
             }
         }

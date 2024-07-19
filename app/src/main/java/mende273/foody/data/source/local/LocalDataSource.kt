@@ -1,4 +1,4 @@
-package mende273.foody.data.dao
+package mende273.foody.data.source.local
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToOneOrNull
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import mende273.foody.Database
 import mende273.foody.MealEntity
 
-class MealDao(private val database: Database) {
+class LocalDataSource(private val database: Database) {
     private val query get() = database.mealQueries
 
     fun selectAll(): List<MealEntity> = query.selectAll().executeAsList()

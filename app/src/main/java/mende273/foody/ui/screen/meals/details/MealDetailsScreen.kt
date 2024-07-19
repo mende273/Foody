@@ -32,18 +32,18 @@ fun MealDetailsScreen(
     onIngredientClicked: (String) -> Unit,
     onNavigateBackClicked: () -> Unit
 ) {
-    val mealFromLocalDb by viewModel.mealFromLocalDb.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = mealId, block = {
-        viewModel.requestData(mealId)
+        viewModel.init(mealId.toLong())
     })
 
     ScreenContents(
         modifier = modifier,
         uiState = uiState,
         windowSize = windowSize,
-        isFavourite = mealFromLocalDb != null,
+        isFavourite = isFavorite,
         onHeaderImageClicked = { onHeaderImageClicked(it) },
         onCategoryClicked = { onCategoryClicked(it) },
         onAreaClicked = { onAreaClicked(it) },

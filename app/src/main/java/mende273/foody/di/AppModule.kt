@@ -8,6 +8,7 @@ val appModule = module {
         localRepositoryModule,
         remoteRepositoryModule,
         viewModelModule,
-        databaseModule
+        databaseModule,
+        dispatchersModule
     )
 }

@@ -7,13 +7,13 @@ import mende273.foody.data.dto.MealDetailsDto
 import mende273.foody.data.dto.MealDto
 import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
-import mende273.foody.data.mapper.toModel
+import mende273.foody.data.mapper.toDomainModel
 import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
 import org.junit.Test
 
-class ResponseMapperKtTest {
+class RemoteMapperKtTest {
 
     private val mealDetailsDto = MealDetailsDto(
         id = 12345,
@@ -37,7 +37,7 @@ class ResponseMapperKtTest {
 
     @Test
     fun `should convert a MealDetailsDto to a MealDetails object`() {
-        val actualMealDetails = mealDetailsDto.toModel()
+        val actualMealDetails = mealDetailsDto.toDomainModel()
 
         val expectedMealDetails = MealDetails(
             id = 12345L,
@@ -66,7 +66,7 @@ class ResponseMapperKtTest {
             mealsWithDetails = listOf(mealDetailsDto)
         )
 
-        val actualMealDetailsList = mealsWithDetailsDto.toModel()
+        val actualMealDetailsList = mealsWithDetailsDto.toDomainModel()
 
         val expectedMealDetailsList = listOf(
             MealDetails(
@@ -95,7 +95,7 @@ class ResponseMapperKtTest {
     fun `should return an empty list if mealsWithDetails is null`() {
         val mealsWithDetailsDto = MealsWithDetailsDto(mealsWithDetails = null)
 
-        val actualMealDetailsList = mealsWithDetailsDto.toModel()
+        val actualMealDetailsList = mealsWithDetailsDto.toDomainModel()
 
         assertEquals(emptyList<MealDetails>(), actualMealDetailsList)
     }
@@ -117,7 +117,7 @@ class ResponseMapperKtTest {
             )
         )
 
-        val actualMealList = mealsDto.toModel()
+        val actualMealList = mealsDto.toDomainModel()
 
         val expectedMealList = listOf(
             Meal(
@@ -139,7 +139,7 @@ class ResponseMapperKtTest {
     fun `should return an empty list if meals is null`() {
         val mealsDto = MealsDto(meals = null)
 
-        val actualMealList = mealsDto.toModel()
+        val actualMealList = mealsDto.toDomainModel()
 
         assertEquals(emptyList<Meal>(), actualMealList)
     }
@@ -152,7 +152,7 @@ class ResponseMapperKtTest {
             thumb = "https://www.example.com/spaghetti.jpg"
         )
 
-        val actualMeal = mealDto.toModel()
+        val actualMeal = mealDto.toDomainModel()
 
         assertEquals(12345L, actualMeal.id)
         assertEquals("Spaghetti Carbonara", actualMeal.name)
@@ -167,7 +167,7 @@ class ResponseMapperKtTest {
             thumb = null
         )
 
-        val actualMeal = mealDto.toModel()
+        val actualMeal = mealDto.toDomainModel()
 
         assertEquals(52772L, actualMeal.id)
         assertEquals("", actualMeal.name)
@@ -184,7 +184,7 @@ class ResponseMapperKtTest {
             )
         )
 
-        val actualCategoryNames = mealCategoriesDto.toModel()
+        val actualCategoryNames = mealCategoriesDto.toDomainModel()
 
         val expectedCategoryNames = listOf("Italian", "Chinese", "Mexican")
 
@@ -195,7 +195,7 @@ class ResponseMapperKtTest {
     fun `should return an empty list if categories is null or contains only null values`() {
         val mealCategoriesDto = MealCategoriesDto(categories = null)
 
-        val actualCategoryNames = mealCategoriesDto.toModel()
+        val actualCategoryNames = mealCategoriesDto.toDomainModel()
 
         assertEquals(emptyList<String>(), actualCategoryNames)
     }
@@ -211,7 +211,7 @@ class ResponseMapperKtTest {
             )
         )
 
-        val actualCategoryNames = mealCategoriesDto.toModel()
+        val actualCategoryNames = mealCategoriesDto.toDomainModel()
 
         val expectedCategoryNames = listOf("Italian")
 

@@ -4,11 +4,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import mende273.foody.ui.preview.annotations.FontScalePreviews
 import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.state.UIStateError
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.largeTextStyle
-import mende273.foody.util.ERROR_LOADING_DATA
 
 @Composable
 fun ErrorComponent(modifier: Modifier = Modifier, text: String) {
@@ -22,6 +23,6 @@ fun ErrorComponent(modifier: Modifier = Modifier, text: String) {
 @Composable
 private fun ErrorComponentPreview() {
     FoodyTheme {
-        ErrorComponent(text = ERROR_LOADING_DATA)
+        ErrorComponent(text = stringResource(id = UIStateError.GENERIC_ERROR.errorMessage))
     }
 }

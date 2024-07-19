@@ -4,25 +4,33 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.LocalRepository
+import mende273.foody.domain.usecase.GetAllFavoriteMealsFromDBUseCase
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
-class FavouritesViewModel(private val localRepository: LocalRepository) : ViewModel() {
+class FavouritesViewModel(
+    private val getAllFavoriteMealsFromDB: GetAllFavoriteMealsFromDBUseCase
+) : ViewModel() {
 
-    private val _meals: MutableStateFlow<UIState<List<Meal>>> = MutableStateFlow(UIState.Loading)
+    private val _meals = MutableStateFlow<UIState<List<Meal>>>(UIState.Loading)
     val meals: StateFlow<UIState<List<Meal>>> = _meals
 
     fun loadData() {
         viewModelScope.launch {
-            _meals.value = UIState.Loading
-            val meals = localRepository.getAllFavouriteMeals()
-            if (meals.isNotEmpty()) {
-                _meals.value = UIState.Success(localRepository.getAllFavouriteMeals())
-            } else {
-                _meals.value = UIState.Error("You don't have any favourite meals")
+            val meals = getAllFavoriteMealsFromDB()
+            when (meals.isNotEmpty()) {
+                true -> updateUiState(UIState.Success(meals))
+                false -> updateUiState(UIState.Error(UIStateError.NO_ITEMS))
             }
+        }
+    }
+
+    private fun updateUiState(uiState: UIState<List<Meal>>) {
+        viewModelScope.launch {
+            _meals.update { uiState }
         }
     }
 }
