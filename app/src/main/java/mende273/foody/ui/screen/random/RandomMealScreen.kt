@@ -28,14 +28,15 @@ fun RandomMealScreen(
     onIngredientClicked: (String) -> Unit,
     onSourceClicked: (String) -> Unit
 ) {
-    val mealFromLocalDb by viewModel.mealFromLocalDb.collectAsStateWithLifecycle()
+    //  val mealFromLocalDb by viewModel.mealFromLocalDb.collectAsStateWithLifecycle()
+    val isMealFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     ScreenContents(
         modifier = modifier,
         uiState = uiState,
         windowSize = windowSize,
-        isFavourite = mealFromLocalDb != null,
+        isFavourite = isMealFavorite,
         onHeaderImageClicked = { onHeaderImageClicked(it) },
         onCategoryClicked = { onCategoryClicked(it) },
         onAreaClicked = { onAreaClicked(it) },
