@@ -14,8 +14,8 @@ import org.koin.dsl.module
 
 val localRepositoryModule = module {
     single<LocalRepository> { LocalRepositoryImpl(get(), get()) }
-    factory<AddFavoriteMealToDBUseCase> { AddFavoriteMealToDBUseCaseImpl(get()) }
-    factory<DeleteFavoriteMealFromDBUseCase> { DeleteFavoriteMealFromDBUseCaseImpl(get()) }
-    factory<GetFavoriteMealByIdFromDBUseCase> { GetFavoriteMealByIdFromDBUseCaseImpl(get()) }
-    factory<GetAllFavoriteMealsFromDBUseCase> { GetAllFavoriteMealsFromDBUseCaseImpl(get()) }
+    single<AddFavoriteMealToDBUseCase> { AddFavoriteMealToDBUseCaseImpl(get()) }
+    single<DeleteFavoriteMealFromDBUseCase> { DeleteFavoriteMealFromDBUseCaseImpl(get()) }
+    single<GetFavoriteMealByIdFromDBUseCase> { GetFavoriteMealByIdFromDBUseCaseImpl(get()) }
+    single<GetAllFavoriteMealsFromDBUseCase> { GetAllFavoriteMealsFromDBUseCaseImpl(get()) }
 }
