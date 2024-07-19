@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.preview.model.SearchScreenPreviewModel
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
 class SearchScreenParameterPreview : PreviewParameterProvider<SearchScreenPreviewModel> {
 
@@ -32,7 +33,7 @@ class SearchScreenParameterPreview : PreviewParameterProvider<SearchScreenPrevie
             windowSize = WindowSizeClass.calculateFromSize(
                 DpSize(width = 673.5.dp, height = 841.dp)
             ),
-            UIState.Error("Something went wrong")
+            UIState.Error(UIStateError.GENERIC_ERROR)
         ),
         SearchScreenPreviewModel(
             windowSize = WindowSizeClass.calculateFromSize(

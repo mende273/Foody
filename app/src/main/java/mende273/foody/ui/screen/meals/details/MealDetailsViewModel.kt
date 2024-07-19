@@ -15,6 +15,7 @@ import mende273.foody.domain.usecase.DeleteFavoriteMealFromDBUseCase
 import mende273.foody.domain.usecase.GetFavoriteMealByIdFromDBUseCase
 import mende273.foody.domain.usecase.GetMealDetailsUseCase
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
 class MealDetailsViewModel(
     private val getFavoriteMealByIdFromDB: GetFavoriteMealByIdFromDBUseCase,
@@ -44,7 +45,7 @@ class MealDetailsViewModel(
                     updateUiState(UIState.Success(mealDetails))
                 },
                 onFailure = {
-                    updateUiState(UIState.Error(""))
+                    updateUiState(UIState.Error(UIStateError.GENERIC_ERROR))
                 }
             )
         }

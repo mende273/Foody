@@ -6,6 +6,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 import mende273.foody.ui.theme.spacing
 
 fun WindowSizeClass.getGridCellsCount(): Int {
@@ -29,7 +30,7 @@ fun <T> Result<T>.toUIState(): UIState<T> {
             UIState.Success(it)
         },
         onFailure = {
-            UIState.Error(it.message ?: ERROR_LOADING_DATA)
+            UIState.Error(UIStateError.GENERIC_ERROR)
         }
     )
 }

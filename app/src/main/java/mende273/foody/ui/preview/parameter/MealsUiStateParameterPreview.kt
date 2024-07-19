@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.preview.model.MealsUiStatePreviewModel
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
 class MealsUiStateParameterPreview : PreviewParameterProvider<MealsUiStatePreviewModel> {
 
@@ -32,7 +33,7 @@ class MealsUiStateParameterPreview : PreviewParameterProvider<MealsUiStatePrevie
             windowSize = WindowSizeClass.calculateFromSize(
                 DpSize(width = 673.5.dp, height = 841.dp)
             ),
-            uiState = UIState.Error("Something went wrong")
+            uiState = UIState.Error(UIStateError.GENERIC_ERROR)
         ),
         MealsUiStatePreviewModel(
             windowSize = WindowSizeClass.calculateFromSize(

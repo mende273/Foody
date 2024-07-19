@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.usecase.GetAllFavoriteMealsFromDBUseCase
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
 class FavouritesViewModel(
     private val getAllFavoriteMealsFromDB: GetAllFavoriteMealsFromDBUseCase
@@ -21,9 +22,15 @@ class FavouritesViewModel(
         viewModelScope.launch {
             val meals = getAllFavoriteMealsFromDB()
             when (meals.isNotEmpty()) {
-                true -> _meals.update { UIState.Success(meals) }
-                false -> _meals.update { UIState.Error("You don't have any favourite meals") }
+                true -> updateUiState(UIState.Success(meals))
+                false -> updateUiState(UIState.Error(UIStateError.NO_ITEMS))
             }
+        }
+    }
+
+    private fun updateUiState(uiState: UIState<List<Meal>>) {
+        viewModelScope.launch {
+            _meals.update { uiState }
         }
     }
 }

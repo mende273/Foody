@@ -7,23 +7,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.spacing
-import mende273.foody.util.ERROR_LOADING_DATA
 
 @Composable
 fun <T> UiStateWrapper(
     uiState: UIState<T>,
-    onError: @Composable (String) -> Unit = { errorMessage ->
+    onError: @Composable (UIStateError) -> Unit = { error ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(MaterialTheme.spacing.normal),
             contentAlignment = Alignment.Center
         ) {
-            ErrorComponent(text = errorMessage)
+            ErrorComponent(text = stringResource(id = error.errorMessage))
         }
     },
     onLoading: @Composable () -> Unit = {
@@ -39,7 +40,7 @@ fun <T> UiStateWrapper(
     onSuccess: @Composable (T) -> Unit
 ) {
     when (uiState) {
-        is UIState.Error -> onError(uiState.errorMessage)
+        is UIState.Error -> onError(uiState.error)
         UIState.Loading -> onLoading()
         is UIState.Success -> onSuccess(uiState.data)
     }
@@ -57,7 +58,7 @@ private fun UiStateWrapperLoadingPreview() {
 @Composable
 private fun UiStateWrapperErrorPreview() {
     FoodyTheme {
-        UiStateWrapper(uiState = UIState.Error(ERROR_LOADING_DATA), onSuccess = {})
+        UiStateWrapper(uiState = UIState.Error(UIStateError.GENERIC_ERROR), onSuccess = {})
     }
 }
 

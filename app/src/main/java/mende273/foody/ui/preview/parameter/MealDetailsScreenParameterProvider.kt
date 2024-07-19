@@ -9,6 +9,7 @@ import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.MealDetails
 import mende273.foody.ui.preview.model.MealDetailsScreenPreviewModel
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MealDetailsScreenParameterProvider : PreviewParameterProvider<MealDetailsScreenPreviewModel> {
@@ -42,7 +43,7 @@ class MealDetailsScreenParameterProvider : PreviewParameterProvider<MealDetailsS
             windowSizeClass = WindowSizeClass.calculateFromSize(
                 DpSize(width = 673.5.dp, height = 841.dp)
             ),
-            uiState = UIState.Error("Something went wrong"),
+            uiState = UIState.Error(UIStateError.GENERIC_ERROR),
             isFavourite = false
         ),
         MealDetailsScreenPreviewModel(

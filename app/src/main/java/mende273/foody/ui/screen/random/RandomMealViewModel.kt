@@ -15,6 +15,7 @@ import mende273.foody.domain.usecase.DeleteFavoriteMealFromDBUseCase
 import mende273.foody.domain.usecase.GetFavoriteMealByIdFromDBUseCase
 import mende273.foody.domain.usecase.GetRandomMealUseCase
 import mende273.foody.ui.state.UIState
+import mende273.foody.ui.state.UIStateError
 
 class RandomMealViewModel(
     private val getRandomMealUseCase: GetRandomMealUseCase,
@@ -44,7 +45,7 @@ class RandomMealViewModel(
                     checkIsFavorite(mealDetails.id)
                 },
                 onFailure = {
-                    updateUiState(UIState.Error(""))
+                    updateUiState(UIState.Error(UIStateError.GENERIC_ERROR))
                 }
             )
         }
