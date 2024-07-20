@@ -29,67 +29,83 @@ class RemoteRepositoryImpl(
         }
 
     override suspend fun getMealsForCategory(category: String): Result<List<Meal>> =
-        runCatching {
-            remoteDataSource
-                .getMealsForCategory(category)
-                .body<MealsDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealsForCategory(category)
+                    .body<MealsDto?>()
+                    .toDomainModel()
+            }
         }
 
     override suspend fun getMealsForArea(area: String): Result<List<Meal>> =
-        runCatching {
-            remoteDataSource
-                .getMealsForArea(area)
-                .body<MealsDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealsForArea(area)
+                    .body<MealsDto?>()
+                    .toDomainModel()
+            }
         }
 
     override suspend fun getMealsWithIngredient(ingredient: String): Result<List<Meal>> =
-        runCatching {
-            remoteDataSource
-                .getMealsWithIngredient((ingredient))
-                .body<MealsDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealsWithIngredient((ingredient))
+                    .body<MealsDto?>()
+                    .toDomainModel()
+            }
         }
 
     override suspend fun getMealsForFirstLetter(letter: String): Result<List<Meal>> =
-        runCatching {
-            remoteDataSource
-                .getMealsForFirstLetter(letter)
-                .body<MealsDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealsForFirstLetter(letter)
+                    .body<MealsDto?>()
+                    .toDomainModel()
+            }
         }
 
     override suspend fun getMealDetails(id: Long): Result<MealDetails> =
-        runCatching {
-            remoteDataSource
-                .getMealDetails(id)
-                .body<MealsWithDetailsDto?>()
-                .toDomainModel()
-                .first()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealDetails(id)
+                    .body<MealsWithDetailsDto?>()
+                    .toDomainModel()
+                    .first()
+            }
         }
 
     override suspend fun getMealCategories(): Result<List<String>> =
-        runCatching {
-            remoteDataSource
-                .getMealCategories()
-                .body<MealCategoriesDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealCategories()
+                    .body<MealCategoriesDto?>()
+                    .toDomainModel()
+            }
         }
 
     override suspend fun getMealAreas(): Result<List<String>> =
-        runCatching {
-            remoteDataSource
-                .getMealAreas()
-                .body<MealCategoriesDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .getMealAreas()
+                    .body<MealCategoriesDto?>()
+                    .toDomainModel()
+            }
         }
 
     override suspend fun searchMealsByName(name: String): Result<List<Meal>> =
-        runCatching {
-            remoteDataSource
-                .searchMealsByName(name)
-                .body<MealsDto?>()
-                .toDomainModel()
+        withContext(ioDispatcher) {
+            runCatching {
+                remoteDataSource
+                    .searchMealsByName(name)
+                    .body<MealsDto?>()
+                    .toDomainModel()
+            }
         }
 }

@@ -7,7 +7,6 @@ import mende273.foody.domain.usecase.GetRandomMealUseCase
 class GetRandomMealUseCaseImpl(private val remoteRepository: RemoteRepository) :
     GetRandomMealUseCase {
 
-    override suspend operator fun invoke(): Result<MealDetails> {
-        return remoteRepository.getRandomMeal()
-    }
+    override suspend operator fun invoke(): Result<MealDetails> =
+        remoteRepository.getRandomMeal()
 }

@@ -6,12 +6,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.RemoteRepository
+import mende273.foody.domain.usecase.GetMealsForAreaUseCase
+import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
+import mende273.foody.domain.usecase.GetMealsWithIngredientUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 class FilterMealsViewModel(
-    private val remoteRepository: RemoteRepository
+    private val getMealsForCategory: GetMealsForCategoryUseCase,
+    private val getMealsForArea: GetMealsForAreaUseCase,
+    private val getMealsWithIngredient: GetMealsWithIngredientUseCase
 ) : ViewModel() {
 
     private val _headerTitle: MutableStateFlow<Int?> = MutableStateFlow(null)
@@ -26,9 +30,9 @@ class FilterMealsViewModel(
             _headerTitle.value = filterType.title
 
             _uiState.value = when (filterType) {
-                FilterType.CATEGORY -> remoteRepository.getMealsForCategory(name)
-                FilterType.AREA -> remoteRepository.getMealsForArea(name)
-                FilterType.INGREDIENT -> remoteRepository.getMealsWithIngredient(name)
+                FilterType.CATEGORY -> getMealsForCategory(name)
+                FilterType.AREA -> getMealsForArea(name)
+                FilterType.INGREDIENT -> getMealsWithIngredient(name)
             }.toUIState()
         }
     }
