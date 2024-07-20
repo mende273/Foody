@@ -8,7 +8,6 @@ import mende273.foody.domain.usecase.GetFavoriteMealByIdFromDBUseCase
 class GetFavoriteMealByIdFromDBUseCaseImpl
 (private val localRepository: LocalRepository) : GetFavoriteMealByIdFromDBUseCase {
 
-    override suspend fun invoke(id: Long): Flow<Meal?> {
-        return localRepository.getFavouriteMealById(id)
-    }
+    override suspend fun invoke(id: Long): Flow<Meal?> =
+        localRepository.getFavouriteMealById(id)
 }

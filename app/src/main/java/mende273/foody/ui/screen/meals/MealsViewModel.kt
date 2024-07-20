@@ -10,17 +10,21 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import mende273.foody.domain.model.FiltersWrapper
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.RemoteRepository
-import mende273.foody.domain.usecase.FiltersWrapper
 import mende273.foody.domain.usecase.GetAllFiltersUseCase
+import mende273.foody.domain.usecase.GetMealsForAreaUseCase
+import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
+import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 
 class MealsViewModel(
-    private val remoteRepository: RemoteRepository,
-    private val getAllFiltersUseCase: GetAllFiltersUseCase
+    private val getAllFilters: GetAllFiltersUseCase,
+    private val getMealsForCategory: GetMealsForCategoryUseCase,
+    private val getMealsForArea: GetMealsForAreaUseCase,
+    private val getMealsForFirstLetter: GetMealsForFirstLetterUseCase
 ) : ViewModel() {
 
     init {
@@ -65,7 +69,7 @@ class MealsViewModel(
 
     private fun fetchAllFilters() {
         viewModelScope.launch {
-            getAllFiltersUseCase().collectLatest { remote ->
+            getAllFilters().collectLatest { remote ->
                 allFilters.update { remote }
 
                 _currentFilter.value = if (remote.categories.isSuccess) {
@@ -91,9 +95,9 @@ class MealsViewModel(
     fun fetchMeals(name: String) {
         viewModelScope.launch {
             _uiStateCurrentFilterTabItems.value = when (_currentFilter.value) {
-                Filter.CATEGORY -> remoteRepository.getMealsForCategory(name)
-                Filter.AREA -> remoteRepository.getMealsForArea(name)
-                Filter.FIRST_LETTER -> remoteRepository.getMealsForFirstLetter(name)
+                Filter.CATEGORY -> getMealsForCategory(name)
+                Filter.AREA -> getMealsForArea(name)
+                Filter.FIRST_LETTER -> getMealsForFirstLetter(name)
             }.toUIState()
         }
     }
