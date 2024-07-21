@@ -19,7 +19,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,6 +26,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import mende273.foody.ui.navigation.AppNavigation
@@ -49,9 +51,9 @@ class MainActivity : ComponentActivity() {
 
             val isPortrait = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
 
-            isNavigationBarVisible = isRouteFromBottomBarMenu(
-                navController.currentBackStackEntryAsState()
-            )
+            val currentBackStack = navController.currentBackStackEntryAsState()
+
+            isNavigationBarVisible = currentBackStack.value.shouldShowNavBar()
 
             FoodyTheme {
                 Scaffold(
@@ -67,8 +69,11 @@ class MainActivity : ComponentActivity() {
                         ) {
                             if (!isPortrait) {
                                 NavigationBar(
-                                    navController = navController,
-                                    isPortrait = false
+                                    currentScreen = currentBackStack.value.currentScreen(),
+                                    isPortrait = false,
+                                    onNavigateToScreen = {
+                                        navController.singleTopNavigate(it)
+                                    }
                                 )
                             }
 
@@ -90,8 +95,9 @@ class MainActivity : ComponentActivity() {
                                 exit = slideOutVertically(targetOffsetY = { it })
                             ) {
                                 NavigationBar(
-                                    navController = navController,
-                                    isPortrait = true
+                                    currentScreen = currentBackStack.value.currentScreen(),
+                                    isPortrait = true,
+                                    onNavigateToScreen = { navController.singleTopNavigate(it) }
                                 )
                             }
                         }
@@ -102,14 +108,48 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun isRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
-    val currentRoute = currentBackStackEntry.value?.destination?.route
-    return currentRoute?.let { route ->
-        return@let (
-            route == Screen.Meals.route ||
-                route == Screen.RandomMeal.route ||
-                route == Screen.Favourites.route ||
-                route == Screen.Search.route
-            )
-    } ?: false
+private fun NavDestination?.getRouteName(): String? =
+    this?.route
+        ?.substringBefore("?")
+        ?.substringBefore("/")
+        ?.substringAfterLast(".")
+
+private fun NavBackStackEntry?.shouldShowNavBar(): Boolean {
+    return this?.destination?.getRouteName()
+        ?.let {
+            when (it) {
+                Screen.Home::class.simpleName,
+                Screen.Random::class.simpleName,
+                Screen.Favorites::class.simpleName,
+                Screen.Search::class.simpleName -> true
+
+                else -> false
+            }
+        } ?: false
+}
+
+private fun NavBackStackEntry?.currentScreen(): Screen {
+    var currentDestination: Screen? = null
+
+    this?.destination?.getRouteName()
+        ?.let {
+            currentDestination = when (it) {
+                Screen.Home::class.simpleName -> Screen.Home
+                Screen.Random::class.simpleName -> Screen.Random
+                Screen.Favorites::class.simpleName -> Screen.Favorites
+                Screen.Search::class.simpleName -> Screen.Search
+                else -> null
+            }
+        }
+    return currentDestination ?: Screen.Home
+}
+
+private fun NavHostController.singleTopNavigate(screen: Screen) {
+    navigate(screen) {
+        popUpTo(graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
 }

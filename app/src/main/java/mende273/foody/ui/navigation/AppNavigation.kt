@@ -9,12 +9,10 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
+import androidx.navigation.toRoute
 import mende273.foody.ui.screen.favourites.FavouritesScreen
 import mende273.foody.ui.screen.meals.MealsScreen
 import mende273.foody.ui.screen.meals.details.MealDetailsScreen
@@ -36,9 +34,9 @@ fun AppNavigation(
 
     NavHost(
         navController,
-        startDestination = Screen.Meals.route
+        startDestination = Screen.Home
     ) {
-        composable(Screen.Meals.route) {
+        composable<Screen.Home> {
             MealsScreen(
                 modifier = modifier.padding(
                     top = innerPadding.calculateTopPadding(),
@@ -46,86 +44,82 @@ fun AppNavigation(
                 ),
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
-                onMealClicked = {
-                    navController.navigate(Screen.MealDetails.getRoute(it))
+                onMealClicked = { mealId ->
+                    navController.navigate(Screen.MealDetails(mealId))
                 }
             )
         }
 
-        composable(Screen.RandomMeal.route) {
+        composable<Screen.Random> {
             RandomMealScreen(
                 modifier = modifier,
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
-                onHeaderImageClicked = {
-                    val encodedUrl = URLEncoder.encode(it, StandardCharsets.UTF_8.toString())
-                    navController.navigate(Screen.FullScreenImage.getRoute(encodedUrl))
+                onHeaderImageClicked = { imageUrl ->
+                    navController.navigate(Screen.FullScreenImage(imageUrl))
                 },
                 onCategoryClicked = { category ->
                     navController.navigate(
-                        Screen.FilterMeals.getRoute(category, FilterType.CATEGORY.name)
+                        Screen.FilterMeals(category, FilterType.CATEGORY.name)
                     )
                 },
                 onAreaClicked = {
                     navController.navigate(
-                        Screen.FilterMeals.getRoute(it, FilterType.AREA.name)
+                        Screen.FilterMeals(it, FilterType.AREA.name)
                     )
                 },
                 onVideoClicked = { startImplicitIntent(context, it) },
                 onIngredientClicked = { ingredient ->
                     navController.navigate(
-                        Screen.FilterMeals.getRoute(ingredient, FilterType.INGREDIENT.name)
+                        Screen.FilterMeals(ingredient, FilterType.INGREDIENT.name)
                     )
                 },
                 onSourceClicked = { startImplicitIntent(context, it) }
             )
         }
 
-        composable(Screen.MealDetails.route) {
+        composable<Screen.MealDetails> { backStack ->
             MealDetailsScreen(
                 modifier = modifier,
                 viewModel = koinNavViewModel(),
-                mealId = it.getArgument(Screen.MealDetails.MEAL_ID_ARGUMENT),
+                mealId = backStack.toRoute<Screen.MealDetails>().mealId,
                 windowSize = windowSize,
                 onHeaderImageClicked = { imageUrl ->
-                    val encodedUrl = URLEncoder.encode(imageUrl, StandardCharsets.UTF_8.toString())
-                    navController.navigate(Screen.FullScreenImage.getRoute(encodedUrl))
+                    navController.navigate(Screen.FullScreenImage(imageUrl))
                 },
                 onCategoryClicked = { category ->
                     navController.navigate(
-                        Screen.FilterMeals.getRoute(category, FilterType.CATEGORY.name)
+                        Screen.FilterMeals(category, FilterType.CATEGORY.name)
                     )
                 },
                 onAreaClicked = { area ->
                     navController.navigate(
-                        Screen.FilterMeals.getRoute(area, FilterType.AREA.name)
+                        Screen.FilterMeals(area, FilterType.AREA.name)
                     )
                 },
                 onVideoClicked = { url -> startImplicitIntent(context, url) },
                 onSourceClicked = { url -> startImplicitIntent(context, url) },
                 onIngredientClicked = { ingredient ->
                     navController.navigate(
-                        Screen.FilterMeals.getRoute(ingredient, FilterType.INGREDIENT.name)
+                        Screen.FilterMeals(ingredient, FilterType.INGREDIENT.name)
                     )
                 },
                 onNavigateBackClicked = { navController.popBackStack() }
             )
         }
 
-        composable(Screen.Search.route) {
+        composable<Screen.Search> {
             SearchScreen(
                 modifier = modifier.padding(
                     bottom = innerPadding.calculateBottomPadding()
                 ),
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
-                onMealClicked = { mealId ->
-                    navController.navigate(Screen.MealDetails.getRoute(mealId))
-                }
+                onMealClicked = { mealId -> navController.navigate(Screen.MealDetails(mealId)) }
             )
         }
 
-        composable(Screen.Favourites.route) {
+        composable<Screen.Favorites> {
             FavouritesScreen(
                 modifier = modifier.padding(
                     top = innerPadding.calculateTopPadding(),
@@ -133,40 +127,32 @@ fun AppNavigation(
                 ),
                 viewModel = koinNavViewModel(),
                 windowSize = windowSize,
-                onMealClicked = { mealId ->
-                    navController.navigate(Screen.MealDetails.getRoute(mealId))
-                }
+                onMealClicked = { mealId -> navController.navigate(Screen.MealDetails(mealId)) }
             )
         }
 
-        composable(Screen.FilterMeals.route) {
+        composable<Screen.FilterMeals> { backStack ->
+            val filterMeals = backStack.toRoute<Screen.FilterMeals>()
             FilterMealsScreen(
                 modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 viewModel = koinNavViewModel(),
-                name = it.getArgument(Screen.FilterMeals.NAME_ARGUMENT),
-                filterType = FilterType.valueOf(
-                    it.getArgument(Screen.FilterMeals.FILTER_TYPE_ARGUMENT)
-                ),
+                name = filterMeals.name,
+                filterType = FilterType.valueOf(filterMeals.filterType),
                 windowSize = windowSize,
-                onMealClicked = { mealId ->
-                    navController.navigate(Screen.MealDetails.getRoute(mealId))
-                },
+                onMealClicked = { navController.navigate(Screen.MealDetails(it)) },
                 onNavigateBackClicked = { navController.popBackStack() }
             )
         }
 
-        composable(Screen.FullScreenImage.route) {
+        composable<Screen.FullScreenImage> { backStack ->
             FullScreenImage(
                 modifier = modifier,
-                imageUrl = it.getArgument(Screen.FullScreenImage.URL_ARGUMENT),
+                imageUrl = backStack.toRoute<Screen.FullScreenImage>().url,
                 onNavigateBackClicked = { navController.popBackStack() }
             )
         }
     }
 }
-
-private fun NavBackStackEntry.getArgument(key: String): String =
-    this.arguments?.getString(key) ?: ""
 
 private fun startImplicitIntent(context: Context, url: String) {
     context.startActivity(

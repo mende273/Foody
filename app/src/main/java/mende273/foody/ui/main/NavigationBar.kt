@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRail
@@ -11,17 +12,11 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import mende273.foody.R
 import mende273.foody.ui.navigation.Screen
 import mende273.foody.ui.theme.LightThemePrimary
@@ -30,29 +25,23 @@ import mende273.foody.ui.theme.NavigationBarSelectedColor
 
 @Composable
 fun NavigationBar(
-    navController: NavHostController,
-    isPortrait: Boolean
+    currentScreen: Screen?,
+    isPortrait: Boolean,
+    onNavigateToScreen: (Screen) -> Unit
 ) {
     val navigationMenuItems = enumValues<NavigationMenuItem>()
-
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val hierarchy = navBackStackEntry?.destination?.hierarchy
 
     if (isPortrait) {
         PortraitNavigationBar(
             navigationMenuItems = navigationMenuItems,
-            hierarchy = hierarchy,
-            onMenuItemClick = { menuItem ->
-                navController.navigateFromNavigationBar(menuItem.getRoute())
-            }
+            currentScreen = currentScreen,
+            onMenuItemClick = onNavigateToScreen
         )
     } else {
         LandscapeNavigationBar(
             navigationMenuItems = navigationMenuItems,
-            hierarchy = hierarchy,
-            onMenuItemClick = { menuItem ->
-                navController.navigateFromNavigationBar(menuItem.getRoute())
-            }
+            currentScreen = currentScreen,
+            onMenuItemClick = onNavigateToScreen
         )
     }
 }
@@ -60,33 +49,32 @@ fun NavigationBar(
 @Composable
 private fun PortraitNavigationBar(
     navigationMenuItems: Array<NavigationMenuItem>,
-    hierarchy: Sequence<NavDestination>?,
-    onMenuItemClick: (NavigationMenuItem) -> Unit
+    currentScreen: Screen?,
+    onMenuItemClick: (Screen) -> Unit
 ) {
-    androidx.compose.material3.NavigationBar(
+    NavigationBar(
         modifier = Modifier,
         contentColor = MaterialTheme.colorScheme.secondary,
         tonalElevation = 0.dp,
         containerColor = MaterialTheme.colorScheme.surface,
         content = {
             navigationMenuItems.forEach { menuItem ->
+                val screenForMenuItem = menuItem.getScreen()
                 NavigationBarItem(
                     modifier = Modifier.testTag(
                         "test_tag_menu_item_${stringResource(id = menuItem.title)}"
                     ),
-                    selected = hierarchy?.any { it.route == menuItem.getRoute() } == true,
+                    selected = currentScreen == screenForMenuItem,
                     onClick = {
-                        onMenuItemClick(menuItem)
+                        onMenuItemClick(screenForMenuItem)
                     },
                     label = { Text(text = stringResource(id = menuItem.title)) },
                     enabled = true,
                     icon = {
-                        menuItem.icon?.let { painterResource(id = menuItem.icon) }?.let {
-                            Icon(
-                                painter = it,
-                                contentDescription = stringResource(id = menuItem.title)
-                            )
-                        }
+                        Icon(
+                            painter = painterResource(id = menuItem.icon),
+                            contentDescription = stringResource(id = menuItem.title)
+                        )
                     },
                     alwaysShowLabel = true,
                     colors = NavigationBarItemDefaults.colors(
@@ -105,8 +93,8 @@ private fun PortraitNavigationBar(
 @Composable
 private fun LandscapeNavigationBar(
     navigationMenuItems: Array<NavigationMenuItem>,
-    hierarchy: Sequence<NavDestination>?,
-    onMenuItemClick: (NavigationMenuItem) -> Unit
+    currentScreen: Screen?,
+    onMenuItemClick: (Screen) -> Unit
 ) {
     NavigationRail(
         modifier = Modifier,
@@ -114,21 +102,20 @@ private fun LandscapeNavigationBar(
         containerColor = MaterialTheme.colorScheme.surface
     ) {
         navigationMenuItems.forEach { menuItem ->
+            val screenForMenuItem = menuItem.getScreen()
             NavigationRailItem(
                 modifier = Modifier.testTag(
                     "test_tag_menu_item_${stringResource(id = menuItem.title)}"
                 ),
                 icon = {
-                    menuItem.icon?.let { painterResource(id = menuItem.icon) }?.let {
-                        Icon(
-                            painter = it,
-                            contentDescription = stringResource(id = menuItem.title)
-                        )
-                    }
+                    Icon(
+                        painter = painterResource(id = menuItem.icon),
+                        contentDescription = stringResource(id = menuItem.title)
+                    )
                 },
                 label = { Text(text = stringResource(id = menuItem.title)) },
-                selected = hierarchy?.any { it.route == menuItem.getRoute() } == true,
-                onClick = { onMenuItemClick(menuItem) },
+                selected = currentScreen == screenForMenuItem,
+                onClick = { onMenuItemClick(screenForMenuItem) },
                 alwaysShowLabel = true,
                 colors = NavigationRailItemDefaults.colors(
                     selectedIconColor = LightThemePrimary,
@@ -144,7 +131,7 @@ private fun LandscapeNavigationBar(
 
 private enum class NavigationMenuItem(
     @StringRes val title: Int,
-    @DrawableRes val icon: Int?
+    @DrawableRes val icon: Int
 ) {
     MEALS(R.string.screen_title_meals, R.drawable.food),
     RANDOM_MEAL(R.string.screen_title_random, R.drawable.random),
@@ -152,20 +139,10 @@ private enum class NavigationMenuItem(
     FAVORITES(R.string.screen_title_favourites, R.drawable.favourite)
 }
 
-private fun NavHostController.navigateFromNavigationBar(route: String) {
-    navigate(route) {
-        popUpTo(graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
-    }
-}
-
-private fun NavigationMenuItem.getRoute(): String =
+private fun NavigationMenuItem.getScreen(): Screen =
     when (this) {
-        NavigationMenuItem.MEALS -> Screen.Meals.route
-        NavigationMenuItem.RANDOM_MEAL -> Screen.RandomMeal.route
-        NavigationMenuItem.SEARCH -> Screen.Search.route
-        NavigationMenuItem.FAVORITES -> Screen.Favourites.route
+        NavigationMenuItem.MEALS -> Screen.Home
+        NavigationMenuItem.RANDOM_MEAL -> Screen.Random
+        NavigationMenuItem.SEARCH -> Screen.Search
+        NavigationMenuItem.FAVORITES -> Screen.Favorites
     }

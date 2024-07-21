@@ -22,7 +22,7 @@ import mende273.foody.ui.theme.FoodyTheme
 fun MealDetailsScreen(
     modifier: Modifier = Modifier,
     viewModel: MealDetailsViewModel,
-    mealId: String,
+    mealId: Long,
     windowSize: WindowSizeClass,
     onHeaderImageClicked: (String) -> Unit,
     onCategoryClicked: (String) -> Unit,
@@ -36,7 +36,7 @@ fun MealDetailsScreen(
     val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = mealId, block = {
-        viewModel.init(mealId.toLong())
+        viewModel.init(mealId)
     })
 
     ScreenContents(
