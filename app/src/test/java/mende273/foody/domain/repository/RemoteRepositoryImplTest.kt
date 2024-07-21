@@ -2,7 +2,9 @@ package mende273.foody.domain.repository
 
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import mende273.foody.data.repository.remote.RemoteRepositoryImpl
 import mende273.foody.data.source.remote.RemoteDataSource
@@ -12,7 +14,10 @@ class RemoteRepositoryImplTest {
 
     private val client = MockHttpClient()
     private val remoteDataSource = RemoteDataSource(client.get())
-    private val remoteRepositoryImpl = RemoteRepositoryImpl(remoteDataSource)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val testDispatcher = UnconfinedTestDispatcher()
+    private val remoteRepositoryImpl = RemoteRepositoryImpl(remoteDataSource, testDispatcher)
 
     @Test
     fun `getRandomMeal() should return a MealDetails object`() =
@@ -83,7 +88,7 @@ class RemoteRepositoryImplTest {
 
     @Test
     fun `getMealDetails should return MealDetails object`() = runTest(StandardTestDispatcher()) {
-        val response = remoteRepositoryImpl.getMealDetails("52999")
+        val response = remoteRepositoryImpl.getMealDetails(52999)
 
         assertTrue { response.isSuccess }
 
