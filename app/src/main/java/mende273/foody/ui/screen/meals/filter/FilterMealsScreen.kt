@@ -30,7 +30,7 @@ fun FilterMealsScreen(
     windowSize: WindowSizeClass,
     name: String,
     filterType: FilterType,
-    onMealClicked: (String) -> Unit,
+    onMealClicked: (Long) -> Unit,
     onNavigateBackClicked: () -> Unit
 ) {
     val headerTitle by viewModel.headerTitle.collectAsStateWithLifecycle()
@@ -46,7 +46,7 @@ fun FilterMealsScreen(
         uiState = uiState,
         windowSize = windowSize,
         onNavigateBackClicked = { onNavigateBackClicked() },
-        onMealClicked = { onMealClicked(it) }
+        onMealClicked = onMealClicked
     )
 }
 
@@ -57,7 +57,7 @@ private fun ScreenContents(
     uiState: UIState<List<Meal>>,
     windowSize: WindowSizeClass,
     onNavigateBackClicked: () -> Unit,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     Column(modifier = modifier) {
         TopBar(
@@ -71,7 +71,7 @@ private fun ScreenContents(
             MealsGrid(
                 gridCellsCount = windowSize.getGridCellsCount(),
                 meals = meals,
-                onMealClicked = { onMealClicked(it) }
+                onMealClicked = onMealClicked
             )
         }
     }

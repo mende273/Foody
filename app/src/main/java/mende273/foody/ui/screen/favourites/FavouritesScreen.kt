@@ -27,7 +27,7 @@ fun FavouritesScreen(
     modifier: Modifier = Modifier,
     viewModel: FavouritesViewModel,
     windowSize: WindowSizeClass,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     val uiState by viewModel.meals.collectAsStateWithLifecycle()
 
@@ -39,7 +39,7 @@ fun FavouritesScreen(
         modifier = modifier,
         windowSize = windowSize,
         uiState = uiState,
-        onMealClicked = { onMealClicked(it) }
+        onMealClicked = onMealClicked
     )
 }
 
@@ -48,14 +48,14 @@ private fun ScreenContents(
     modifier: Modifier,
     windowSize: WindowSizeClass,
     uiState: UIState<List<Meal>>,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     Box(modifier.padding(vertical = windowSize.getTopPadding())) {
         UiStateWrapper(uiState = uiState) { meals ->
             MealsGrid(
                 gridCellsCount = windowSize.getGridCellsCount(),
                 meals = meals,
-                onMealClicked = { onMealClicked(it) }
+                onMealClicked = onMealClicked
             )
         }
     }

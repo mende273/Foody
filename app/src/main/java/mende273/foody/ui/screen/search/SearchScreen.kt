@@ -36,7 +36,7 @@ fun SearchScreen(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel,
     windowSize: WindowSizeClass,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     var searchText by rememberSaveable { mutableStateOf("") }
     var isSearchBarActive by rememberSaveable { mutableStateOf(false) }
@@ -62,7 +62,7 @@ fun SearchScreen(
                 isSearchBarActive = false
             }
         },
-        onMealClicked = { onMealClicked(it) }
+        onMealClicked = onMealClicked
     )
 }
 
@@ -76,7 +76,7 @@ private fun ScreenContents(
     onQueryChanged: (String) -> Unit,
     onIsSearchBarActiveChanged: (Boolean) -> Unit,
     onClearText: () -> Unit,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     Column(modifier = modifier) {
         SearchBarComponent(
@@ -112,7 +112,7 @@ private fun ScreenContents(
             MealsGrid(
                 gridCellsCount = windowSize.getGridCellsCount(),
                 meals = meals,
-                onMealClicked = { onMealClicked(it) }
+                onMealClicked = onMealClicked
             )
         }
     }

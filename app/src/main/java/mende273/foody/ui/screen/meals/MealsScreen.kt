@@ -1,6 +1,5 @@
 package mende273.foody.ui.screen.meals
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -54,7 +53,7 @@ fun MealsScreen(
     modifier: Modifier = Modifier,
     viewModel: MealsViewModel,
     windowSize: WindowSizeClass,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     val uiStateCurrentFilterTabs by
     viewModel.uiStateCurrentFilterTabs.collectAsStateWithLifecycle()
@@ -100,11 +99,10 @@ fun MealsScreen(
         onShouldMoveToFirstPage = { shouldMoveToFirstPage = it },
         onFetchMeals = { viewModel.fetchMeals(it) },
         onShouldShowFilterDialog = { shouldShowFilterDialog = it },
-        onMealClicked = { onMealClicked(it) }
+        onMealClicked = onMealClicked
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ScreenContents(
     modifier: Modifier,
@@ -117,7 +115,7 @@ private fun ScreenContents(
     onShouldMoveToFirstPage: (Boolean) -> Unit,
     onFetchMeals: (String) -> Unit,
     onShouldShowFilterDialog: (Boolean) -> Unit,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     Column(modifier.testTag("test_tag_meals_screen")) {
         UiStateWrapper(uiState = uiStateCurrentFilterTabs) { tabs ->
@@ -150,7 +148,7 @@ private fun ScreenContents(
                 uiStateFilterOptionData = uiStateCurrentFilterTabItems,
                 pagerState = pagerState,
                 windowSize = windowSize,
-                onMealClicked = { onMealClicked(it) },
+                onMealClicked = onMealClicked,
                 scrollToPage = { index ->
                     coroutineScope.launch { pagerState.scrollToPage(index) }
                 }
@@ -182,14 +180,13 @@ private fun MealsScreenContentsPreview(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun PagerSection(
     currentFilterData: Array<Tab>,
     uiStateFilterOptionData: UIState<List<Meal>>,
     pagerState: PagerState,
     windowSize: WindowSizeClass,
-    onMealClicked: (String) -> Unit,
+    onMealClicked: (Long) -> Unit,
     scrollToPage: (Int) -> Unit
 ) {
     ScrollableTabRowComponent(
@@ -204,13 +201,12 @@ private fun PagerSection(
         state = pagerState,
         pageSpacing = 0.dp,
         userScrollEnabled = false,
-        beyondBoundsPageCount = 0,
         pageContent = {
             UiStateWrapper(uiState = uiStateFilterOptionData) { meals ->
                 MealsGrid(
                     gridCellsCount = windowSize.getGridCellsCount(),
                     meals = meals,
-                    onMealClicked = { onMealClicked(it) }
+                    onMealClicked = onMealClicked
                 )
             }
         }

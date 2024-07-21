@@ -17,7 +17,7 @@ import mende273.foody.ui.theme.spacing
 fun MealsGrid(
     gridCellsCount: Int,
     meals: List<Meal>,
-    onMealClicked: (String) -> Unit
+    onMealClicked: (Long) -> Unit
 ) {
     LazyVerticalGrid(
         modifier = Modifier.padding(
@@ -33,7 +33,7 @@ fun MealsGrid(
                 modifier = Modifier
                     .padding(4.dp)
                     .clickable {
-                        onMealClicked(item.id.toString())
+                        onMealClicked(item.id)
                     },
                 meal = item,
                 contentDescription = "meal item"
