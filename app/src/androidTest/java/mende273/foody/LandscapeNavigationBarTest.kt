@@ -11,6 +11,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
@@ -43,8 +44,9 @@ class LandscapeNavigationBarTest {
             )
 
             NavigationBar(
-                navController = navController,
-                isPortrait = false
+                currentScreen = Screen.Home,
+                isPortrait = false,
+                onNavigateToScreen = { navController.navigate(it) }
             )
         }
     }
@@ -60,31 +62,31 @@ class LandscapeNavigationBarTest {
     fun appNavHost_verifyGoToMealsScreen() {
         val meals = context.resources.getString(R.string.screen_title_meals)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$meals").performClick()
-        val route = navController.currentDestination?.route
-        Assert.assertEquals(route, Screen.Meals.route)
+        val route = navController.currentDestination?.hasRoute(Screen.Home::class) == true
+        Assert.assertEquals(route, true)
     }
 
     @Test
     fun appNavHost_verifyGoToSearchScreen() {
         val search = context.resources.getString(R.string.screen_title_search)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$search").performClick()
-        val route = navController.currentDestination?.route
-        Assert.assertEquals(route, Screen.Search.route)
+        val route = navController.currentDestination?.hasRoute(Screen.Search::class) == true
+        Assert.assertEquals(route, true)
     }
 
     @Test
     fun appNavHost_verifyGoToFavouritesScreen() {
         val favourites = context.resources.getString(R.string.screen_title_favourites)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$favourites").performClick()
-        val route = navController.currentDestination?.route
-        Assert.assertEquals(route, Screen.Favourites.route)
+        val route = navController.currentDestination?.hasRoute(Screen.Favorites::class) == true
+        Assert.assertEquals(route, true)
     }
 
     @Test
     fun appNavHost_verifyGoToRandomMealScreen() {
         val random = context.resources.getString(R.string.screen_title_random)
         composeTestRule.onNodeWithTag("test_tag_menu_item_$random").performClick()
-        val route = navController.currentDestination?.route
-        Assert.assertEquals(route, Screen.RandomMeal.route)
+        val route = navController.currentDestination?.hasRoute(Screen.Random::class) == true
+        Assert.assertEquals(route, true)
     }
 }
