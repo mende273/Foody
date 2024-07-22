@@ -26,7 +26,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -51,9 +52,12 @@ class MainActivity : ComponentActivity() {
 
             val isPortrait = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
 
-            val currentBackStack = navController.currentBackStackEntryAsState()
+            val currentNavigationBarDestination = navController
+                .currentBackStackEntryAsState()
+                .value
+                .currentDestinationFromNavigationBar()
 
-            isNavigationBarVisible = currentBackStack.value.shouldShowNavBar()
+            isNavigationBarVisible = currentNavigationBarDestination != null
 
             FoodyTheme {
                 Scaffold(
@@ -69,7 +73,8 @@ class MainActivity : ComponentActivity() {
                         ) {
                             if (!isPortrait) {
                                 NavigationBar(
-                                    currentScreen = currentBackStack.value.currentScreen(),
+                                    currentScreen =
+                                    currentNavigationBarDestination,
                                     isPortrait = false,
                                     onNavigateToScreen = {
                                         navController.singleTopNavigate(it)
@@ -95,7 +100,8 @@ class MainActivity : ComponentActivity() {
                                 exit = slideOutVertically(targetOffsetY = { it })
                             ) {
                                 NavigationBar(
-                                    currentScreen = currentBackStack.value.currentScreen(),
+                                    currentScreen =
+                                    currentNavigationBarDestination,
                                     isPortrait = true,
                                     onNavigateToScreen = { navController.singleTopNavigate(it) }
                                 )
@@ -108,40 +114,25 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun NavDestination?.getRouteName(): String? =
-    this?.route
-        ?.substringBefore("?")
-        ?.substringBefore("/")
-        ?.substringAfterLast(".")
+private fun NavBackStackEntry?.currentDestinationFromNavigationBar(): Screen? {
+    val bottomBarItems = mapOf(
+        Screen.Home::class to Screen.Home,
+        Screen.Random::class to Screen.Random,
+        Screen.Favorites::class to Screen.Favorites,
+        Screen.Search::class to Screen.Search
+    )
 
-private fun NavBackStackEntry?.shouldShowNavBar(): Boolean {
-    return this?.destination?.getRouteName()
-        ?.let {
-            when (it) {
-                Screen.Home::class.simpleName,
-                Screen.Random::class.simpleName,
-                Screen.Favorites::class.simpleName,
-                Screen.Search::class.simpleName -> true
-
-                else -> false
-            }
-        } ?: false
-}
-
-private fun NavBackStackEntry?.currentScreen(): Screen {
     var currentDestination: Screen? = null
-
-    this?.destination?.getRouteName()
-        ?.let {
-            currentDestination = when (it) {
-                Screen.Home::class.simpleName -> Screen.Home
-                Screen.Random::class.simpleName -> Screen.Random
-                Screen.Favorites::class.simpleName -> Screen.Favorites
-                Screen.Search::class.simpleName -> Screen.Search
-                else -> null
-            }
+    bottomBarItems.forEach { item ->
+        if (this?.destination?.hierarchy?.any {
+            it.hasRoute(item.key)
+        } == true
+        ) {
+            currentDestination = item.value
         }
-    return currentDestination ?: Screen.Home
+    }
+
+    return currentDestination
 }
 
 private fun NavHostController.singleTopNavigate(screen: Screen) {

@@ -5,16 +5,16 @@ import kotlinx.serialization.Serializable
 sealed interface Screen {
 
     @Serializable
-    object Home : Screen
+    data object Home : Screen
 
     @Serializable
-    object Search : Screen
+    data object Search : Screen
 
     @Serializable
-    object Random : Screen
+    data object Random : Screen
 
     @Serializable
-    object Favorites : Screen
+    data object Favorites : Screen
 
     @Serializable
     data class FullScreenImage(val url: String) : Screen
