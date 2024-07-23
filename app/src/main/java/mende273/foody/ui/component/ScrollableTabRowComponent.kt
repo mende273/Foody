@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mende273.foody.ui.common.model.Tab
-import mende273.foody.ui.preview.parameter.TabItemsParameterProvider
+import mende273.foody.ui.common.preview.parameter.TabItemsParameterProvider
 import mende273.foody.ui.theme.AccentColor
 import mende273.foody.ui.theme.FoodyTheme
 

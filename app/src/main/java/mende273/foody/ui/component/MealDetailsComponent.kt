@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.ui.preview.model.MealDetailsComponentPreviewModel
-import mende273.foody.ui.preview.parameter.MealDetailsComponentParameterProvider
+import mende273.foody.ui.common.preview.model.MealDetailsComponentPreviewModel
+import mende273.foody.ui.common.preview.parameter.MealDetailsComponentParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.mediumTextStyle
 import mende273.foody.ui.theme.spacing

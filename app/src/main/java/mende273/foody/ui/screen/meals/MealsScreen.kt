@@ -33,13 +33,13 @@ import kotlinx.coroutines.launch
 import mende273.foody.R
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.common.model.Tab
+import mende273.foody.ui.common.preview.model.MealsScreenPreviewModel
+import mende273.foody.ui.common.preview.parameter.MealsScreenParameterProvider
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.NormalText
 import mende273.foody.ui.component.ScrollableTabRowComponent
 import mende273.foody.ui.component.SmallButton
 import mende273.foody.ui.component.UiStateWrapper
-import mende273.foody.ui.preview.model.MealsScreenPreviewModel
-import mende273.foody.ui.preview.parameter.MealsScreenParameterProvider
 import mende273.foody.ui.screen.meals.dialog.FilterDialog
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState

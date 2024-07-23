@@ -1,4 +1,4 @@
-package mende273.foody.ui.preview.model
+package mende273.foody.ui.common.preview.model
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import mende273.foody.domain.model.Meal

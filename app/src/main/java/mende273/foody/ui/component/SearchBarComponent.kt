@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
-import mende273.foody.ui.preview.parameter.SearchBarComponentParameterProvider
+import mende273.foody.ui.common.preview.parameter.SearchBarComponentParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

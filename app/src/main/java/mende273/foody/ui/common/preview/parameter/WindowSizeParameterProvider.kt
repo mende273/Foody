@@ -1,4 +1,4 @@
-package mende273.foody.ui.preview.parameter
+package mende273.foody.ui.common.preview.parameter
 
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass

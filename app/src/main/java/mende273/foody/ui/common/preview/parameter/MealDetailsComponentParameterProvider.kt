@@ -1,4 +1,4 @@
-package mende273.foody.ui.preview.parameter
+package mende273.foody.ui.common.preview.parameter
 
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.IngredientWithMeasure
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.ui.preview.model.MealDetailsComponentPreviewModel
+import mende273.foody.ui.common.preview.model.MealDetailsComponentPreviewModel
 
 class MealDetailsComponentParameterProvider :
     PreviewParameterProvider<MealDetailsComponentPreviewModel> {

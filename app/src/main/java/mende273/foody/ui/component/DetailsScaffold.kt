@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
-import mende273.foody.ui.preview.parameter.WindowSizeParameterProvider
+import mende273.foody.ui.common.preview.parameter.WindowSizeParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.spacing
 
