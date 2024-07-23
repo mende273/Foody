@@ -12,9 +12,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.spacing
@@ -56,7 +56,7 @@ fun FilterDialog(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun DialogPreview() {
     FoodyTheme {

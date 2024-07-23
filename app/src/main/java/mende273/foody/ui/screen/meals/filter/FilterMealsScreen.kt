@@ -9,14 +9,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.TopBar
 import mende273.foody.ui.component.UiStateWrapper
-import mende273.foody.ui.preview.annotations.ScreenPreviews
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.model.MealsUiStatePreviewModel
 import mende273.foody.ui.preview.parameter.MealsUiStateParameterPreview
 import mende273.foody.ui.state.UIState
@@ -77,8 +77,8 @@ private fun ScreenContents(
     }
 }
 
-@ThemePreviews
-@ScreenPreviews
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
 private fun ScreenPreview(
     @PreviewParameter(MealsUiStateParameterPreview::class) previewModel: MealsUiStatePreviewModel

@@ -19,10 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.parameter.IngredientWithMeasureParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.blackNormalTextStyle
@@ -83,7 +83,7 @@ private fun IngredientWithMeasureItem(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun IngredientWithMeasureItemPreview(
     @PreviewParameter(IngredientWithMeasureParameterProvider::class) item: IngredientWithMeasure

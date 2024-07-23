@@ -15,15 +15,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mende273.foody.domain.model.Meal
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.SearchBarComponent
 import mende273.foody.ui.component.UiStateWrapper
-import mende273.foody.ui.preview.annotations.ScreenPreviews
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.model.SearchScreenPreviewModel
 import mende273.foody.ui.preview.parameter.SearchScreenParameterPreview
 import mende273.foody.ui.state.UIState
@@ -118,8 +118,8 @@ private fun ScreenContents(
     }
 }
 
-@ThemePreviews
-@ScreenPreviews
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
 private fun ScreenPreview(
     @PreviewParameter(SearchScreenParameterPreview::class) previewModel: SearchScreenPreviewModel

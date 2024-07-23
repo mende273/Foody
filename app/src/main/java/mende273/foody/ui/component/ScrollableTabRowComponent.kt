@@ -1,6 +1,5 @@
 package mende273.foody.ui.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -19,15 +18,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import mende273.foody.ui.common.Tab
-import mende273.foody.ui.preview.annotations.ThemePreviews
+import mende273.foody.ui.common.model.Tab
 import mende273.foody.ui.preview.parameter.TabItemsParameterProvider
 import mende273.foody.ui.theme.AccentColor
 import mende273.foody.ui.theme.FoodyTheme
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ScrollableTabRowComponent(
     items: Array<Tab>,
@@ -66,8 +64,7 @@ private fun TabIndicator(modifier: Modifier = Modifier) {
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun ScrollableTabComponentPreview(
     @PreviewParameter(TabItemsParameterProvider::class) items: Array<Tab>
@@ -81,7 +78,7 @@ private fun ScrollableTabComponentPreview(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun TabIndicatorPreview() {
     TabIndicator()

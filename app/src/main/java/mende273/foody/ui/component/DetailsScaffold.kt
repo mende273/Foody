@@ -24,11 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
-import mende273.foody.ui.preview.annotations.ScreenPreviews
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.parameter.WindowSizeParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.spacing
@@ -216,8 +216,8 @@ private fun Modifier.headerImage(windowSize: WindowSizeClass): Modifier {
     }
 }
 
-@ScreenPreviews
-@ThemePreviews
+@PreviewScreenSizes
+@PreviewLightDark
 @Composable
 private fun DetailsScaffoldPreview(
     @PreviewParameter(WindowSizeParameterProvider::class) windowSize: WindowSizeClass

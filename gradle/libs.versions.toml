@@ -49,13 +49,13 @@ koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 
 #ktor
-ktor-bom ={ group = "io.ktor",name="ktor-bom", version.ref= "ktor" }
-ktor-client-android = { group = "io.ktor", name="ktor-client-android"}
-ktor-client-logging = { group = "io.ktor", name="ktor-client-logging" }
-ktor-client-serialization = { group = "io.ktor", name="ktor-client-serialization" }
-ktor-client-content-negotiation = {group ="io.ktor", name = "ktor-client-content-negotiation"}
-ktor-client-mock = { group = "io.ktor", name="ktor-client-mock" }
-ktor-serialization-kotlinx-json = { group = "io.ktor", name="ktor-serialization-kotlinx-json" }
+ktor-bom = { group = "io.ktor", name = "ktor-bom", version.ref = "ktor" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json" }
 
 # mockk
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -70,6 +70,7 @@ compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-material3-window-size = { group = "androidx.compose.material3", name = "material3-window-size-class" }
 compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui_test_manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 
 [plugins]

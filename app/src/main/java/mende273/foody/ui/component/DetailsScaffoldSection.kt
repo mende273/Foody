@@ -8,8 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import mende273.foody.ui.preview.annotations.FontScalePreviews
-import mende273.foody.ui.preview.annotations.ThemePreviews
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.largeTextStyle
 import mende273.foody.ui.theme.mediumTextStyle
@@ -42,8 +42,8 @@ fun ColumnScope.DetailsScaffoldSection(
     }
 }
 
-@ThemePreviews
-@FontScalePreviews
+@PreviewLightDark
+@PreviewFontScale
 @Composable
 private fun DetailsScaffoldSectionPreview() {
     FoodyTheme {

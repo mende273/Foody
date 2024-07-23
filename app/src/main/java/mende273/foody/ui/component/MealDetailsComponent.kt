@@ -12,11 +12,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.ui.preview.annotations.ScreenPreviews
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.model.MealDetailsComponentPreviewModel
 import mende273.foody.ui.preview.parameter.MealDetailsComponentParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
@@ -137,8 +137,8 @@ fun MealDetailsComponent(
     )
 }
 
-@ScreenPreviews
-@ThemePreviews
+@PreviewScreenSizes
+@PreviewLightDark
 @Composable
 private fun MealDetailsComponentPreview(
     @PreviewParameter(MealDetailsComponentParameterProvider::class)

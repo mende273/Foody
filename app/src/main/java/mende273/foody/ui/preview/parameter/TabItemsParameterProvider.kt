@@ -1,7 +1,7 @@
 package mende273.foody.ui.preview.parameter
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import mende273.foody.ui.common.Tab
+import mende273.foody.ui.common.model.Tab
 
 class TabItemsParameterProvider : PreviewParameterProvider<Array<Tab>> {
     override val values: Sequence<Array<Tab>> = sequenceOf(
