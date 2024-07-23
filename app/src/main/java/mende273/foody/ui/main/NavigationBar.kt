@@ -59,7 +59,7 @@ private fun PortraitNavigationBar(
         containerColor = MaterialTheme.colorScheme.surface,
         content = {
             navigationMenuItems.forEach { menuItem ->
-                val screenForMenuItem = menuItem.getScreen()
+                val screenForMenuItem = menuItem.screen
                 NavigationBarItem(
                     modifier = Modifier.testTag(
                         "test_tag_menu_item_${stringResource(id = menuItem.title)}"
@@ -102,7 +102,7 @@ private fun LandscapeNavigationBar(
         containerColor = MaterialTheme.colorScheme.surface
     ) {
         navigationMenuItems.forEach { menuItem ->
-            val screenForMenuItem = menuItem.getScreen()
+            val screenForMenuItem = menuItem.screen
             NavigationRailItem(
                 modifier = Modifier.testTag(
                     "test_tag_menu_item_${stringResource(id = menuItem.title)}"
@@ -129,20 +129,13 @@ private fun LandscapeNavigationBar(
     }
 }
 
-private enum class NavigationMenuItem(
+enum class NavigationMenuItem(
     @StringRes val title: Int,
-    @DrawableRes val icon: Int
+    @DrawableRes val icon: Int,
+    val screen: Screen
 ) {
-    MEALS(R.string.screen_title_meals, R.drawable.food),
-    RANDOM_MEAL(R.string.screen_title_random, R.drawable.random),
-    SEARCH(R.string.screen_title_search, R.drawable.search),
-    FAVORITES(R.string.screen_title_favourites, R.drawable.favourite)
+    MEALS(R.string.screen_title_meals, R.drawable.food, Screen.Home),
+    RANDOM_MEAL(R.string.screen_title_random, R.drawable.random, Screen.Random),
+    SEARCH(R.string.screen_title_search, R.drawable.search, Screen.Search),
+    FAVORITES(R.string.screen_title_favourites, R.drawable.favourite, Screen.Favorites)
 }
-
-private fun NavigationMenuItem.getScreen(): Screen =
-    when (this) {
-        NavigationMenuItem.MEALS -> Screen.Home
-        NavigationMenuItem.RANDOM_MEAL -> Screen.Random
-        NavigationMenuItem.SEARCH -> Screen.Search
-        NavigationMenuItem.FAVORITES -> Screen.Favorites
-    }

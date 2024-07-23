@@ -55,7 +55,10 @@ class MainActivity : ComponentActivity() {
             val currentNavigationBarDestination = navController
                 .currentBackStackEntryAsState()
                 .value
-                .currentDestinationFromNavigationBar()
+                .currentDestinationFromNavigationBar(
+                    enumValues<NavigationMenuItem>()
+                        .map { it.screen }
+                )
 
             isNavigationBarVisible = currentNavigationBarDestination != null
 
@@ -114,21 +117,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun NavBackStackEntry?.currentDestinationFromNavigationBar(): Screen? {
-    val bottomBarItems = mapOf(
-        Screen.Home::class to Screen.Home,
-        Screen.Random::class to Screen.Random,
-        Screen.Favorites::class to Screen.Favorites,
-        Screen.Search::class to Screen.Search
-    )
-
+private fun NavBackStackEntry?.currentDestinationFromNavigationBar(
+    navigationBarItems: List<Screen>
+): Screen? {
     var currentDestination: Screen? = null
-    bottomBarItems.forEach { item ->
+
+    navigationBarItems.forEach { item ->
         if (this?.destination?.hierarchy?.any {
-            it.hasRoute(item.key)
+            it.hasRoute(item::class)
         } == true
         ) {
-            currentDestination = item.value
+            currentDestination = item
         }
     }
 
