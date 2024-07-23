@@ -23,21 +23,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mende273.foody.R
 import mende273.foody.domain.model.Meal
-import mende273.foody.ui.common.Tab
+import mende273.foody.ui.common.model.Tab
 import mende273.foody.ui.component.MealsGrid
 import mende273.foody.ui.component.NormalText
 import mende273.foody.ui.component.ScrollableTabRowComponent
 import mende273.foody.ui.component.SmallButton
 import mende273.foody.ui.component.UiStateWrapper
-import mende273.foody.ui.preview.annotations.ScreenPreviews
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.model.MealsScreenPreviewModel
 import mende273.foody.ui.preview.parameter.MealsScreenParameterProvider
 import mende273.foody.ui.screen.meals.dialog.FilterDialog
@@ -157,8 +157,8 @@ private fun ScreenContents(
     }
 }
 
-@ThemePreviews
-@ScreenPreviews
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
 private fun MealsScreenContentsPreview(
     @PreviewParameter(MealsScreenParameterProvider::class) previewModel: MealsScreenPreviewModel
@@ -236,7 +236,7 @@ private fun HeaderSection(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun HeaderSectionPreview() {
     FoodyTheme {

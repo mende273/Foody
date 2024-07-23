@@ -14,10 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.preview.parameter.SearchBarComponentParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 
@@ -64,7 +64,7 @@ fun SearchBarComponent(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun SearchBarComponentPreview(
     @PreviewParameter(SearchBarComponentParameterProvider::class) isSearchBarActive: Boolean

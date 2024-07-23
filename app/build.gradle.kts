@@ -118,6 +118,7 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui.preview)
     implementation(libs.compose.material3)
+    implementation(libs.compose.ui.tooling.preview)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test)
     debugImplementation(libs.compose.ui.tooling)

@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import mende273.foody.ui.component.NormalText
-import mende273.foody.ui.preview.annotations.ThemePreviews
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.mediumTextStyle
@@ -53,7 +53,7 @@ fun FilterDialogItem(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun FilterDialogItemPreview() {
     FoodyTheme {

@@ -9,7 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import mende273.foody.ui.preview.annotations.ThemePreviews
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.spacing
 
@@ -29,7 +29,7 @@ fun RoundedBackButton(onNavigateBackClicked: () -> Unit) {
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun RoundedBackButtonPreview() {
     FoodyTheme {

@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import mende273.foody.ui.preview.annotations.ThemePreviews
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.state.UIStateError
 import mende273.foody.ui.theme.FoodyTheme
@@ -46,7 +46,7 @@ fun <T> UiStateWrapper(
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun UiStateWrapperLoadingPreview() {
     FoodyTheme {
@@ -54,7 +54,7 @@ private fun UiStateWrapperLoadingPreview() {
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun UiStateWrapperErrorPreview() {
     FoodyTheme {
@@ -62,7 +62,7 @@ private fun UiStateWrapperErrorPreview() {
     }
 }
 
-@ThemePreviews
+@PreviewLightDark
 @Composable
 private fun UiStateWrapperSuccessPreview() {
     FoodyTheme {
