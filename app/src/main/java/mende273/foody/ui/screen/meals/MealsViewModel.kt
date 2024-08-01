@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -69,20 +68,19 @@ class MealsViewModel(
 
     private fun fetchAllFilters() {
         viewModelScope.launch {
-            getAllFilters().collectLatest { remote ->
-                allFilters.update { remote }
+            val allRemoteFilters = getAllFilters()
+            allFilters.update { allRemoteFilters }
 
-                _currentFilter.value = if (remote.categories.isSuccess) {
-                    Filter.CATEGORY
+            _currentFilter.value = if (allRemoteFilters.categories.isSuccess) {
+                Filter.CATEGORY
+            } else {
+                if (allRemoteFilters.areas.isSuccess) {
+                    Filter.AREA
                 } else {
-                    if (remote.areas.isSuccess) {
-                        Filter.AREA
-                    } else {
-                        Filter.FIRST_LETTER
-                    }
+                    Filter.FIRST_LETTER
                 }
-                allFiltersLoaded.update { true }
             }
+            allFiltersLoaded.update { true }
         }
     }
 
