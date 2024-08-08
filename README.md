@@ -105,3 +105,6 @@ ImageLoader(this).newBuilder()
 
 ## Testing
 - [MockEngine](https://api.ktor.io/ktor-client/ktor-client-mock/io.ktor.client.engine.mock/-mock-engine/index.html) - HttpClientEngine for writing tests without network.
+
+## Code Coverage
+- [Kover](https://github.com/Kotlin/kotlinx-kover) - a set of solutions for collecting test coverage of Kotlin code compiled for JVM and Android platforms.
