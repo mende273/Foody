@@ -1,5 +1,4 @@
 import com.android.build.gradle.internal.tasks.factory.dependsOn
-import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -68,10 +67,6 @@ android {
 
     ksp {
         arg("KOIN_CONFIG_CHECK", "true")
-    }
-
-    composeCompiler {
-        featureFlags = setOf(ComposeFeatureFlag.StrongSkipping)
     }
 
     ktlint {
