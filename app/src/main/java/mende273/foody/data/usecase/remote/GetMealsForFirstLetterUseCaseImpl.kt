@@ -1,8 +1,8 @@
-package mende273.foody.data.usecase
+package mende273.foody.data.usecase.remote
 
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.repository.RemoteRepository
-import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
+import mende273.foody.domain.usecase.remote.GetMealsForFirstLetterUseCase
 
 class GetMealsForFirstLetterUseCaseImpl(
     private val remoteRepository: RemoteRepository

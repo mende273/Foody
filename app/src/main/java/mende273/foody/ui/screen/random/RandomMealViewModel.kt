@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 import mende273.foody.data.mapper.toMeal
 import mende273.foody.domain.model.Meal
 import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.usecase.AddFavoriteMealToDBUseCase
-import mende273.foody.domain.usecase.DeleteFavoriteMealFromDBUseCase
-import mende273.foody.domain.usecase.GetFavoriteMealByIdFromDBUseCase
-import mende273.foody.domain.usecase.GetRandomMealUseCase
+import mende273.foody.domain.usecase.local.AddFavoriteMealToDBUseCase
+import mende273.foody.domain.usecase.local.DeleteFavoriteMealFromDBUseCase
+import mende273.foody.domain.usecase.local.GetFavoriteMealByIdFromDBUseCase
+import mende273.foody.domain.usecase.remote.GetRandomMealUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.state.UIStateError
 

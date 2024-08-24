@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.usecase.GetAllFavoriteMealsFromDBUseCase
+import mende273.foody.domain.usecase.local.GetAllFavoriteMealsFromDBUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.state.UIStateError
 

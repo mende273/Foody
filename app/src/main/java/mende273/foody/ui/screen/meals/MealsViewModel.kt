@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mende273.foody.domain.model.FiltersWrapper
 import mende273.foody.domain.model.Meal
-import mende273.foody.domain.usecase.GetAllFiltersUseCase
-import mende273.foody.domain.usecase.GetMealsForAreaUseCase
-import mende273.foody.domain.usecase.GetMealsForCategoryUseCase
-import mende273.foody.domain.usecase.GetMealsForFirstLetterUseCase
+import mende273.foody.domain.usecase.remote.GetAllFiltersUseCase
+import mende273.foody.domain.usecase.remote.GetMealsForAreaUseCase
+import mende273.foody.domain.usecase.remote.GetMealsForCategoryUseCase
+import mende273.foody.domain.usecase.remote.GetMealsForFirstLetterUseCase
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
