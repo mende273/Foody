@@ -10,9 +10,12 @@ import mende273.foody.ui.state.UIStateError
 import mende273.foody.ui.theme.spacing
 
 fun WindowSizeClass.getGridCellsCount(): Int {
+    val gridCellsCountInPortrait = 2
+    val gridCellsCountInLandscape = 4
+
     return when (this.widthSizeClass == WindowWidthSizeClass.Compact) {
-        true -> GRID_CELLS_COUNT_IN_PORTRAIT
-        false -> GRID_CELLS_COUNT_IN_LANDSCAPE
+        true -> gridCellsCountInPortrait
+        false -> gridCellsCountInLandscape
     }
 }
 
