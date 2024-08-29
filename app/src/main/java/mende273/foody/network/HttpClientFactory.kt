@@ -1,4 +1,4 @@
-package mende273.foody.data.network
+package mende273.foody.network
 
 import io.ktor.client.HttpClient
 
