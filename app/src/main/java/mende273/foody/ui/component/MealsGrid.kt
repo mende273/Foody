@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import mende273.foody.domain.model.Meal
+import mende273.foody.core.domain.model.Meal
 import mende273.foody.ui.theme.spacing
 
 @Composable

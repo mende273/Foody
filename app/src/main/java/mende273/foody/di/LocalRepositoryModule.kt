@@ -1,15 +1,15 @@
 package mende273.foody.di
 
+import mende273.foody.core.domain.repository.LocalRepository
+import mende273.foody.core.domain.usecase.local.AddFavoriteMealToDBUseCase
+import mende273.foody.core.domain.usecase.local.DeleteFavoriteMealFromDBUseCase
+import mende273.foody.core.domain.usecase.local.GetAllFavoriteMealsFromDBUseCase
+import mende273.foody.core.domain.usecase.local.GetFavoriteMealByIdFromDBUseCase
 import mende273.foody.data.repository.local.LocalRepositoryImpl
 import mende273.foody.data.usecase.local.AddFavoriteMealToDBUseCaseImpl
 import mende273.foody.data.usecase.local.DeleteFavoriteMealFromDBUseCaseImpl
 import mende273.foody.data.usecase.local.GetAllFavoriteMealsFromDBUseCaseImpl
 import mende273.foody.data.usecase.local.GetFavoriteMealByIdFromDBUseCaseImpl
-import mende273.foody.domain.repository.LocalRepository
-import mende273.foody.domain.usecase.local.AddFavoriteMealToDBUseCase
-import mende273.foody.domain.usecase.local.DeleteFavoriteMealFromDBUseCase
-import mende273.foody.domain.usecase.local.GetAllFavoriteMealsFromDBUseCase
-import mende273.foody.domain.usecase.local.GetFavoriteMealByIdFromDBUseCase
 import org.koin.dsl.module
 
 val localRepositoryModule = module {

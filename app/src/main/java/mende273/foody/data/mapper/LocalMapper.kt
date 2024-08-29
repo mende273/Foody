@@ -1,8 +1,8 @@
 package mende273.foody.data.mapper
 
 import mende273.foody.MealEntity
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.model.MealDetails
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.model.MealDetails
 
 fun List<MealEntity>.toDomainModel(): List<Meal> {
     return this.map { it.toDomainModel() }

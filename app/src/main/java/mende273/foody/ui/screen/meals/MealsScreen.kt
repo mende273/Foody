@@ -31,7 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mende273.foody.R
-import mende273.foody.domain.model.Meal
+import mende273.foody.core.domain.model.Meal
 import mende273.foody.ui.common.model.Tab
 import mende273.foody.ui.common.preview.model.MealsScreenPreviewModel
 import mende273.foody.ui.common.preview.parameter.MealsScreenParameterProvider
