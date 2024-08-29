@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Foody"
 include(":app")
- 
+include(":core:domain")
