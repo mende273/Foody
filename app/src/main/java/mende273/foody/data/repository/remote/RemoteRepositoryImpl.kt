@@ -3,14 +3,14 @@ package mende273.foody.data.repository.remote
 import io.ktor.client.call.body
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.model.MealDetails
+import mende273.foody.core.domain.repository.RemoteRepository
 import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.data.mapper.toDomainModel
 import mende273.foody.data.source.remote.RemoteDataSource
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.model.MealDetails
-import mende273.foody.domain.repository.RemoteRepository
 
 class RemoteRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,

@@ -1,8 +1,8 @@
 package mende273.foody.data.usecase.local
 
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.LocalRepository
-import mende273.foody.domain.usecase.local.AddFavoriteMealToDBUseCase
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.repository.LocalRepository
+import mende273.foody.core.domain.usecase.local.AddFavoriteMealToDBUseCase
 
 class AddFavoriteMealToDBUseCaseImpl(private val localRepository: LocalRepository) :
     AddFavoriteMealToDBUseCase {

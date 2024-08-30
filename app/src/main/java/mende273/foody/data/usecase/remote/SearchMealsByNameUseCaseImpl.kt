@@ -1,8 +1,8 @@
 package mende273.foody.data.usecase.remote
 
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.RemoteRepository
-import mende273.foody.domain.usecase.remote.SearchMealsByNameUseCase
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.repository.RemoteRepository
+import mende273.foody.core.domain.usecase.remote.SearchMealsByNameUseCase
 
 class SearchMealsByNameUseCaseImpl
 (private val remoteRepository: RemoteRepository) : SearchMealsByNameUseCase {

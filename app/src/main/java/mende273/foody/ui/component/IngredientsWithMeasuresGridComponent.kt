@@ -22,8 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.ui.common.preview.parameter.IngredientWithMeasureParameterProvider
+import mende273.foody.core.domain.model.IngredientWithMeasure
+import mende273.foody.ui.screen.meals.details.IngredientWithMeasureParameterProvider
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.blackNormalTextStyle
 import mende273.foody.ui.theme.spacing

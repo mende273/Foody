@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "mende273.foody.core.domain"
+    namespace = "mende273.foody.core.data"
     compileSdk = 34
 
     defaultConfig {
@@ -25,7 +25,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -38,6 +37,4 @@ android {
     }
 }
 
-dependencies {
-    implementation(libs.androidx.core.ktx)
-}
+dependencies {}

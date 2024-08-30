@@ -1,8 +1,8 @@
 package mende273.foody.domain.repository
 
 import io.ktor.client.request.HttpRequestData
-import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.domain.model.MealDetails
+import mende273.foody.core.domain.model.IngredientWithMeasure
+import mende273.foody.core.domain.model.MealDetails
 
 fun getMockResponseForRequest(request: HttpRequestData): String {
     val path = request.url.encodedPath

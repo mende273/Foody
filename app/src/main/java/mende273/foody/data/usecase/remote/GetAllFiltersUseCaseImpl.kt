@@ -3,10 +3,10 @@ package mende273.foody.data.usecase.remote
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import mende273.foody.domain.model.FiltersWrapper
-import mende273.foody.domain.usecase.remote.GetAllFiltersUseCase
-import mende273.foody.domain.usecase.remote.GetMealAreasUseCase
-import mende273.foody.domain.usecase.remote.GetMealCategoriesUseCase
+import mende273.foody.core.domain.model.FiltersWrapper
+import mende273.foody.core.domain.usecase.remote.GetAllFiltersUseCase
+import mende273.foody.core.domain.usecase.remote.GetMealAreasUseCase
+import mende273.foody.core.domain.usecase.remote.GetMealCategoriesUseCase
 
 class GetAllFiltersUseCaseImpl(
     private val getMealCategories: GetMealCategoriesUseCase,

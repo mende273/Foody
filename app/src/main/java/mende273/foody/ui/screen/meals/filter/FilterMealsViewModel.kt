@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.usecase.remote.GetMealsForAreaUseCase
-import mende273.foody.domain.usecase.remote.GetMealsForCategoryUseCase
-import mende273.foody.domain.usecase.remote.GetMealsWithIngredientUseCase
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.usecase.remote.GetMealsForAreaUseCase
+import mende273.foody.core.domain.usecase.remote.GetMealsForCategoryUseCase
+import mende273.foody.core.domain.usecase.remote.GetMealsWithIngredientUseCase
 import mende273.foody.ui.state.UIState
 import mende273.foody.util.toUIState
 

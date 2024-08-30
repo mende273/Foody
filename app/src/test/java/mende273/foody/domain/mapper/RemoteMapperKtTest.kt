@@ -1,6 +1,9 @@
 package mende273.foody.domain.mapper
 
 import junit.framework.TestCase.assertEquals
+import mende273.foody.core.domain.model.IngredientWithMeasure
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.model.MealDetails
 import mende273.foody.data.dto.MealCategoriesDto
 import mende273.foody.data.dto.MealCategoryDto
 import mende273.foody.data.dto.MealDetailsDto
@@ -8,9 +11,6 @@ import mende273.foody.data.dto.MealDto
 import mende273.foody.data.dto.MealsDto
 import mende273.foody.data.dto.MealsWithDetailsDto
 import mende273.foody.data.mapper.toDomainModel
-import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.model.MealDetails
 import org.junit.Test
 
 class RemoteMapperKtTest {

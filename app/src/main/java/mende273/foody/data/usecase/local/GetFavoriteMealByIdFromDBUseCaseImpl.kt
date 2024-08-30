@@ -1,9 +1,9 @@
 package mende273.foody.data.usecase.local
 
 import kotlinx.coroutines.flow.Flow
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.repository.LocalRepository
-import mende273.foody.domain.usecase.local.GetFavoriteMealByIdFromDBUseCase
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.repository.LocalRepository
+import mende273.foody.core.domain.usecase.local.GetFavoriteMealByIdFromDBUseCase
 
 class GetFavoriteMealByIdFromDBUseCaseImpl
 (private val localRepository: LocalRepository) : GetFavoriteMealByIdFromDBUseCase {

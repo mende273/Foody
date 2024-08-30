@@ -1,7 +1,7 @@
-package mende273.foody.ui.common.preview.parameter
+package mende273.foody.ui.screen.meals.details
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import mende273.foody.domain.model.IngredientWithMeasure
+import mende273.foody.core.domain.model.IngredientWithMeasure
 
 class IngredientWithMeasureParameterProvider :
     PreviewParameterProvider<IngredientWithMeasure> {
