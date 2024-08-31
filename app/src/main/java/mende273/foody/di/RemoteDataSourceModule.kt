@@ -1,7 +1,7 @@
 package mende273.foody.di
 
+import mende273.foody.core.network.KtorHttpClient
 import mende273.foody.data.source.remote.RemoteDataSource
-import mende273.foody.network.KtorHttpClient
 import org.koin.dsl.module
 
 val remoteDataSourceModule = module {

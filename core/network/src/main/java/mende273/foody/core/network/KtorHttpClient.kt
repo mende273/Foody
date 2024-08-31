@@ -1,4 +1,4 @@
-package mende273.foody.network
+package mende273.foody.core.network
 
 import android.util.Log
 import io.ktor.client.HttpClient
