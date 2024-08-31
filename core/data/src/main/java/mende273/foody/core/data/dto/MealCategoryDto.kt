@@ -1,4 +1,4 @@
-package mende273.foody.data.dto
+package mende273.foody.core.data.dto
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable

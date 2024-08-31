@@ -1,13 +1,13 @@
 package mende273.foody.data.mapper
 
+import mende273.foody.core.data.dto.MealCategoriesDto
+import mende273.foody.core.data.dto.MealDetailsDto
+import mende273.foody.core.data.dto.MealDto
+import mende273.foody.core.data.dto.MealsDto
+import mende273.foody.core.data.dto.MealsWithDetailsDto
 import mende273.foody.core.domain.model.IngredientWithMeasure
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.model.MealDetails
-import mende273.foody.data.dto.MealCategoriesDto
-import mende273.foody.data.dto.MealDetailsDto
-import mende273.foody.data.dto.MealDto
-import mende273.foody.data.dto.MealsDto
-import mende273.foody.data.dto.MealsWithDetailsDto
 
 fun MealsWithDetailsDto?.toDomainModel(): List<MealDetails> {
     return this?.mealsWithDetails?.filterNotNull()?.map { it.toDomainModel() } ?: emptyList()
