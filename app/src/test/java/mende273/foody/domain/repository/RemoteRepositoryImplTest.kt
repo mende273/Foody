@@ -6,8 +6,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
+import mende273.foody.core.data.source.remote.RemoteDataSource
 import mende273.foody.data.repository.remote.RemoteRepositoryImpl
-import mende273.foody.data.source.remote.RemoteDataSource
 import org.junit.Test
 
 class RemoteRepositoryImplTest {

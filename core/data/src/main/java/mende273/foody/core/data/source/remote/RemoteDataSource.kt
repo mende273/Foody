@@ -1,4 +1,4 @@
-package mende273.foody.data.source.remote
+package mende273.foody.core.data.source.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get

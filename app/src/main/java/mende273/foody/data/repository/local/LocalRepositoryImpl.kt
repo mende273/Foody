@@ -4,11 +4,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import mende273.foody.core.data.source.local.LocalDataSource
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.repository.LocalRepository
 import mende273.foody.data.mapper.toDomainModel
 import mende273.foody.data.mapper.toEntityModel
-import mende273.foody.data.source.local.LocalDataSource
 
 class LocalRepositoryImpl(
     private val localDataSource: LocalDataSource,

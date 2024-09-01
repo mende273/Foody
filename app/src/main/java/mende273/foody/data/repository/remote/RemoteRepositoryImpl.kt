@@ -6,11 +6,11 @@ import kotlinx.coroutines.withContext
 import mende273.foody.core.data.dto.MealCategoriesDto
 import mende273.foody.core.data.dto.MealsDto
 import mende273.foody.core.data.dto.MealsWithDetailsDto
+import mende273.foody.core.data.source.remote.RemoteDataSource
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.model.MealDetails
 import mende273.foody.core.domain.repository.RemoteRepository
 import mende273.foody.data.mapper.toDomainModel
-import mende273.foody.data.source.remote.RemoteDataSource
 
 class RemoteRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
