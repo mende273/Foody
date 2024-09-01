@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.kover)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.sql.delight)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -54,14 +53,6 @@ android {
     packaging {
         resources {
             excludes += "META-INF/*"
-        }
-    }
-
-    sqldelight {
-        databases {
-            create("Database") {
-                packageName.set("mende273.foody")
-            }
         }
     }
 
@@ -143,8 +134,4 @@ dependencies {
 
     // coil
     implementation(libs.coil.compose)
-
-    // sqldelight
-    implementation(libs.app.cash.sqldelight)
-    implementation(libs.app.cash.sqldelight.coroutines.extensions)
 }

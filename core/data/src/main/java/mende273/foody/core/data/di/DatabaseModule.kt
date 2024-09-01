@@ -1,10 +1,10 @@
-package mende273.foody.di
+package mende273.foody.core.data.di
 
 import android.content.Context
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import mende273.foody.Database
-import mende273.foody.data.source.local.LocalDataSource
+import mende273.foody.core.data.Database
+import mende273.foody.core.data.source.local.LocalDataSource
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
