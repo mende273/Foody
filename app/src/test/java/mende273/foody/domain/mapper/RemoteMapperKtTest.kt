@@ -7,10 +7,10 @@ import mende273.foody.core.data.dto.MealDetailsDto
 import mende273.foody.core.data.dto.MealDto
 import mende273.foody.core.data.dto.MealsDto
 import mende273.foody.core.data.dto.MealsWithDetailsDto
+import mende273.foody.core.data.mapper.toDomainModel
 import mende273.foody.core.domain.model.IngredientWithMeasure
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.model.MealDetails
-import mende273.foody.data.mapper.toDomainModel
 import org.junit.Test
 
 class RemoteMapperKtTest {

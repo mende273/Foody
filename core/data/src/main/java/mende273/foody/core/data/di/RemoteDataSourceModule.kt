@@ -1,4 +1,4 @@
-package mende273.foody.di
+package mende273.foody.core.data.di
 
 import mende273.foody.core.data.source.remote.RemoteDataSource
 import mende273.foody.core.network.KtorHttpClient

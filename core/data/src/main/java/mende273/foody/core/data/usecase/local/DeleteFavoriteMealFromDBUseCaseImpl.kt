@@ -1,4 +1,4 @@
-package mende273.foody.data.usecase.local
+package mende273.foody.core.data.usecase.local
 
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.repository.LocalRepository

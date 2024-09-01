@@ -1,4 +1,4 @@
-package mende273.foody.di
+package mende273.foody.core.data.di
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

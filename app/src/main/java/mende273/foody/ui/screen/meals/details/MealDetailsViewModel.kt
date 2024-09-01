@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import mende273.foody.core.data.mapper.toMeal
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.model.MealDetails
 import mende273.foody.core.domain.usecase.local.AddFavoriteMealToDBUseCase
 import mende273.foody.core.domain.usecase.local.DeleteFavoriteMealFromDBUseCase
 import mende273.foody.core.domain.usecase.local.GetFavoriteMealByIdFromDBUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealDetailsUseCase
-import mende273.foody.data.mapper.toMeal
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.state.UIStateError
 

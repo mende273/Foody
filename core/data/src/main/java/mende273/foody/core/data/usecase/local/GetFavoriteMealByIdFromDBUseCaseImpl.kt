@@ -1,4 +1,4 @@
-package mende273.foody.data.usecase.local
+package mende273.foody.core.data.usecase.local
 
 import kotlinx.coroutines.flow.Flow
 import mende273.foody.core.domain.model.Meal

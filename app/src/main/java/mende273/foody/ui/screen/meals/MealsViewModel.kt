@@ -15,9 +15,9 @@ import mende273.foody.core.domain.usecase.remote.GetAllFiltersUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsForAreaUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsForCategoryUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsForFirstLetterUseCase
+import mende273.foody.ui.common.toUIState
 import mende273.foody.ui.state.Filter
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.toUIState
 
 class MealsViewModel(
     private val getAllFilters: GetAllFiltersUseCase,

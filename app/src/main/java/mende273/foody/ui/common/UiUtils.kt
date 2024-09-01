@@ -1,4 +1,4 @@
-package mende273.foody.util
+package mende273.foody.ui.common
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass

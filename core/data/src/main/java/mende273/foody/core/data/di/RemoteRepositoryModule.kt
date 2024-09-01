@@ -1,5 +1,16 @@
-package mende273.foody.di
+package mende273.foody.core.data.di
 
+import mende273.foody.core.data.repository.remote.RemoteRepositoryImpl
+import mende273.foody.core.data.usecase.remote.GetAllFiltersUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealAreasUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealCategoriesUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealDetailsUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealsForAreaUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealsForCategoryUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealsForFirstLetterUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetMealsWithIngredientUseCaseImpl
+import mende273.foody.core.data.usecase.remote.GetRandomMealUseCaseImpl
+import mende273.foody.core.data.usecase.remote.SearchMealsByNameUseCaseImpl
 import mende273.foody.core.domain.repository.RemoteRepository
 import mende273.foody.core.domain.usecase.remote.GetAllFiltersUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealAreasUseCase
@@ -11,17 +22,6 @@ import mende273.foody.core.domain.usecase.remote.GetMealsForFirstLetterUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsWithIngredientUseCase
 import mende273.foody.core.domain.usecase.remote.GetRandomMealUseCase
 import mende273.foody.core.domain.usecase.remote.SearchMealsByNameUseCase
-import mende273.foody.data.repository.remote.RemoteRepositoryImpl
-import mende273.foody.data.usecase.remote.GetAllFiltersUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealAreasUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealCategoriesUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealDetailsUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealsForAreaUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealsForCategoryUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealsForFirstLetterUseCaseImpl
-import mende273.foody.data.usecase.remote.GetMealsWithIngredientUseCaseImpl
-import mende273.foody.data.usecase.remote.GetRandomMealUseCaseImpl
-import mende273.foody.data.usecase.remote.SearchMealsByNameUseCaseImpl
 import org.koin.dsl.module
 
 val remoteRepositoryModule = module {

@@ -1,4 +1,4 @@
-package mende273.foody.data.usecase.remote
+package mende273.foody.core.data.usecase.remote
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

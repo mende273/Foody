@@ -86,7 +86,6 @@ android {
 dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
-    implementation(project(":core:network"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -99,6 +98,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+
+    // serialization
+    implementation(libs.kotlinx.serialization.json)
 
     // compose
     implementation(platform(libs.compose.bom))
@@ -122,15 +124,6 @@ dependencies {
     implementation(libs.koin.androidx.compose.navigation)
     testImplementation(libs.koin.test)
     testImplementation(libs.koin.test.junit4)
-
-    // ktor
-    implementation(platform(libs.ktor.bom))
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.serialization)
-    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    testImplementation(libs.ktor.client.mock)
 
     // coil
     implementation(libs.coil.compose)

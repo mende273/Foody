@@ -9,8 +9,8 @@ import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.usecase.remote.GetMealsForAreaUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsForCategoryUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsWithIngredientUseCase
+import mende273.foody.ui.common.toUIState
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.toUIState
 
 class FilterMealsViewModel(
     private val getMealsForCategory: GetMealsForCategoryUseCase,

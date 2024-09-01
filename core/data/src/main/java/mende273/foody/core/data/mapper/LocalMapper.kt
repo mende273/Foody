@@ -1,4 +1,4 @@
-package mende273.foody.data.mapper
+package mende273.foody.core.data.mapper
 
 import mende273.foody.MealEntity
 import mende273.foody.core.domain.model.Meal
