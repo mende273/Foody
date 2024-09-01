@@ -5,5 +5,5 @@ import mende273.foody.core.network.KtorHttpClient
 import org.koin.dsl.module
 
 val remoteDataSourceModule = module {
-    single { RemoteDataSource(KtorHttpClient().create()) }
+    single { RemoteDataSource(KtorHttpClient().get()) }
 }

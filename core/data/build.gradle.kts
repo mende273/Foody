@@ -52,6 +52,8 @@ dependencies {
     implementation(project(":core:network"))
 
     implementation(libs.kotlinx.serialization.json)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // sqldelight
     implementation(libs.app.cash.sqldelight)

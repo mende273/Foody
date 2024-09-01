@@ -19,8 +19,10 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class KtorHttpClient : HttpClientFactory {
-    override fun create(): HttpClient = HttpClient(Android) {
+class KtorHttpClient {
+    fun get() = client
+
+    private val client = HttpClient(Android) {
         install(ContentNegotiation) {
             json(
                 Json {

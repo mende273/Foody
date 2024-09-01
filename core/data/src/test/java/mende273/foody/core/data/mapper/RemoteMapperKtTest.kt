@@ -1,4 +1,4 @@
-package mende273.foody.domain.mapper
+package mende273.foody.core.data.mapper
 
 import junit.framework.TestCase.assertEquals
 import mende273.foody.core.data.dto.MealCategoriesDto
@@ -7,7 +7,6 @@ import mende273.foody.core.data.dto.MealDetailsDto
 import mende273.foody.core.data.dto.MealDto
 import mende273.foody.core.data.dto.MealsDto
 import mende273.foody.core.data.dto.MealsWithDetailsDto
-import mende273.foody.core.data.mapper.toDomainModel
 import mende273.foody.core.domain.model.IngredientWithMeasure
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.model.MealDetails
