@@ -1,21 +1,29 @@
 package mende273.foody
 
-import mende273.foody.di.appModule
+import mende273.foody.core.data.di.databaseModule
+import mende273.foody.core.data.di.dispatchersModule
+import mende273.foody.core.data.di.localRepositoryModule
+import mende273.foody.core.data.di.remoteDataSourceModule
+import mende273.foody.core.data.di.remoteRepositoryModule
 import org.junit.Test
-import org.koin.core.annotation.KoinExperimentalAPI
-import org.koin.test.verify.verify
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.koinApplication
+import org.koin.test.check.checkModules
 
 class VerifyKoinConfiguration {
 
-    @OptIn(KoinExperimentalAPI::class)
     @Test
     fun checkKoinModule() {
-        // Verify Koin configuration
-        appModule.verify(
-            extraTypes = listOf(
-                io.ktor.client.engine.HttpClientEngine::class,
-                io.ktor.client.HttpClientConfig::class
+        koinApplication {
+            androidContext(FoodyApplication())
+            modules(
+                databaseModule,
+                dispatchersModule,
+                localRepositoryModule,
+                remoteDataSourceModule,
+                remoteRepositoryModule
             )
-        )
+            checkModules()
+        }
     }
 }

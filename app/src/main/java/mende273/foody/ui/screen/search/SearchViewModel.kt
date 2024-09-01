@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import mende273.foody.domain.model.Meal
-import mende273.foody.domain.usecase.SearchMealsByNameUseCase
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.core.domain.usecase.remote.SearchMealsByNameUseCase
+import mende273.foody.ui.common.toUIState
 import mende273.foody.ui.state.UIState
-import mende273.foody.util.toUIState
 
 class SearchViewModel
 (private val searchMealsByName: SearchMealsByNameUseCase) : ViewModel() {

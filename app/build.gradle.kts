@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.kover)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.sql.delight)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -57,14 +56,6 @@ android {
         }
     }
 
-    sqldelight {
-        databases {
-            create("Database") {
-                packageName.set("mende273.foody")
-            }
-        }
-    }
-
     ksp {
         arg("KOIN_CONFIG_CHECK", "true")
     }
@@ -93,6 +84,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -104,6 +98,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+
+    // serialization
+    implementation(libs.kotlinx.serialization.json)
 
     // compose
     implementation(platform(libs.compose.bom))
@@ -128,19 +125,6 @@ dependencies {
     testImplementation(libs.koin.test)
     testImplementation(libs.koin.test.junit4)
 
-    // ktor
-    implementation(platform(libs.ktor.bom))
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.serialization)
-    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    testImplementation(libs.ktor.client.mock)
-
     // coil
     implementation(libs.coil.compose)
-
-    // sqldelight
-    implementation(libs.app.cash.sqldelight)
-    implementation(libs.app.cash.sqldelight.coroutines.extensions)
 }

@@ -5,8 +5,8 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import mende273.foody.domain.model.IngredientWithMeasure
-import mende273.foody.domain.model.MealDetails
+import mende273.foody.core.domain.model.IngredientWithMeasure
+import mende273.foody.core.domain.model.MealDetails
 import mende273.foody.ui.common.preview.model.MealDetailsScreenPreviewModel
 import mende273.foody.ui.state.UIState
 import mende273.foody.ui.state.UIStateError

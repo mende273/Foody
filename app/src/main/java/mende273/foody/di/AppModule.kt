@@ -1,5 +1,10 @@
 package mende273.foody.di
 
+import mende273.foody.core.data.di.databaseModule
+import mende273.foody.core.data.di.dispatchersModule
+import mende273.foody.core.data.di.localRepositoryModule
+import mende273.foody.core.data.di.remoteDataSourceModule
+import mende273.foody.core.data.di.remoteRepositoryModule
 import org.koin.dsl.module
 
 val appModule = module {

@@ -31,7 +31,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mende273.foody.R
-import mende273.foody.domain.model.Meal
+import mende273.foody.core.domain.model.Meal
+import mende273.foody.ui.common.getGridCellsCount
 import mende273.foody.ui.common.model.Tab
 import mende273.foody.ui.common.preview.model.MealsScreenPreviewModel
 import mende273.foody.ui.common.preview.parameter.MealsScreenParameterProvider
@@ -46,7 +47,6 @@ import mende273.foody.ui.state.UIState
 import mende273.foody.ui.theme.FoodyTheme
 import mende273.foody.ui.theme.largeTextStyle
 import mende273.foody.ui.theme.spacing
-import mende273.foody.util.getGridCellsCount
 
 @Composable
 fun MealsScreen(

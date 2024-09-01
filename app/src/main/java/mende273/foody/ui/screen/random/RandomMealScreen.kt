@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import mende273.foody.domain.model.MealDetails
+import mende273.foody.core.domain.model.MealDetails
 import mende273.foody.ui.common.preview.model.MealDetailsScreenPreviewModel
 import mende273.foody.ui.common.preview.parameter.MealDetailsScreenParameterProvider
 import mende273.foody.ui.component.MealDetailsComponent
