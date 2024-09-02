@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Foody"
         tools:targetApi="31">
         <activity
-            android:name="mende273.foody.ui.main.MainActivity"
+            android:name="mende273.foody.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Foody">
             <intent-filter>
