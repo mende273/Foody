@@ -1,11 +1,11 @@
 package mende273.foody.util
 
+import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import mende273.foody.common.state.UIState
 import mende273.foody.common.state.UIStateError
 import mende273.foody.common.ui.toUIState
 import org.junit.Test
-import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
 class ResultToUIStateTest {
