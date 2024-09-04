@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import mende273.foody.R
+import mende273.foody.common.R
 import mende273.foody.common.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,7 +57,7 @@ private fun BackNavigationButton(navigateBackEvent: () -> Unit) {
 @Composable
 private fun TopBarPreview() {
     FoodyTheme {
-        TopBar(title = stringResource(id = R.string.app_name))
+        TopBar(title = stringResource(id = R.string.placeholder_text))
     }
 }
 
@@ -65,7 +65,7 @@ private fun TopBarPreview() {
 @Composable
 private fun TopBarWithBackEnabledPreview() {
     FoodyTheme {
-        TopBar(title = stringResource(id = R.string.app_name), isBackButtonEnabled = true)
+        TopBar(title = stringResource(id = R.string.placeholder_text), isBackButtonEnabled = true)
     }
 }
 

@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
+import mende273.foody.common.R
 import mende273.foody.common.ui.theme.FoodyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

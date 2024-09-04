@@ -1,7 +1,7 @@
 package mende273.foody.common.state
 
 import androidx.annotation.StringRes
-import mende273.foody.R
+import mende273.foody.common.R
 
 enum class UIStateError(@StringRes val errorMessage: Int) {
     GENERIC_ERROR(R.string.generic_error),

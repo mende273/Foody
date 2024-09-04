@@ -22,18 +22,16 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
-import mende273.foody.common.ui.component.NetworkImage
 import mende273.foody.common.ui.component.NormalText
 import mende273.foody.common.ui.component.RoundedBackButton
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.spacing
+import mende273.foody.image.NetworkImage
+import mende273.foody.image.NetworkImageContentScale
 
 private val spaceBetween = 25.dp
 private val negativeSpaceBetween = -spaceBetween
@@ -60,7 +58,7 @@ fun DetailsScaffold(
 
     when (
         windowSize.widthSizeClass <= WindowWidthSizeClass.Medium &&
-            windowSize.heightSizeClass >= WindowHeightSizeClass.Medium
+                windowSize.heightSizeClass >= WindowHeightSizeClass.Medium
     ) {
         true -> PortraitDetailsComponent(
             modifier = modifier,
@@ -106,7 +104,7 @@ private fun PortraitDetailsComponent(
                 modifier = headerImageModifier,
                 url = headerImageUrl,
                 contentDescription = "meal image",
-                contentScale = ContentScale.Crop
+                contentScale = NetworkImageContentScale.CROP
             )
 
             if (isBackButtonEnabled) {
@@ -160,8 +158,7 @@ private fun LandscapeDetailsComponent(
                 modifier = headerImageModifier,
                 url = headerImageUrl,
                 contentDescription = "meal image",
-                contentScale = ContentScale.FillHeight,
-                error = painterResource(id = R.drawable.image_placeholder)
+                contentScale = NetworkImageContentScale.FILL_HEIGHT
             )
 
             if (isBackButtonEnabled) {

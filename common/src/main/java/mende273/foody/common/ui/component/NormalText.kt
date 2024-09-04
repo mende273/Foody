@@ -8,7 +8,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import mende273.foody.R
+import mende273.foody.common.R
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.largeTextStyle
 import mende273.foody.common.ui.theme.mediumTextStyle
@@ -35,7 +35,7 @@ fun NormalText(
 @Composable
 private fun NormalTextPreview() {
     FoodyTheme {
-        NormalText(text = stringResource(id = R.string.app_name))
+        NormalText(text = stringResource(id = R.string.placeholder_text))
     }
 }
 
@@ -44,7 +44,7 @@ private fun NormalTextPreview() {
 private fun NormalTextWithMediumTextStyle() {
     FoodyTheme {
         NormalText(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = R.string.placeholder_text),
             textStyle = mediumTextStyle()
         )
     }
@@ -55,7 +55,7 @@ private fun NormalTextWithMediumTextStyle() {
 private fun NormalTextWithLargeTextStyle() {
     FoodyTheme {
         NormalText(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = R.string.placeholder_text),
             textStyle = largeTextStyle()
         )
     }
@@ -66,7 +66,7 @@ private fun NormalTextWithLargeTextStyle() {
 private fun NormalTextWithSemiBoldFontWeight() {
     FoodyTheme {
         NormalText(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = R.string.placeholder_text),
             fontWeight = FontWeight.SemiBold
         )
     }

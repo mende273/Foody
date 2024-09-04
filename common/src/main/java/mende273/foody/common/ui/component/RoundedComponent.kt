@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import mende273.foody.R
+import mende273.foody.common.R
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.spacing
 
@@ -37,7 +37,7 @@ fun RoundedComponent(
 fun RoundedComponentPreview() {
     FoodyTheme {
         RoundedComponent {
-            Text(text = stringResource(id = R.string.app_name))
+            Text(text = stringResource(id = R.string.placeholder_text))
         }
     }
 }

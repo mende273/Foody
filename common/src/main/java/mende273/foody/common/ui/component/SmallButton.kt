@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import mende273.foody.R
+import mende273.foody.common.R
 import mende273.foody.common.ui.theme.FoodyTheme
 
 @Composable
@@ -39,6 +39,6 @@ fun SmallButton(modifier: Modifier = Modifier, text: String, onClicked: () -> Un
 @Composable
 private fun SmallButtonPreview() {
     FoodyTheme {
-        SmallButton(text = stringResource(id = R.string.app_name), onClicked = {})
+        SmallButton(text = stringResource(id = R.string.placeholder_text), onClicked = {})
     }
 }

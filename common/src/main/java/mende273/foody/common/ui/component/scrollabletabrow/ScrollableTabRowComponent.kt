@@ -1,5 +1,6 @@
 package mende273.foody.common.ui.component.scrollabletabrow
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import mende273.foody.common.ui.theme.AccentColor
 import mende273.foody.common.ui.theme.FoodyTheme
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ScrollableTabRowComponent(
     items: Array<Tab>,
@@ -62,6 +64,7 @@ private fun TabIndicator(modifier: Modifier = Modifier) {
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @PreviewLightDark
 @Composable
 private fun ScrollableTabComponentPreview(

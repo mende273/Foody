@@ -22,11 +22,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import mende273.foody.common.ui.preview.parameter.IngredientWithMeasureParameterProvider
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.blackNormalTextStyle
 import mende273.foody.common.ui.theme.spacing
 import mende273.foody.core.domain.model.IngredientWithMeasure
-import mende273.foody.feature.mealdetails.IngredientWithMeasureParameterProvider
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
