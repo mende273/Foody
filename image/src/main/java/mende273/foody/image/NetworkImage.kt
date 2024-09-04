@@ -1,4 +1,4 @@
-package mende273.foody.common.ui.component
+package mende273.foody.image
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -10,8 +10,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import mende273.foody.R
-import mende273.foody.common.ui.theme.FoodyTheme
 
 @Composable
 fun NetworkImage(
@@ -19,8 +17,8 @@ fun NetworkImage(
     url: String,
     contentDescription: String,
     withCrossFade: Boolean = false,
-    error: Painter? = null,
-    contentScale: ContentScale = ContentScale.None
+    error: Painter? = painterResource(id = R.drawable.image_placeholder),
+    contentScale: NetworkImageContentScale = NetworkImageContentScale.NONE
 ) {
     AsyncImage(
         modifier = modifier,
@@ -30,7 +28,7 @@ fun NetworkImage(
             .build(),
         contentDescription = contentDescription,
         error = error,
-        contentScale = contentScale,
+        contentScale = getCoilContentScaleFor(contentScale),
         placeholder = painterResource(R.drawable.image_placeholder)
     )
 }
@@ -38,7 +36,14 @@ fun NetworkImage(
 @Preview
 @Composable
 private fun NetworkImagePreview() {
-    FoodyTheme {
-        NetworkImage(Modifier.fillMaxSize(), url = "", contentDescription = "")
-    }
+    NetworkImage(Modifier.fillMaxSize(), url = "", contentDescription = "")
 }
+
+private fun getCoilContentScaleFor(contentScale: NetworkImageContentScale): ContentScale =
+    when (contentScale) {
+        NetworkImageContentScale.NONE -> ContentScale.None
+        NetworkImageContentScale.CROP -> ContentScale.Crop
+        NetworkImageContentScale.FILL_HEIGHT -> ContentScale.FillHeight
+        NetworkImageContentScale.INSIDE -> ContentScale.Inside
+        NetworkImageContentScale.FIT -> ContentScale.Fit
+    }
