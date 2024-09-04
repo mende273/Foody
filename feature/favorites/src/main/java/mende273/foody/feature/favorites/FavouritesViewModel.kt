@@ -1,4 +1,4 @@
-package mende273.foody.feature.favourites
+package mende273.foody.feature.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

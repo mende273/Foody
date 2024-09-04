@@ -1,4 +1,4 @@
-package mende273.foody.feature.favourites
+package mende273.foody.feature.favorites
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,11 +12,11 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mende273.foody.common.getGridCellsCount
+import mende273.foody.common.getTopPadding
 import mende273.foody.common.state.UIState
 import mende273.foody.common.ui.component.mealsgrid.MealsGrid
 import mende273.foody.common.ui.component.uistatewrapper.UiStateWrapper
-import mende273.foody.common.ui.getGridCellsCount
-import mende273.foody.common.ui.getTopPadding
 import mende273.foody.common.ui.preview.model.MealsUiStatePreviewModel
 import mende273.foody.common.ui.preview.parameter.MealsUiStateParameterPreview
 import mende273.foody.common.ui.theme.FoodyTheme
