@@ -32,9 +32,9 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import mende273.foody.common.navigation.AppNavigation
-import mende273.foody.common.navigation.Screen
 import mende273.foody.common.ui.theme.FoodyTheme
+import mende273.foody.navigation.AppNavigation
+import mende273.foody.navigation.Screen
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : ComponentActivity() {

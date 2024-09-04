@@ -1,4 +1,4 @@
-package mende273.foody.common.navigation
+package mende273.foody.navigation
 
 import android.content.Context
 import android.content.Intent

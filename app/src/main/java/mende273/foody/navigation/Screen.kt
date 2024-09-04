@@ -1,4 +1,4 @@
-package mende273.foody.common.navigation
+package mende273.foody.navigation
 
 import kotlinx.serialization.Serializable
 
