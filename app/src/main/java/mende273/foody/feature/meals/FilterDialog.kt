@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import mende273.foody.common.state.Filter
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.spacing
 

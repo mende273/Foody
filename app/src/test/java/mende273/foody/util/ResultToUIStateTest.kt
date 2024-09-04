@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import mende273.foody.common.state.UIState
 import mende273.foody.common.state.UIStateError
-import mende273.foody.common.ui.toUIState
+import mende273.foody.common.toUIState
 import org.junit.Test
 
 @ExperimentalCoroutinesApi

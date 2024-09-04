@@ -9,9 +9,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import mende273.foody.common.state.Filter
 import mende273.foody.common.state.UIState
-import mende273.foody.common.ui.toUIState
+import mende273.foody.common.toUIState
 import mende273.foody.core.domain.model.FiltersWrapper
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.usecase.remote.GetAllFiltersUseCase

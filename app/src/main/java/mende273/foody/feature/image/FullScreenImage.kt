@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import mende273.foody.common.ui.component.NetworkImage
 import mende273.foody.common.ui.component.RoundedBackButton
+import mende273.foody.image.NetworkImage
+import mende273.foody.image.NetworkImageContentScale
 
 @Composable
 fun FullScreenImage(
@@ -43,7 +43,7 @@ fun FullScreenImage(
                 ),
             url = imageUrl,
             contentDescription = "background blurred image",
-            contentScale = ContentScale.Crop
+            contentScale = NetworkImageContentScale.CROP
         )
         NetworkImage(
             modifier = Modifier
@@ -58,7 +58,7 @@ fun FullScreenImage(
                 .fillMaxSize(),
             url = imageUrl,
             contentDescription = "full screen meal image",
-            contentScale = ContentScale.Fit
+            contentScale = NetworkImageContentScale.FIT
         )
         RoundedBackButton(onNavigateBackClicked = { onNavigateBackClicked() })
     }

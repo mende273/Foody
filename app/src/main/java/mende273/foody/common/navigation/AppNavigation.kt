@@ -13,7 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import mende273.foody.feature.favourites.FavouritesScreen
+import mende273.foody.feature.favorites.FavouritesScreen
 import mende273.foody.feature.filtermeals.FilterMealsScreen
 import mende273.foody.feature.filtermeals.FilterType
 import mende273.foody.feature.image.FullScreenImage

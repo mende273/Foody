@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import mende273.foody.common.state.Filter
 import mende273.foody.common.ui.component.NormalText
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.mediumTextStyle

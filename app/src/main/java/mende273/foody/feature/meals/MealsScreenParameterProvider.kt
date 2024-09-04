@@ -5,7 +5,6 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import mende273.foody.common.state.Filter
 import mende273.foody.common.state.UIState
 import mende273.foody.core.domain.model.Meal
 

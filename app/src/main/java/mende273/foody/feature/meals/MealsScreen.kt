@@ -1,5 +1,6 @@
 package mende273.foody.feature.meals
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,7 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mende273.foody.R
-import mende273.foody.common.state.Filter
+import mende273.foody.common.getGridCellsCount
 import mende273.foody.common.state.UIState
 import mende273.foody.common.ui.component.NormalText
 import mende273.foody.common.ui.component.SmallButton
@@ -39,7 +40,6 @@ import mende273.foody.common.ui.component.mealsgrid.MealsGrid
 import mende273.foody.common.ui.component.scrollabletabrow.ScrollableTabRowComponent
 import mende273.foody.common.ui.component.scrollabletabrow.Tab
 import mende273.foody.common.ui.component.uistatewrapper.UiStateWrapper
-import mende273.foody.common.ui.getGridCellsCount
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.largeTextStyle
 import mende273.foody.common.ui.theme.spacing
@@ -177,6 +177,7 @@ private fun MealsScreenContentsPreview(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun PagerSection(
     currentFilterData: Array<Tab>,

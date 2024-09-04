@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mende273.foody.common.state.UIState
-import mende273.foody.common.ui.toUIState
+import mende273.foody.common.toUIState
 import mende273.foody.core.domain.model.Meal
 import mende273.foody.core.domain.usecase.remote.GetMealsForAreaUseCase
 import mende273.foody.core.domain.usecase.remote.GetMealsForCategoryUseCase

@@ -1,4 +1,4 @@
-package mende273.foody.common.state
+package mende273.foody.feature.meals
 
 import androidx.annotation.StringRes
 import mende273.foody.R

@@ -20,11 +20,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mende273.foody.common.getGridCellsCount
 import mende273.foody.common.state.UIState
 import mende273.foody.common.ui.component.mealsgrid.MealsGrid
 import mende273.foody.common.ui.component.searchbar.SearchBarComponent
 import mende273.foody.common.ui.component.uistatewrapper.UiStateWrapper
-import mende273.foody.common.ui.getGridCellsCount
 import mende273.foody.common.ui.theme.FoodyTheme
 import mende273.foody.common.ui.theme.spacing
 import mende273.foody.core.domain.model.Meal
