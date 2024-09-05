@@ -89,6 +89,7 @@ dependencies {
     implementation(project(":image"))
     implementation(project(":common"))
     implementation(project(":feature:favorites"))
+    implementation(project(":feature:filtermeals"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
