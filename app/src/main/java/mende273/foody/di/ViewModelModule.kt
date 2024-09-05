@@ -1,6 +1,5 @@
 package mende273.foody.di
 
-import mende273.foody.feature.mealdetails.MealDetailsViewModel
 import mende273.foody.feature.meals.MealsViewModel
 import mende273.foody.feature.random.RandomMealViewModel
 import mende273.foody.feature.search.SearchViewModel
@@ -11,5 +10,4 @@ val viewModelModule = module {
     viewModel { MealsViewModel(get(), get(), get(), get()) }
     viewModel { RandomMealViewModel(get(), get(), get(), get()) }
     viewModel { SearchViewModel(get()) }
-    viewModel { MealDetailsViewModel(get(), get(), get(), get()) }
 }
