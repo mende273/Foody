@@ -91,6 +91,10 @@ dependencies {
     implementation(project(":feature:favorites"))
     implementation(project(":feature:filtermeals"))
     implementation(project(":feature:mealdetails"))
+    implementation(project(":feature:meals"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:random"))
+    implementation(project(":feature:fullscreenimage"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
