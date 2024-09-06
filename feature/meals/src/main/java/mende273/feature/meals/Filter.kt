@@ -1,7 +1,6 @@
-package mende273.foody.feature.meals
+package mende273.feature.meals
 
 import androidx.annotation.StringRes
-import mende273.foody.R
 
 enum class Filter(@StringRes val title: Int) {
     CATEGORY(R.string.filter_category),

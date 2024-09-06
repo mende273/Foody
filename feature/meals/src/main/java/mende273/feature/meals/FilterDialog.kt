@@ -1,4 +1,4 @@
-package mende273.foody.feature.meals
+package mende273.feature.meals
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package mende273.foody.feature.meals
+package mende273.feature.meals
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import mende273.foody.R
 import mende273.foody.common.getGridCellsCount
 import mende273.foody.common.state.UIState
 import mende273.foody.common.ui.component.NormalText
