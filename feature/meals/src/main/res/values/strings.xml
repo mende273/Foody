@@ -1,0 +1,6 @@
+<resources>
+    <string name="filter">Filter</string>
+    <string name="filter_category">Category</string>
+    <string name="filter_area">Area</string>
+    <string name="first_letter">First Letter</string>
+</resources>

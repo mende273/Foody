@@ -18,10 +18,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import mende273.foody.R
-import mende273.foody.common.navigation.Screen
 import mende273.foody.common.ui.theme.LightThemePrimary
 import mende273.foody.common.ui.theme.MediumDarkGreyColor
 import mende273.foody.common.ui.theme.NavigationBarSelectedColor
+import mende273.foody.navigation.Screen
 
 @Composable
 fun NavigationBar(

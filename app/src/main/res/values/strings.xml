@@ -6,17 +6,6 @@
     <string name="screen_title_search">Search</string>
     <string name="screen_title_favourites">Favourites</string>
 
-    <string name="filter_category">Category</string>
-    <string name="filter_area">Area</string>
-    <string name="first_letter">First Letter</string>
-
-    <string name="filter">Filter</string>
-
-    <string name="search_bar_hint">Enter your meal name here</string>
-    <string name="cd_close_search_bar">Close search bar button</string>
-    <string name="cd_search_icon">Search icon</string>
-    <string name="search_results">Found %1s meals</string>
-
     <string name="title_category">Category: %1s</string>
     <string name="title_area">Area: %1s</string>
     <string name="title_ingredient">Ingredient: %1s</string>

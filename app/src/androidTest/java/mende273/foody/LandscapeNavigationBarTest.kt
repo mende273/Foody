@@ -15,9 +15,9 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
-import mende273.foody.common.navigation.AppNavigation
-import mende273.foody.common.navigation.Screen
 import mende273.foody.main.NavigationBar
+import mende273.foody.navigation.AppNavigation
+import mende273.foody.navigation.Screen
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

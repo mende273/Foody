@@ -86,6 +86,15 @@ android {
 dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
+    implementation(project(":image"))
+    implementation(project(":common"))
+    implementation(project(":feature:favorites"))
+    implementation(project(":feature:filtermeals"))
+    implementation(project(":feature:mealdetails"))
+    implementation(project(":feature:meals"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:random"))
+    implementation(project(":feature:fullscreenimage"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -93,6 +102,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.compose)
+
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
