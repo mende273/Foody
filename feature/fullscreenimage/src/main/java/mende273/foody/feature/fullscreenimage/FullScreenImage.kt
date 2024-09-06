@@ -1,4 +1,4 @@
-package mende273.foody.feature.image
+package mende273.foody.feature.fullscreenimage
 
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
