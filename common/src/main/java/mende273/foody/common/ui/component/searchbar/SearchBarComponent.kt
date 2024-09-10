@@ -10,9 +10,12 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarColors
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -32,35 +35,52 @@ fun SearchBarComponent(
     onClearText: () -> Unit
 ) {
     SearchBar(
-        modifier = modifier,
-        query = searchText,
-        onQueryChange = { onQueryChanged(it) },
-        onSearch = { onIsSearchBarActiveChanged(false) },
-        active = isSearchBarActive,
-        onActiveChange = { onIsSearchBarActiveChanged(it) },
-        placeholder = {
-            Text(text = stringResource(id = R.string.search_bar_hint))
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = searchText,
+                onQueryChange = { onQueryChanged(it) },
+                onSearch = { onIsSearchBarActiveChanged(false) },
+                expanded = isSearchBarActive,
+                onExpandedChange = onIsSearchBarActiveChanged,
+                enabled = true,
+                placeholder = {
+                    Text(text = stringResource(id = R.string.search_bar_hint))
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = stringResource(id = R.string.cd_search_icon)
+                    )
+                },
+                trailingIcon = {
+                    if (isSearchBarActive) {
+                        Icon(
+                            modifier = Modifier.clickable { onClearText() },
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(id = R.string.cd_close_search_bar)
+                        )
+                    }
+                },
+                interactionSource = null,
+            )
         },
-        trailingIcon = {
-            if (isSearchBarActive) {
-                Icon(
-                    modifier = Modifier.clickable { onClearText() },
-                    imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(id = R.string.cd_close_search_bar)
-                )
+        expanded = isSearchBarActive,
+        onExpandedChange = onIsSearchBarActiveChanged,
+        modifier = modifier,
+        shape = SearchBarDefaults.inputFieldShape,
+        colors = SearchBarColors(
+            containerColor = Color.LightGray,
+            dividerColor = Color.LightGray
+        ),
+        tonalElevation = SearchBarDefaults.TonalElevation,
+        shadowElevation = SearchBarDefaults.ShadowElevation,
+        windowInsets = SearchBarDefaults.windowInsets,
+        content = {
+            Box(modifier = Modifier.padding(16.dp)) {
+                Text(text = stringResource(id = R.string.search_results, mealsSize))
             }
         },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = stringResource(id = R.string.cd_search_icon)
-            )
-        }
-    ) {
-        Box(modifier = Modifier.padding(16.dp)) {
-            Text(text = stringResource(id = R.string.search_results, mealsSize))
-        }
-    }
+    )
 }
 
 @PreviewLightDark
