@@ -23,6 +23,12 @@ class KtorHttpClient {
     fun get() = client
 
     private val client = HttpClient(Android) {
+        defaultRequest {
+            url("https://www.themealdb.com/api/json/v1/1/")
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+        
         install(ContentNegotiation) {
             json(
                 Json {
@@ -59,11 +65,6 @@ class KtorHttpClient {
 
         install(DefaultRequest) {
             header(HttpHeaders.ContentType, ContentType.Application.Json)
-        }
-
-        defaultRequest {
-            contentType(ContentType.Application.Json)
-            accept(ContentType.Application.Json)
         }
     }
 }
