@@ -22,12 +22,8 @@ class LocalRepositoryImpl(
                 .toDomainModel()
         }
 
-    override suspend fun getFavouriteMealById(id: Long): Flow<Meal?> =
-        withContext(ioDispatcher) {
-            localDataSource
-                .selectById(id)
-                .map { it?.toDomainModel() }
-        }
+    override fun getFavouriteMealById(id: Long): Flow<Meal?> =
+        localDataSource.selectById(id).map { it?.toDomainModel() }
 
     override suspend fun addFavouriteMeal(meal: Meal) {
         withContext(ioDispatcher) {
