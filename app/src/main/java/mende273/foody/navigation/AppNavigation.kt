@@ -2,13 +2,13 @@ package mende273.foody.navigation
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,7 +21,7 @@ import mende273.foody.feature.fullscreenimage.FullScreenImage
 import mende273.foody.feature.mealdetails.MealDetailsScreen
 import mende273.foody.feature.random.RandomMealScreen
 import mende273.foody.feature.search.SearchScreen
-import org.koin.androidx.compose.navigation.koinNavViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AppNavigation(
@@ -42,7 +42,7 @@ fun AppNavigation(
                     top = innerPadding.calculateTopPadding(),
                     bottom = innerPadding.calculateBottomPadding()
                 ),
-                viewModel = koinNavViewModel(),
+                viewModel = koinViewModel(),
                 windowSize = windowSize,
                 onMealClicked = { mealId ->
                     navController.navigate(Screen.MealDetails(mealId))
@@ -53,7 +53,7 @@ fun AppNavigation(
         composable<Screen.Random> {
             RandomMealScreen(
                 modifier = modifier,
-                viewModel = koinNavViewModel(),
+                viewModel = koinViewModel(),
                 windowSize = windowSize,
                 onHeaderImageClicked = { imageUrl ->
                     navController.navigate(Screen.FullScreenImage(imageUrl))
@@ -81,7 +81,7 @@ fun AppNavigation(
         composable<Screen.MealDetails> { backStack ->
             MealDetailsScreen(
                 modifier = modifier,
-                viewModel = koinNavViewModel(),
+                viewModel = koinViewModel(),
                 mealId = backStack.toRoute<Screen.MealDetails>().mealId,
                 windowSize = windowSize,
                 onHeaderImageClicked = { imageUrl ->
@@ -113,7 +113,7 @@ fun AppNavigation(
                 modifier = modifier.padding(
                     bottom = innerPadding.calculateBottomPadding()
                 ),
-                viewModel = koinNavViewModel(),
+                viewModel = koinViewModel(),
                 windowSize = windowSize,
                 onMealClicked = { mealId -> navController.navigate(Screen.MealDetails(mealId)) }
             )
@@ -125,7 +125,7 @@ fun AppNavigation(
                     top = innerPadding.calculateTopPadding(),
                     bottom = innerPadding.calculateBottomPadding()
                 ),
-                viewModel = koinNavViewModel(),
+                viewModel = koinViewModel(),
                 windowSize = windowSize,
                 onMealClicked = { mealId -> navController.navigate(Screen.MealDetails(mealId)) }
             )
@@ -135,7 +135,7 @@ fun AppNavigation(
             val filterMeals = backStack.toRoute<Screen.FilterMeals>()
             FilterMealsScreen(
                 modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding()),
-                viewModel = koinNavViewModel(),
+                viewModel = koinViewModel(),
                 name = filterMeals.name,
                 filterType = FilterType.valueOf(filterMeals.filterType),
                 windowSize = windowSize,
@@ -158,7 +158,7 @@ private fun startImplicitIntent(context: Context, url: String) {
     context.startActivity(
         Intent(
             Intent.ACTION_VIEW,
-            Uri.parse(url)
+            url.toUri()
         )
     )
 }
