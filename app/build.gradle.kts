@@ -14,12 +14,12 @@ plugins {
 
 android {
     namespace = "mende273.foody"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "mende273.foody"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 5
         versionName = "1.0.4"
 
